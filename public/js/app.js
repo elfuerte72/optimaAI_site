@@ -41,7 +41,14 @@ function setupForms() {
                 if (form.getAttribute('data-ajax') === 'true') {
                     e.preventDefault();
                     
+                    console.log('Отправка формы:', form.id);
+                    
                     const formData = new FormData(form);
+                    
+                    // Выводим данные формы для отладки
+                    for (let pair of formData.entries()) {
+                        console.log(pair[0] + ': ' + pair[1]);
+                    }
                     
                     // Показываем индикатор загрузки
                     const submitButton = form.querySelector('button[type="submit"]');
@@ -57,8 +64,13 @@ function setupForms() {
                             'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
                         }
                     })
-                    .then(response => response.json())
+                    .then(response => {
+                        console.log('Статус ответа:', response.status);
+                        return response.json();
+                    })
                     .then(data => {
+                        console.log('Ответ сервера:', data);
+                        
                         // Восстанавливаем кнопку
                         submitButton.disabled = false;
                         submitButton.innerHTML = originalButtonText;
@@ -99,13 +111,14 @@ function setupForms() {
                         }
                     })
                     .catch(error => {
+                        console.error('Ошибка при отправке формы:', error);
+                        
                         // Восстанавливаем кнопку
                         submitButton.disabled = false;
                         submitButton.innerHTML = originalButtonText;
                         
                         // Показываем ошибку
                         showNotification('error', 'Произошла ошибка при отправке формы. Пожалуйста, попробуйте позже.');
-                        console.error('Error:', error);
                     });
                 }
             });

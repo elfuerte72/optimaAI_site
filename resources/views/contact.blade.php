@@ -82,7 +82,7 @@
                                 </div>
                             @endif
                             
-                            <form action="{{ route('contact.store') }}" method="POST">
+                            <form action="{{ route('contact.store') }}" method="POST" data-ajax="true">
                                 @csrf
                                 <input type="hidden" name="source" value="contact_page">
                                 

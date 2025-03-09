@@ -6,6 +6,9 @@ use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\CaseStudyController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\FormController;
+use App\Models\Contact;
+use App\Models\ClientMessage;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Mail;
 
@@ -43,35 +46,4 @@ Route::get('/contact', [ContactController::class, 'index'])->name('contact.index
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
 // Обработка заявок с форм
-Route::post('/submit-form', function (\Illuminate\Http\Request $request) {
-    // Валидация данных
-    $validated = $request->validate([
-        'name' => 'required|string|max:255',
-        'email' => 'required|email|max:255',
-        'phone' => 'required|string|max:20',
-        'message' => 'nullable|string',
-    ]);
-    
-    // Добавляем источник запроса
-    $validated['source'] = $request->input('source', 'popup_form');
-    
-    // Создаем новый контакт
-    $contact = \App\Models\Contact::create($validated);
-    
-    // Отправляем email с данными заявки
-    try {
-        Mail::raw("Новая заявка с сайта\n\nИмя: {$validated['name']}\nEmail: {$validated['email']}\nТелефон: {$validated['phone']}\nСообщение: {$validated['message']}\nИсточник: {$validated['source']}", function ($message) {
-            $message->to('info@optimaai.ru')
-                    ->subject('Новая заявка с сайта OptimaAI');
-        });
-    } catch (\Exception $e) {
-        // Логируем ошибку, но не прерываем выполнение
-        \Illuminate\Support\Facades\Log::error('Ошибка отправки email: ' . $e->getMessage());
-    }
-    
-    // Возвращаем JSON-ответ для AJAX-запросов
-    return response()->json([
-        'success' => true,
-        'message' => 'Спасибо за вашу заявку! Мы свяжемся с вами в ближайшее время.'
-    ]);
-})->name('submit-form');
+Route::post('/submit-form', [FormController::class, 'submitForm'])->name('submit-form');

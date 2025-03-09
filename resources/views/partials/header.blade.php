@@ -2,7 +2,7 @@
     <div class="container">
         <nav class="navbar navbar-expand-lg">
             <a class="navbar-brand" href="{{ route('home') }}">
-                <img src="/images/logo.jpg?v={{ time() }}" alt="OptimaAI" width="300" height="80" style="object-fit: cover; max-width: 100%;">
+                <img src="/images/logo.png?v={{ time() }}" alt="OptimaAI" width="300" height="80" style="object-fit: contain; max-width: 100%;">
             </a>
             
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain" aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">

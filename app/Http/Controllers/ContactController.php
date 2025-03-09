@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Contact;
+use App\Models\ClientMessage;
 use Illuminate\Http\Request;
 
 class ContactController extends Controller
@@ -21,7 +22,7 @@ class ContactController extends Controller
      * Store a newly created contact in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
@@ -37,7 +38,18 @@ class ContactController extends Controller
         $validated['source'] = $request->input('source', 'contact_form');
         
         // Создаем новый контакт
-        Contact::create($validated);
+        $contact = Contact::create($validated);
+        
+        // Создаем новое сообщение клиента (для админки)
+        $clientMessage = ClientMessage::create($validated);
+        
+        // Если запрос AJAX, возвращаем JSON-ответ
+        if ($request->ajax() || $request->wantsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Спасибо за вашу заявку! Мы свяжемся с вами в ближайшее время.'
+            ]);
+        }
         
         // Редирект с сообщением об успехе
         return redirect()->route('contact.index')
