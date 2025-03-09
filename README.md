@@ -132,3 +132,23 @@ npm run dev
 ## Контакты
 
 По всем вопросам обращайтесь по адресу info@optimaai.ru
+
+## Развертывание
+
+Приложение развернуто на Railway по адресу: [https://optimaaisite-production.up.railway.app](https://optimaaisite-production.up.railway.app)
+
+## Локальная разработка
+
+### С использованием Docker
+
+1. Клонируйте репозиторий
+2. Запустите `./docker-start.sh`
+3. Откройте http://localhost:8001
+
+### Без Docker
+
+1. Клонируйте репозиторий
+2. Установите зависимости: `composer install`
+3. Настройте .env файл
+4. Запустите миграции: `php artisan migrate`
+5. Запустите сервер: `php artisan serve`
