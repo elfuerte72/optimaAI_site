@@ -1,0 +1,316 @@
+/* 
+ * OptimaAI - Нейросетевые решения для бизнеса
+ * Основные стили сайта
+ */
+
+:root {
+    --primary: #0a2463;
+    --primary-dark: #071a47;
+    --primary-light: #1a3473;
+    --secondary: #f5f5f5;
+    --accent: #3cb371;
+    --accent-dark: #2e8c57;
+    --text-dark: #333333;
+    --text-light: #ffffff;
+    --gray-light: #e9ecef;
+    --gray: #6c757d;
+}
+
+/* General Styles */
+body {
+    font-family: 'Inter', sans-serif;
+    color: var(--text-dark);
+    line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+}
+
+a {
+    color: var(--primary);
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--primary-dark);
+}
+
+.btn-primary {
+    background-color: var(--primary);
+    border-color: var(--primary);
+}
+
+.btn-primary:hover, 
+.btn-primary:focus, 
+.btn-primary:active {
+    background-color: var(--primary-dark);
+    border-color: var(--primary-dark);
+}
+
+.btn-outline-primary {
+    color: var(--primary);
+    border-color: var(--primary);
+}
+
+.btn-outline-primary:hover, 
+.btn-outline-primary:focus, 
+.btn-outline-primary:active {
+    background-color: var(--primary);
+    border-color: var(--primary);
+}
+
+.text-primary {
+    color: var(--primary) !important;
+}
+
+.bg-primary {
+    background-color: var(--primary) !important;
+}
+
+/* Header Styles */
+.header {
+    background-color: var(--text-light);
+}
+
+.navbar-brand img {
+    max-height: 40px;
+}
+
+.navbar-nav .nav-link {
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+}
+
+.navbar-nav .nav-link.active {
+    color: var(--primary);
+}
+
+/* Hero Section */
+.hero {
+    padding: 5rem 0;
+    background-color: var(--primary);
+    color: var(--text-light);
+}
+
+.hero h1 {
+    font-weight: 700;
+}
+
+/* Card Styles */
+.card {
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+}
+
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
+
+/* Icon Styles */
+.icon-wrapper {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background-color: rgba(10, 36, 99, 0.1);
+    margin-bottom: 1rem;
+}
+
+/* Process Steps */
+.process-step {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: rgba(10, 36, 99, 0.1);
+    margin-bottom: 1rem;
+}
+
+/* Testimonials */
+.testimonial-card {
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+/* Footer Styles */
+.footer {
+    background-color: var(--primary);
+    color: var(--text-light);
+    padding: 4rem 0 2rem;
+}
+
+.footer a {
+    color: var(--text-light);
+    transition: opacity 0.3s ease;
+}
+
+.footer a:hover {
+    opacity: 0.8;
+    color: var(--text-light);
+}
+
+.footer h5 {
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+}
+
+.social-links a {
+    font-size: 1.5rem;
+    margin-right: 1rem;
+}
+
+/* Chatbot Styles */
+.chatbot-container {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 1000;
+}
+
+.chatbot-button {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: var(--primary);
+    color: var(--text-light);
+    border: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.chatbot-button:hover {
+    background-color: var(--primary-dark);
+    transform: scale(1.05);
+}
+
+.chatbot-button.active {
+    background-color: var(--accent);
+}
+
+.chatbot-window {
+    position: absolute;
+    bottom: 80px;
+    right: 0;
+    width: 350px;
+    max-height: 500px;
+    background-color: var(--text-light);
+    border-radius: 12px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.chatbot-header {
+    background-color: var(--primary);
+    color: var(--text-light);
+    padding: 15px;
+    font-weight: 600;
+}
+
+.chatbot-body {
+    padding: 20px;
+    overflow-y: auto;
+    max-height: 450px;
+}
+
+.bot-message {
+    background-color: var(--gray-light);
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.options-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.option-button {
+    background-color: var(--text-light);
+    border: 1px solid var(--primary);
+    color: var(--primary);
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: left;
+}
+
+.option-button:hover {
+    background-color: var(--primary);
+    color: var(--text-light);
+}
+
+.recommendation-box {
+    background-color: #e6f7ff;
+    border-left: 4px solid var(--primary);
+    padding: 15px;
+    margin: 15px 0;
+    border-radius: 0 5px 5px 0;
+}
+
+/* Responsive Styles */
+@media (max-width: 991.98px) {
+    .hero {
+        padding: 3rem 0;
+    }
+    
+    .navbar-collapse {
+        background-color: var(--text-light);
+        padding: 1rem;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        margin-top: 1rem;
+    }
+    
+    .chatbot-window {
+        width: 300px;
+    }
+}
+
+@media (max-width: 767.98px) {
+    h1 {
+        font-size: 2.5rem;
+    }
+    
+    .hero {
+        text-align: center;
+        padding: 2rem 0;
+    }
+    
+    .chatbot-container {
+        bottom: 20px;
+        right: 20px;
+    }
+    
+    .chatbot-button {
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+    }
+    
+    .chatbot-window {
+        width: 280px;
+        max-height: 450px;
+    }
+} 
