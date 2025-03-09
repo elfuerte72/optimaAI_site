@@ -40,8 +40,8 @@ RUN composer install --no-interaction --optimize-autoloader
 # Установка прав на директории
 RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
 
-# Экспозиция порта для PHP-FPM
-EXPOSE 8000
+# Экспозиция порта для PHP-FPM (используем переменную PORT или 8000 по умолчанию)
+EXPOSE ${PORT:-8000}
 
 # Скрипт для запуска приложения
 COPY docker-entrypoint.sh /usr/local/bin/
@@ -49,4 +49,4 @@ RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
 # Запуск приложения
 ENTRYPOINT ["docker-entrypoint.sh"]
-CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"] 
+CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=${PORT:-8000}"] 
