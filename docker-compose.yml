@@ -1,0 +1,49 @@
+services:
+  # PHP Service
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: optimaai-app
+    restart: unless-stopped
+    ports:
+      - "8001:8000"
+    networks:
+      - optimaai-network
+    depends_on:
+      - mysql
+      - redis
+    command: php artisan serve --host=0.0.0.0 --port=8000
+
+  # MySQL Service
+  mysql:
+    image: mysql:8.0
+    container_name: optimaai-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE:-laravel}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-root}
+      MYSQL_PASSWORD: ${DB_PASSWORD:-root}
+      MYSQL_USER: ${DB_USERNAME:-laravel}
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - optimaai-network
+
+  # Redis Service
+  redis:
+    image: redis:alpine
+    container_name: optimaai-redis
+    restart: unless-stopped
+    networks:
+      - optimaai-network
+
+networks:
+  optimaai-network:
+    driver: bridge
+
+volumes:
+  mysql-data:
+    driver: local 
