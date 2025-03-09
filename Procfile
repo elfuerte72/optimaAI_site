@@ -1,1 +1,1 @@
-web: cp .env.railway .env && php artisan key:generate --force && php artisan migrate --force && vendor/bin/heroku-php-apache2 public/ 
+web: cp .env.railway .env && php -S 0.0.0.0:${PORT:-8000} -t public 
