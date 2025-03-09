@@ -23,6 +23,11 @@ use Illuminate\Support\Facades\Mail;
 |
 */
 
+// Маршрут для проверки здоровья (healthcheck)
+Route::get('/health', function () {
+    return response()->json(['status' => 'ok']);
+});
+
 // Главная страница
 Route::get('/', [HomeController::class, 'index'])->name('home');
 

@@ -5,8 +5,8 @@
     "buildCommand": "composer install --no-interaction --optimize-autoloader && php artisan optimize"
   },
   "deploy": {
-    "startCommand": "php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=${PORT:-8000}",
-    "healthcheckPath": "/",
+    "startCommand": "cp .env.railway .env && php artisan key:generate --force && php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=${PORT:-8000}",
+    "healthcheckPath": "/health",
     "healthcheckTimeout": 300,
     "restartPolicyType": "ON_FAILURE"
   }

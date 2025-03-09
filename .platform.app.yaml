@@ -13,6 +13,8 @@ web:
                 - index.php
             allow: true
             passthru: "/index.php"
+    commands:
+        start: php artisan serve --host=0.0.0.0 --port=$PORT
 
 disk: 2048
 
@@ -33,3 +35,10 @@ hooks:
         php artisan migrate --force
         php artisan optimize
         php artisan storage:link 
+
+# Добавляем настройку для проверки здоровья
+healthcheck:
+    path: /health
+    interval: 10s
+    timeout: 5s
+    retries: 3 
