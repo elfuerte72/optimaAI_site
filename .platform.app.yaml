@@ -1,0 +1,35 @@
+name: app
+
+type: php:8.1
+
+build:
+    flavor: composer
+
+web:
+    locations:
+        "/":
+            root: "public"
+            index:
+                - index.php
+            allow: true
+            passthru: "/index.php"
+
+disk: 2048
+
+mounts:
+    "/storage/app/public": "shared:files/public"
+    "/storage/app": "shared:files/app"
+    "/storage/framework/cache": "shared:files/cache"
+    "/storage/framework/sessions": "shared:files/sessions"
+    "/storage/framework/views": "shared:files/views"
+    "/storage/logs": "shared:files/logs"
+
+hooks:
+    build: |
+        set -e
+        composer install --no-interaction --optimize-autoloader
+    deploy: |
+        set -e
+        php artisan migrate --force
+        php artisan optimize
+        php artisan storage:link 
