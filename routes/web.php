@@ -25,7 +25,7 @@ use Illuminate\Support\Facades\Mail;
 
 // Маршрут для проверки здоровья (healthcheck)
 Route::get('/health', function () {
-    return response()->json(['status' => 'ok']);
+    return response()->json(['status' => 'ok', 'timestamp' => time()]);
 });
 
 // Главная страница

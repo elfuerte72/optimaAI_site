@@ -41,8 +41,14 @@ COPY docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 # Создание директории для логов
 RUN mkdir -p /var/log/supervisor
 
+# Создание скрипта запуска
+RUN echo '#!/bin/sh\n\
+sed -i "s/listen 0.0.0.0:8000/listen 0.0.0.0:${PORT:-8000}/g" /etc/nginx/http.d/default.conf\n\
+exec /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf\n\
+' > /start.sh && chmod +x /start.sh
+
 # Экспозиция порта
 EXPOSE ${PORT:-8000}
 
-# Запуск Supervisor
-CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"] 
+# Запуск скрипта
+CMD ["/start.sh"] 
