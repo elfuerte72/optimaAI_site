@@ -11,10 +11,11 @@ RUN apk add --no-cache \
     libxml2-dev \
     zip \
     unzip \
-    icu-dev
+    icu-dev \
+    libzip-dev
 
 # Установка PHP расширений
-RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd intl
+RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd intl zip
 
 # Установка Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
