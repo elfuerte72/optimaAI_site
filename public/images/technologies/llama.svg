@@ -1,0 +1,15 @@
+<svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="120" height="120" rx="60" fill="#0A0F1E"/>
+  <path d="M85 45C85 42.2386 82.7614 40 80 40H40C37.2386 40 35 42.2386 35 45V75C35 77.7614 37.2386 80 40 80H80C82.7614 80 85 77.7614 85 75V45Z" stroke="#00F0FF" stroke-width="2"/>
+  <path d="M45 55L45 65" stroke="#00F0FF" stroke-width="2" stroke-linecap="round"/>
+  <path d="M55 50L55 70" stroke="#00F0FF" stroke-width="2" stroke-linecap="round"/>
+  <path d="M65 50L65 70" stroke="#00F0FF" stroke-width="2" stroke-linecap="round"/>
+  <path d="M75 55L75 65" stroke="#00F0FF" stroke-width="2" stroke-linecap="round"/>
+  <path d="M40 50H45" stroke="#00F0FF" stroke-width="2" stroke-linecap="round"/>
+  <path d="M40 70H45" stroke="#00F0FF" stroke-width="2" stroke-linecap="round"/>
+  <path d="M75 50H80" stroke="#00F0FF" stroke-width="2" stroke-linecap="round"/>
+  <path d="M75 70H80" stroke="#00F0FF" stroke-width="2" stroke-linecap="round"/>
+  <path d="M50 50H60" stroke="#00F0FF" stroke-width="2" stroke-linecap="round"/>
+  <path d="M60 70H70" stroke="#00F0FF" stroke-width="2" stroke-linecap="round"/>
+  <path d="M60 60H70" stroke="#00F0FF" stroke-width="2" stroke-linecap="round"/>
+</svg> 

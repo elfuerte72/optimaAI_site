@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1000" viewBox="0 0 1000 1000">
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a2463" stop-opacity="0.05" />
+      <stop offset="100%" stop-color="#3cb371" stop-opacity="0.1" />
+    </linearGradient>
+    <linearGradient id="grad2" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0a2463" stop-opacity="0.03" />
+      <stop offset="100%" stop-color="#3cb371" stop-opacity="0.07" />
+    </linearGradient>
+    <filter id="blur1" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="30" />
+    </filter>
+    <filter id="blur2" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="20" />
+    </filter>
+  </defs>
+  
+  <!-- Абстрактные формы на фоне -->
+  <rect width="100%" height="100%" fill="#ffffff" />
+  
+  <!-- Большие размытые круги -->
+  <circle cx="200" cy="150" r="300" fill="url(#grad1)" filter="url(#blur1)" />
+  <circle cx="800" cy="850" r="350" fill="url(#grad2)" filter="url(#blur1)" />
+  
+  <!-- Маленькие размытые круги -->
+  <circle cx="700" cy="200" r="100" fill="#0a2463" opacity="0.05" filter="url(#blur2)" />
+  <circle cx="300" cy="700" r="120" fill="#3cb371" opacity="0.05" filter="url(#blur2)" />
+  
+  <!-- Тонкие линии -->
+  <path d="M0,300 Q500,250 1000,400" stroke="#0a2463" stroke-width="1" fill="none" opacity="0.1" />
+  <path d="M0,600 Q500,550 1000,700" stroke="#3cb371" stroke-width="1" fill="none" opacity="0.1" />
+  <path d="M300,0 Q250,500 400,1000" stroke="#0a2463" stroke-width="1" fill="none" opacity="0.1" />
+  <path d="M700,0 Q650,500 800,1000" stroke="#3cb371" stroke-width="1" fill="none" opacity="0.1" />
+  
+  <!-- Точки -->
+  <g opacity="0.2">
+    <circle cx="100" cy="100" r="2" fill="#0a2463" />
+    <circle cx="150" cy="150" r="2" fill="#0a2463" />
+    <circle cx="200" cy="100" r="2" fill="#0a2463" />
+    <circle cx="250" cy="150" r="2" fill="#0a2463" />
+    <circle cx="300" cy="100" r="2" fill="#0a2463" />
+    
+    <circle cx="700" cy="800" r="2" fill="#3cb371" />
+    <circle cx="750" cy="850" r="2" fill="#3cb371" />
+    <circle cx="800" cy="800" r="2" fill="#3cb371" />
+    <circle cx="850" cy="850" r="2" fill="#3cb371" />
+    <circle cx="900" cy="800" r="2" fill="#3cb371" />
+  </g>
+</svg> 

@@ -1,0 +1,234 @@
+<svg width="1440" height="800" viewBox="0 0 1440 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g opacity="0.6">
+    <!-- Узлы нейронной сети -->
+    <circle cx="120" cy="120" r="4" fill="#00E5FF" />
+    <circle cx="320" cy="180" r="3" fill="#6C63FF" />
+    <circle cx="520" cy="120" r="4" fill="#00E5FF" />
+    <circle cx="720" cy="220" r="3" fill="#FF00E5" />
+    <circle cx="920" cy="150" r="4" fill="#00E5FF" />
+    <circle cx="1120" cy="180" r="3" fill="#6C63FF" />
+    <circle cx="1320" cy="120" r="4" fill="#00E5FF" />
+    
+    <circle cx="220" cy="320" r="3" fill="#6C63FF" />
+    <circle cx="420" cy="380" r="4" fill="#00E5FF" />
+    <circle cx="620" cy="320" r="3" fill="#FF00E5" />
+    <circle cx="820" cy="420" r="4" fill="#00E5FF" />
+    <circle cx="1020" cy="350" r="3" fill="#6C63FF" />
+    <circle cx="1220" cy="380" r="4" fill="#00E5FF" />
+    <circle cx="1420" cy="320" r="3" fill="#FF00E5" />
+    
+    <circle cx="120" cy="520" r="3" fill="#FF00E5" />
+    <circle cx="320" cy="580" r="4" fill="#00E5FF" />
+    <circle cx="520" cy="520" r="3" fill="#6C63FF" />
+    <circle cx="720" cy="620" r="4" fill="#00E5FF" />
+    <circle cx="920" cy="550" r="3" fill="#FF00E5" />
+    <circle cx="1120" cy="580" r="4" fill="#00E5FF" />
+    <circle cx="1320" cy="520" r="3" fill="#6C63FF" />
+    
+    <circle cx="220" cy="720" r="4" fill="#00E5FF" />
+    <circle cx="420" cy="780" r="3" fill="#FF00E5" />
+    <circle cx="620" cy="720" r="4" fill="#00E5FF" />
+    <circle cx="820" cy="780" r="3" fill="#6C63FF" />
+    <circle cx="1020" cy="720" r="4" fill="#00E5FF" />
+    <circle cx="1220" cy="780" r="3" fill="#FF00E5" />
+    <circle cx="1420" cy="720" r="4" fill="#00E5FF" />
+    
+    <!-- Дополнительные узлы -->
+    <circle cx="170" cy="220" r="2" fill="#00E5FF" />
+    <circle cx="370" cy="280" r="2" fill="#6C63FF" />
+    <circle cx="570" cy="220" r="2" fill="#00E5FF" />
+    <circle cx="770" cy="320" r="2" fill="#FF00E5" />
+    <circle cx="970" cy="250" r="2" fill="#00E5FF" />
+    <circle cx="1170" cy="280" r="2" fill="#6C63FF" />
+    <circle cx="1370" cy="220" r="2" fill="#00E5FF" />
+    
+    <circle cx="270" cy="420" r="2" fill="#6C63FF" />
+    <circle cx="470" cy="480" r="2" fill="#00E5FF" />
+    <circle cx="670" cy="420" r="2" fill="#FF00E5" />
+    <circle cx="870" cy="520" r="2" fill="#00E5FF" />
+    <circle cx="1070" cy="450" r="2" fill="#6C63FF" />
+    <circle cx="1270" cy="480" r="2" fill="#00E5FF" />
+    <circle cx="1470" cy="420" r="2" fill="#FF00E5" />
+    
+    <circle cx="170" cy="620" r="2" fill="#FF00E5" />
+    <circle cx="370" cy="680" r="2" fill="#00E5FF" />
+    <circle cx="570" cy="620" r="2" fill="#6C63FF" />
+    <circle cx="770" cy="720" r="2" fill="#00E5FF" />
+    <circle cx="970" cy="650" r="2" fill="#FF00E5" />
+    <circle cx="1170" cy="680" r="2" fill="#00E5FF" />
+    <circle cx="1370" cy="620" r="2" fill="#6C63FF" />
+    
+    <!-- Соединения между узлами -->
+    <!-- Горизонтальные линии -->
+    <line x1="120" y1="120" x2="320" y2="180" stroke="#00E5FF" stroke-width="0.5" stroke-opacity="0.3" />
+    <line x1="320" y1="180" x2="520" y2="120" stroke="#6C63FF" stroke-width="0.5" stroke-opacity="0.3" />
+    <line x1="520" y1="120" x2="720" y2="220" stroke="#00E5FF" stroke-width="0.5" stroke-opacity="0.3" />
+    <line x1="720" y1="220" x2="920" y2="150" stroke="#FF00E5" stroke-width="0.5" stroke-opacity="0.3" />
+    <line x1="920" y1="150" x2="1120" y2="180" stroke="#00E5FF" stroke-width="0.5" stroke-opacity="0.3" />
+    <line x1="1120" y1="180" x2="1320" y2="120" stroke="#6C63FF" stroke-width="0.5" stroke-opacity="0.3" />
+    
+    <line x1="220" y1="320" x2="420" y2="380" stroke="#6C63FF" stroke-width="0.5" stroke-opacity="0.3" />
+    <line x1="420" y1="380" x2="620" y2="320" stroke="#00E5FF" stroke-width="0.5" stroke-opacity="0.3" />
+    <line x1="620" y1="320" x2="820" y2="420" stroke="#FF00E5" stroke-width="0.5" stroke-opacity="0.3" />
+    <line x1="820" y1="420" x2="1020" y2="350" stroke="#00E5FF" stroke-width="0.5" stroke-opacity="0.3" />
+    <line x1="1020" y1="350" x2="1220" y2="380" stroke="#6C63FF" stroke-width="0.5" stroke-opacity="0.3" />
+    <line x1="1220" y1="380" x2="1420" y2="320" stroke="#00E5FF" stroke-width="0.5" stroke-opacity="0.3" />
+    
+    <line x1="120" y1="520" x2="320" y2="580" stroke="#FF00E5" stroke-width="0.5" stroke-opacity="0.3" />
+    <line x1="320" y1="580" x2="520" y2="520" stroke="#00E5FF" stroke-width="0.5" stroke-opacity="0.3" />
+    <line x1="520" y1="520" x2="720" y2="620" stroke="#6C63FF" stroke-width="0.5" stroke-opacity="0.3" />
+    <line x1="720" y1="620" x2="920" y2="550" stroke="#00E5FF" stroke-width="0.5" stroke-opacity="0.3" />
+    <line x1="920" y1="550" x2="1120" y2="580" stroke="#FF00E5" stroke-width="0.5" stroke-opacity="0.3" />
+    <line x1="1120" y1="580" x2="1320" y2="520" stroke="#00E5FF" stroke-width="0.5" stroke-opacity="0.3" />
+    
+    <line x1="220" y1="720" x2="420" y2="780" stroke="#00E5FF" stroke-width="0.5" stroke-opacity="0.3" />
+    <line x1="420" y1="780" x2="620" y2="720" stroke="#FF00E5" stroke-width="0.5" stroke-opacity="0.3" />
+    <line x1="620" y1="720" x2="820" y2="780" stroke="#00E5FF" stroke-width="0.5" stroke-opacity="0.3" />
+    <line x1="820" y1="780" x2="1020" y2="720" stroke="#6C63FF" stroke-width="0.5" stroke-opacity="0.3" />
+    <line x1="1020" y1="720" x2="1220" y2="780" stroke="#00E5FF" stroke-width="0.5" stroke-opacity="0.3" />
+    <line x1="1220" y1="780" x2="1420" y2="720" stroke="#FF00E5" stroke-width="0.5" stroke-opacity="0.3" />
+    
+    <!-- Вертикальные соединения -->
+    <line x1="120" y1="120" x2="220" y2="320" stroke="#00E5FF" stroke-width="0.5" stroke-opacity="0.3" />
+    <line x1="320" y1="180" x2="420" y2="380" stroke="#6C63FF" stroke-width="0.5" stroke-opacity="0.3" />
+    <line x1="520" y1="120" x2="620" y2="320" stroke="#00E5FF" stroke-width="0.5" stroke-opacity="0.3" />
+    <line x1="720" y1="220" x2="820" y2="420" stroke="#FF00E5" stroke-width="0.5" stroke-opacity="0.3" />
+    <line x1="920" y1="150" x2="1020" y2="350" stroke="#00E5FF" stroke-width="0.5" stroke-opacity="0.3" />
+    <line x1="1120" y1="180" x2="1220" y2="380" stroke="#6C63FF" stroke-width="0.5" stroke-opacity="0.3" />
+    <line x1="1320" y1="120" x2="1420" y2="320" stroke="#00E5FF" stroke-width="0.5" stroke-opacity="0.3" />
+    
+    <line x1="220" y1="320" x2="120" y2="520" stroke="#6C63FF" stroke-width="0.5" stroke-opacity="0.3" />
+    <line x1="420" y1="380" x2="320" y2="580" stroke="#00E5FF" stroke-width="0.5" stroke-opacity="0.3" />
+    <line x1="620" y1="320" x2="520" y2="520" stroke="#FF00E5" stroke-width="0.5" stroke-opacity="0.3" />
+    <line x1="820" y1="420" x2="720" y2="620" stroke="#00E5FF" stroke-width="0.5" stroke-opacity="0.3" />
+    <line x1="1020" y1="350" x2="920" y2="550" stroke="#6C63FF" stroke-width="0.5" stroke-opacity="0.3" />
+    <line x1="1220" y1="380" x2="1120" y2="580" stroke="#00E5FF" stroke-width="0.5" stroke-opacity="0.3" />
+    <line x1="1420" y1="320" x2="1320" y2="520" stroke="#FF00E5" stroke-width="0.5" stroke-opacity="0.3" />
+    
+    <line x1="120" y1="520" x2="220" y2="720" stroke="#FF00E5" stroke-width="0.5" stroke-opacity="0.3" />
+    <line x1="320" y1="580" x2="420" y2="780" stroke="#00E5FF" stroke-width="0.5" stroke-opacity="0.3" />
+    <line x1="520" y1="520" x2="620" y2="720" stroke="#6C63FF" stroke-width="0.5" stroke-opacity="0.3" />
+    <line x1="720" y1="620" x2="820" y2="780" stroke="#00E5FF" stroke-width="0.5" stroke-opacity="0.3" />
+    <line x1="920" y1="550" x2="1020" y2="720" stroke="#FF00E5" stroke-width="0.5" stroke-opacity="0.3" />
+    <line x1="1120" y1="580" x2="1220" y2="780" stroke="#00E5FF" stroke-width="0.5" stroke-opacity="0.3" />
+    <line x1="1320" y1="520" x2="1420" y2="720" stroke="#6C63FF" stroke-width="0.5" stroke-opacity="0.3" />
+    
+    <!-- Диагональные соединения -->
+    <line x1="120" y1="120" x2="420" y2="380" stroke="#00E5FF" stroke-width="0.5" stroke-opacity="0.2" />
+    <line x1="320" y1="180" x2="620" y2="320" stroke="#6C63FF" stroke-width="0.5" stroke-opacity="0.2" />
+    <line x1="520" y1="120" x2="820" y2="420" stroke="#00E5FF" stroke-width="0.5" stroke-opacity="0.2" />
+    <line x1="720" y1="220" x2="1020" y2="350" stroke="#FF00E5" stroke-width="0.5" stroke-opacity="0.2" />
+    <line x1="920" y1="150" x2="1220" y2="380" stroke="#00E5FF" stroke-width="0.5" stroke-opacity="0.2" />
+    <line x1="1120" y1="180" x2="1420" y2="320" stroke="#6C63FF" stroke-width="0.5" stroke-opacity="0.2" />
+    
+    <line x1="220" y1="320" x2="320" y2="580" stroke="#6C63FF" stroke-width="0.5" stroke-opacity="0.2" />
+    <line x1="420" y1="380" x2="520" y2="520" stroke="#00E5FF" stroke-width="0.5" stroke-opacity="0.2" />
+    <line x1="620" y1="320" x2="720" y2="620" stroke="#FF00E5" stroke-width="0.5" stroke-opacity="0.2" />
+    <line x1="820" y1="420" x2="920" y2="550" stroke="#00E5FF" stroke-width="0.5" stroke-opacity="0.2" />
+    <line x1="1020" y1="350" x2="1120" y2="580" stroke="#6C63FF" stroke-width="0.5" stroke-opacity="0.2" />
+    <line x1="1220" y1="380" x2="1320" y2="520" stroke="#00E5FF" stroke-width="0.5" stroke-opacity="0.2" />
+    
+    <line x1="120" y1="520" x2="420" y2="780" stroke="#FF00E5" stroke-width="0.5" stroke-opacity="0.2" />
+    <line x1="320" y1="580" x2="620" y2="720" stroke="#00E5FF" stroke-width="0.5" stroke-opacity="0.2" />
+    <line x1="520" y1="520" x2="820" y2="780" stroke="#6C63FF" stroke-width="0.5" stroke-opacity="0.2" />
+    <line x1="720" y1="620" x2="1020" y2="720" stroke="#00E5FF" stroke-width="0.5" stroke-opacity="0.2" />
+    <line x1="920" y1="550" x2="1220" y2="780" stroke="#FF00E5" stroke-width="0.5" stroke-opacity="0.2" />
+    <line x1="1120" y1="580" x2="1420" y2="720" stroke="#00E5FF" stroke-width="0.5" stroke-opacity="0.2" />
+    
+    <!-- Анимированные частицы -->
+    <circle cx="120" cy="120" r="1.5" fill="#00E5FF">
+      <animate attributeName="opacity" values="0.2;1;0.2" dur="3s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="520" cy="120" r="1.5" fill="#00E5FF">
+      <animate attributeName="opacity" values="0.2;1;0.2" dur="4s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="920" cy="150" r="1.5" fill="#00E5FF">
+      <animate attributeName="opacity" values="0.2;1;0.2" dur="3.5s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="1320" cy="120" r="1.5" fill="#00E5FF">
+      <animate attributeName="opacity" values="0.2;1;0.2" dur="4.5s" repeatCount="indefinite" />
+    </circle>
+    
+    <circle cx="420" cy="380" r="1.5" fill="#00E5FF">
+      <animate attributeName="opacity" values="0.2;1;0.2" dur="3.2s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="820" cy="420" r="1.5" fill="#00E5FF">
+      <animate attributeName="opacity" values="0.2;1;0.2" dur="4.2s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="1220" cy="380" r="1.5" fill="#00E5FF">
+      <animate attributeName="opacity" values="0.2;1;0.2" dur="3.7s" repeatCount="indefinite" />
+    </circle>
+    
+    <circle cx="320" cy="580" r="1.5" fill="#00E5FF">
+      <animate attributeName="opacity" values="0.2;1;0.2" dur="3.3s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="720" cy="620" r="1.5" fill="#00E5FF">
+      <animate attributeName="opacity" values="0.2;1;0.2" dur="4.3s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="1120" cy="580" r="1.5" fill="#00E5FF">
+      <animate attributeName="opacity" values="0.2;1;0.2" dur="3.8s" repeatCount="indefinite" />
+    </circle>
+    
+    <circle cx="220" cy="720" r="1.5" fill="#00E5FF">
+      <animate attributeName="opacity" values="0.2;1;0.2" dur="3.4s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="620" cy="720" r="1.5" fill="#00E5FF">
+      <animate attributeName="opacity" values="0.2;1;0.2" dur="4.4s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="1020" cy="720" r="1.5" fill="#00E5FF">
+      <animate attributeName="opacity" values="0.2;1;0.2" dur="3.9s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="1420" cy="720" r="1.5" fill="#00E5FF">
+      <animate attributeName="opacity" values="0.2;1;0.2" dur="4.9s" repeatCount="indefinite" />
+    </circle>
+    
+    <!-- Движущиеся частицы по линиям -->
+    <circle r="2" fill="#00E5FF">
+      <animate attributeName="cx" values="120;320" dur="4s" repeatCount="indefinite" />
+      <animate attributeName="cy" values="120;180" dur="4s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0;1;0" dur="4s" repeatCount="indefinite" />
+    </circle>
+    
+    <circle r="2" fill="#6C63FF">
+      <animate attributeName="cx" values="320;520" dur="5s" repeatCount="indefinite" />
+      <animate attributeName="cy" values="180;120" dur="5s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0;1;0" dur="5s" repeatCount="indefinite" />
+    </circle>
+    
+    <circle r="2" fill="#FF00E5">
+      <animate attributeName="cx" values="520;720" dur="4.5s" repeatCount="indefinite" />
+      <animate attributeName="cy" values="120;220" dur="4.5s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0;1;0" dur="4.5s" repeatCount="indefinite" />
+    </circle>
+    
+    <circle r="2" fill="#00E5FF">
+      <animate attributeName="cx" values="720;920" dur="5.5s" repeatCount="indefinite" />
+      <animate attributeName="cy" values="220;150" dur="5.5s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0;1;0" dur="5.5s" repeatCount="indefinite" />
+    </circle>
+    
+    <circle r="2" fill="#6C63FF">
+      <animate attributeName="cx" values="920;1120" dur="4.2s" repeatCount="indefinite" />
+      <animate attributeName="cy" values="150;180" dur="4.2s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0;1;0" dur="4.2s" repeatCount="indefinite" />
+    </circle>
+    
+    <circle r="2" fill="#FF00E5">
+      <animate attributeName="cx" values="1120;1320" dur="5.2s" repeatCount="indefinite" />
+      <animate attributeName="cy" values="180;120" dur="5.2s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0;1;0" dur="5.2s" repeatCount="indefinite" />
+    </circle>
+    
+    <circle r="2" fill="#00E5FF">
+      <animate attributeName="cx" values="120;220" dur="4.7s" repeatCount="indefinite" />
+      <animate attributeName="cy" values="120;320" dur="4.7s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0;1;0" dur="4.7s" repeatCount="indefinite" />
+    </circle>
+    
+    <circle r="2" fill="#6C63FF">
+      <animate attributeName="cx" values="320;420" dur="5.7s" repeatCount="indefinite" />
+      <animate attributeName="cy" values="180;380" dur="5.7s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0;1;0" dur="5.7s" repeatCount="indefinite" />
+    </circle>
+  </g>
+</svg> 

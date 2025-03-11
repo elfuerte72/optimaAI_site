@@ -34,6 +34,19 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/services', [ServiceController::class, 'index'])->name('services.index');
 Route::get('/services/{service}', [ServiceController::class, 'show'])->name('services.show');
 
+// Добавляем новые маршруты для услуг с использованием строковых идентификаторов
+Route::get('/services/consulting-and-training', function () {
+    return view('services.consulting-and-training');
+})->name('services.consulting-and-training');
+
+Route::get('/services/language-models-setup', function () {
+    return view('services.language-models-setup');
+})->name('services.language-models-setup');
+
+Route::get('/services/ai-business-integration', function () {
+    return view('services.ai-business-integration');
+})->name('services.ai-business-integration');
+
 // Кейсы
 Route::get('/case-studies', [CaseStudyController::class, 'index'])->name('case-studies.index');
 Route::get('/case-studies/{caseStudy}', [CaseStudyController::class, 'show'])->name('case-studies.show');

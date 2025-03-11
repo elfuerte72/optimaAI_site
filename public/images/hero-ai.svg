@@ -1,0 +1,166 @@
+<svg width="500" height="500" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background Glow -->
+  <circle cx="250" cy="250" r="200" fill="url(#glow_gradient)" filter="blur(30px)" opacity="0.6"/>
+  
+  <!-- Neural Network Grid -->
+  <g opacity="0.8">
+    <!-- Horizontal Lines -->
+    <line x1="100" y1="150" x2="400" y2="150" stroke="url(#line_gradient)" stroke-width="1" stroke-dasharray="4 4"/>
+    <line x1="100" y1="200" x2="400" y2="200" stroke="url(#line_gradient)" stroke-width="1" stroke-dasharray="4 4"/>
+    <line x1="100" y1="250" x2="400" y2="250" stroke="url(#line_gradient)" stroke-width="1" stroke-dasharray="4 4"/>
+    <line x1="100" y1="300" x2="400" y2="300" stroke="url(#line_gradient)" stroke-width="1" stroke-dasharray="4 4"/>
+    <line x1="100" y1="350" x2="400" y2="350" stroke="url(#line_gradient)" stroke-width="1" stroke-dasharray="4 4"/>
+    
+    <!-- Vertical Lines -->
+    <line x1="150" y1="100" x2="150" y2="400" stroke="url(#line_gradient)" stroke-width="1" stroke-dasharray="4 4"/>
+    <line x1="200" y1="100" x2="200" y2="400" stroke="url(#line_gradient)" stroke-width="1" stroke-dasharray="4 4"/>
+    <line x1="250" y1="100" x2="250" y2="400" stroke="url(#line_gradient)" stroke-width="1" stroke-dasharray="4 4"/>
+    <line x1="300" y1="100" x2="300" y2="400" stroke="url(#line_gradient)" stroke-width="1" stroke-dasharray="4 4"/>
+    <line x1="350" y1="100" x2="350" y2="400" stroke="url(#line_gradient)" stroke-width="1" stroke-dasharray="4 4"/>
+  </g>
+  
+  <!-- Neural Network Nodes -->
+  <g>
+    <!-- Layer 1 -->
+    <circle cx="150" cy="150" r="8" fill="url(#node_gradient)"/>
+    <circle cx="150" cy="200" r="8" fill="url(#node_gradient)"/>
+    <circle cx="150" cy="250" r="8" fill="url(#node_gradient)"/>
+    <circle cx="150" cy="300" r="8" fill="url(#node_gradient)"/>
+    <circle cx="150" cy="350" r="8" fill="url(#node_gradient)"/>
+    
+    <!-- Layer 2 -->
+    <circle cx="250" cy="175" r="8" fill="url(#node_gradient)"/>
+    <circle cx="250" cy="225" r="8" fill="url(#node_gradient)"/>
+    <circle cx="250" cy="275" r="8" fill="url(#node_gradient)"/>
+    <circle cx="250" cy="325" r="8" fill="url(#node_gradient)"/>
+    
+    <!-- Layer 3 -->
+    <circle cx="350" cy="200" r="8" fill="url(#node_gradient)"/>
+    <circle cx="350" cy="250" r="8" fill="url(#node_gradient)"/>
+    <circle cx="350" cy="300" r="8" fill="url(#node_gradient)"/>
+  </g>
+  
+  <!-- Neural Network Connections -->
+  <g opacity="0.6">
+    <!-- Layer 1 to Layer 2 -->
+    <line x1="150" y1="150" x2="250" y2="175" stroke="url(#connection_gradient)" stroke-width="2"/>
+    <line x1="150" y1="150" x2="250" y2="225" stroke="url(#connection_gradient)" stroke-width="2"/>
+    <line x1="150" y1="200" x2="250" y2="175" stroke="url(#connection_gradient)" stroke-width="2"/>
+    <line x1="150" y1="200" x2="250" y2="225" stroke="url(#connection_gradient)" stroke-width="2"/>
+    <line x1="150" y1="200" x2="250" y2="275" stroke="url(#connection_gradient)" stroke-width="2"/>
+    <line x1="150" y1="250" x2="250" y2="225" stroke="url(#connection_gradient)" stroke-width="2"/>
+    <line x1="150" y1="250" x2="250" y2="275" stroke="url(#connection_gradient)" stroke-width="2"/>
+    <line x1="150" y1="300" x2="250" y2="275" stroke="url(#connection_gradient)" stroke-width="2"/>
+    <line x1="150" y1="300" x2="250" y2="325" stroke="url(#connection_gradient)" stroke-width="2"/>
+    <line x1="150" y1="350" x2="250" y2="325" stroke="url(#connection_gradient)" stroke-width="2"/>
+    
+    <!-- Layer 2 to Layer 3 -->
+    <line x1="250" y1="175" x2="350" y2="200" stroke="url(#connection_gradient)" stroke-width="2"/>
+    <line x1="250" y1="225" x2="350" y2="200" stroke="url(#connection_gradient)" stroke-width="2"/>
+    <line x1="250" y1="225" x2="350" y2="250" stroke="url(#connection_gradient)" stroke-width="2"/>
+    <line x1="250" y1="275" x2="350" y2="250" stroke="url(#connection_gradient)" stroke-width="2"/>
+    <line x1="250" y1="275" x2="350" y2="300" stroke="url(#connection_gradient)" stroke-width="2"/>
+    <line x1="250" y1="325" x2="350" y2="300" stroke="url(#connection_gradient)" stroke-width="2"/>
+  </g>
+  
+  <!-- Animated Pulses -->
+  <circle cx="150" cy="150" r="12" fill="url(#pulse_gradient)" opacity="0.6">
+    <animate attributeName="r" values="8;16;8" dur="3s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.8;0.2;0.8" dur="3s" repeatCount="indefinite"/>
+  </circle>
+  
+  <circle cx="250" cy="225" r="12" fill="url(#pulse_gradient)" opacity="0.6">
+    <animate attributeName="r" values="8;16;8" dur="3s" repeatCount="indefinite" begin="0.5s"/>
+    <animate attributeName="opacity" values="0.8;0.2;0.8" dur="3s" repeatCount="indefinite" begin="0.5s"/>
+  </circle>
+  
+  <circle cx="350" cy="250" r="12" fill="url(#pulse_gradient)" opacity="0.6">
+    <animate attributeName="r" values="8;16;8" dur="3s" repeatCount="indefinite" begin="1s"/>
+    <animate attributeName="opacity" values="0.8;0.2;0.8" dur="3s" repeatCount="indefinite" begin="1s"/>
+  </circle>
+  
+  <!-- Central Brain Element -->
+  <g transform="translate(250, 250)">
+    <path d="M0,-60 C33.1371,-60 60,-33.1371 60,0 C60,33.1371 33.1371,60 0,60 C-33.1371,60 -60,33.1371 -60,0 C-60,-33.1371 -33.1371,-60 0,-60 Z" fill="url(#brain_gradient)" opacity="0.9"/>
+    
+    <!-- Brain Connections -->
+    <g opacity="0.7">
+      <path d="M0,0 C10,10 20,0 30,-10" stroke="url(#brain_connection)" stroke-width="2" fill="none"/>
+      <path d="M0,0 C-10,10 -20,0 -30,-10" stroke="url(#brain_connection)" stroke-width="2" fill="none"/>
+      <path d="M0,0 C10,-10 20,0 30,10" stroke="url(#brain_connection)" stroke-width="2" fill="none"/>
+      <path d="M0,0 C-10,-10 -20,0 -30,10" stroke="url(#brain_connection)" stroke-width="2" fill="none"/>
+      <path d="M0,0 C0,20 10,30 20,40" stroke="url(#brain_connection)" stroke-width="2" fill="none"/>
+      <path d="M0,0 C0,-20 10,-30 20,-40" stroke="url(#brain_connection)" stroke-width="2" fill="none"/>
+      <path d="M0,0 C0,20 -10,30 -20,40" stroke="url(#brain_connection)" stroke-width="2" fill="none"/>
+      <path d="M0,0 C0,-20 -10,-30 -20,-40" stroke="url(#brain_connection)" stroke-width="2" fill="none"/>
+    </g>
+    
+    <!-- Pulsing Core -->
+    <circle cx="0" cy="0" r="15" fill="url(#core_gradient)">
+      <animate attributeName="r" values="15;20;15" dur="2s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="1;0.8;1" dur="2s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+  
+  <!-- Floating Data Elements -->
+  <g opacity="0.7">
+    <rect x="120" y="120" width="20" height="10" rx="2" fill="#4F46E5" opacity="0.6">
+      <animate attributeName="y" values="120;110;120" dur="4s" repeatCount="indefinite"/>
+    </rect>
+    
+    <rect x="360" y="220" width="20" height="10" rx="2" fill="#06B6D4" opacity="0.6">
+      <animate attributeName="y" values="220;230;220" dur="3s" repeatCount="indefinite"/>
+    </rect>
+    
+    <rect x="280" y="350" width="20" height="10" rx="2" fill="#4F46E5" opacity="0.6">
+      <animate attributeName="y" values="350;340;350" dur="5s" repeatCount="indefinite"/>
+    </rect>
+    
+    <rect x="180" y="380" width="20" height="10" rx="2" fill="#06B6D4" opacity="0.6">
+      <animate attributeName="y" values="380;390;380" dur="4.5s" repeatCount="indefinite"/>
+    </rect>
+  </g>
+  
+  <!-- Gradients -->
+  <defs>
+    <linearGradient id="glow_gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4F46E5" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#06B6D4" stop-opacity="0.3"/>
+    </linearGradient>
+    
+    <linearGradient id="line_gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#4F46E5" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#06B6D4" stop-opacity="0.3"/>
+    </linearGradient>
+    
+    <linearGradient id="node_gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4F46E5"/>
+      <stop offset="100%" stop-color="#06B6D4"/>
+    </linearGradient>
+    
+    <linearGradient id="connection_gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#4F46E5"/>
+      <stop offset="100%" stop-color="#06B6D4"/>
+    </linearGradient>
+    
+    <linearGradient id="pulse_gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4F46E5"/>
+      <stop offset="100%" stop-color="#06B6D4"/>
+    </linearGradient>
+    
+    <linearGradient id="brain_gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4F46E5" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#06B6D4" stop-opacity="0.8"/>
+    </linearGradient>
+    
+    <linearGradient id="brain_connection" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#06B6D4"/>
+    </linearGradient>
+    
+    <linearGradient id="core_gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#06B6D4"/>
+    </linearGradient>
+  </defs>
+</svg> 

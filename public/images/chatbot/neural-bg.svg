@@ -1,0 +1,171 @@
+<svg width="800" height="800" viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00f0ff" stop-opacity="0.3" />
+      <stop offset="100%" stop-color="#9d4edd" stop-opacity="0.3" />
+    </linearGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="5" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+  
+  <!-- Фоновая сетка -->
+  <g stroke="rgba(255,255,255,0.1)" stroke-width="0.5">
+    <line x1="0" y1="100" x2="800" y2="100" />
+    <line x1="0" y1="200" x2="800" y2="200" />
+    <line x1="0" y1="300" x2="800" y2="300" />
+    <line x1="0" y1="400" x2="800" y2="400" />
+    <line x1="0" y1="500" x2="800" y2="500" />
+    <line x1="0" y1="600" x2="800" y2="600" />
+    <line x1="0" y1="700" x2="800" y2="700" />
+    
+    <line x1="100" y1="0" x2="100" y2="800" />
+    <line x1="200" y1="0" x2="200" y2="800" />
+    <line x1="300" y1="0" x2="300" y2="800" />
+    <line x1="400" y1="0" x2="400" y2="800" />
+    <line x1="500" y1="0" x2="500" y2="800" />
+    <line x1="600" y1="0" x2="600" y2="800" />
+    <line x1="700" y1="0" x2="700" y2="800" />
+  </g>
+  
+  <!-- Узлы нейронной сети -->
+  <g fill="url(#grad1)" filter="url(#glow)">
+    <circle cx="150" cy="150" r="8" />
+    <circle cx="250" cy="100" r="6" />
+    <circle cx="350" cy="200" r="10" />
+    <circle cx="450" cy="150" r="7" />
+    <circle cx="550" cy="100" r="9" />
+    <circle cx="650" cy="200" r="8" />
+    
+    <circle cx="100" cy="300" r="7" />
+    <circle cx="200" cy="350" r="9" />
+    <circle cx="300" cy="300" r="8" />
+    <circle cx="400" cy="350" r="10" />
+    <circle cx="500" cy="300" r="6" />
+    <circle cx="600" cy="350" r="8" />
+    <circle cx="700" cy="300" r="7" />
+    
+    <circle cx="150" cy="450" r="9" />
+    <circle cx="250" cy="500" r="7" />
+    <circle cx="350" cy="450" r="8" />
+    <circle cx="450" cy="500" r="10" />
+    <circle cx="550" cy="450" r="7" />
+    <circle cx="650" cy="500" r="9" />
+    
+    <circle cx="100" cy="600" r="8" />
+    <circle cx="200" cy="650" r="10" />
+    <circle cx="300" cy="600" r="7" />
+    <circle cx="400" cy="650" r="9" />
+    <circle cx="500" cy="600" r="8" />
+    <circle cx="600" cy="650" r="6" />
+    <circle cx="700" cy="600" r="10" />
+  </g>
+  
+  <!-- Связи между узлами -->
+  <g stroke="url(#grad1)" stroke-width="1" stroke-opacity="0.5">
+    <!-- Первый слой связей -->
+    <line x1="150" y1="150" x2="250" y2="100" />
+    <line x1="150" y1="150" x2="350" y2="200" />
+    <line x1="250" y1="100" x2="450" y2="150" />
+    <line x1="350" y1="200" x2="450" y2="150" />
+    <line x1="450" y1="150" x2="550" y2="100" />
+    <line x1="450" y1="150" x2="650" y2="200" />
+    <line x1="550" y1="100" x2="650" y2="200" />
+    
+    <!-- Второй слой связей -->
+    <line x1="100" y1="300" x2="200" y2="350" />
+    <line x1="100" y1="300" x2="300" y2="300" />
+    <line x1="200" y1="350" x2="300" y2="300" />
+    <line x1="300" y1="300" x2="400" y2="350" />
+    <line x1="400" y1="350" x2="500" y2="300" />
+    <line x1="500" y1="300" x2="600" y2="350" />
+    <line x1="600" y1="350" x2="700" y2="300" />
+    
+    <!-- Третий слой связей -->
+    <line x1="150" y1="450" x2="250" y2="500" />
+    <line x1="150" y1="450" x2="350" y2="450" />
+    <line x1="250" y1="500" x2="350" y2="450" />
+    <line x1="350" y1="450" x2="450" y2="500" />
+    <line x1="450" y1="500" x2="550" y2="450" />
+    <line x1="550" y1="450" x2="650" y2="500" />
+    
+    <!-- Четвертый слой связей -->
+    <line x1="100" y1="600" x2="200" y2="650" />
+    <line x1="200" y1="650" x2="300" y2="600" />
+    <line x1="300" y1="600" x2="400" y2="650" />
+    <line x1="400" y1="650" x2="500" y2="600" />
+    <line x1="500" y1="600" x2="600" y2="650" />
+    <line x1="600" y1="650" x2="700" y2="600" />
+    
+    <!-- Связи между слоями -->
+    <line x1="150" y1="150" x2="100" y2="300" />
+    <line x1="250" y1="100" x2="200" y2="350" />
+    <line x1="350" y1="200" x2="300" y2="300" />
+    <line x1="450" y1="150" x2="400" y2="350" />
+    <line x1="550" y1="100" x2="500" y2="300" />
+    <line x1="650" y1="200" x2="600" y2="350" />
+    
+    <line x1="100" y1="300" x2="150" y2="450" />
+    <line x1="200" y1="350" x2="250" y2="500" />
+    <line x1="300" y1="300" x2="350" y2="450" />
+    <line x1="400" y1="350" x2="450" y2="500" />
+    <line x1="500" y1="300" x2="550" y2="450" />
+    <line x1="600" y1="350" x2="650" y2="500" />
+    
+    <line x1="150" y1="450" x2="100" y2="600" />
+    <line x1="250" y1="500" x2="200" y2="650" />
+    <line x1="350" y1="450" x2="300" y2="600" />
+    <line x1="450" y1="500" x2="400" y2="650" />
+    <line x1="550" y1="450" x2="500" y2="600" />
+    <line x1="650" y1="500" x2="600" y2="650" />
+  </g>
+  
+  <!-- Анимация пульсации -->
+  <style>
+    @keyframes pulse {
+      0% { opacity: 0.3; r: 6; }
+      50% { opacity: 0.8; r: 10; }
+      100% { opacity: 0.3; r: 6; }
+    }
+    
+    @keyframes flow {
+      0% { stroke-dashoffset: 1000; }
+      100% { stroke-dashoffset: 0; }
+    }
+    
+    circle {
+      animation: pulse 3s infinite;
+    }
+    
+    circle:nth-child(odd) {
+      animation-delay: 0.5s;
+    }
+    
+    circle:nth-child(3n) {
+      animation-delay: 1s;
+    }
+    
+    circle:nth-child(3n+1) {
+      animation-delay: 1.5s;
+    }
+    
+    line {
+      stroke-dasharray: 1000;
+      stroke-dashoffset: 1000;
+      animation: flow 10s linear infinite;
+    }
+    
+    line:nth-child(odd) {
+      animation-delay: 0.5s;
+    }
+    
+    line:nth-child(3n) {
+      animation-delay: 1s;
+    }
+    
+    line:nth-child(3n+1) {
+      animation-delay: 1.5s;
+    }
+  </style>
+</svg> 

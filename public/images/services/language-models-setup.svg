@@ -1,94 +1,182 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="800" height="400" viewBox="0 0 800 400">
-  <rect width="800" height="400" fill="#f8f9fa"/>
+<svg width="500" height="400" viewBox="0 0 500 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Фон с градиентом -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0A0F1E" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#0A0F1E" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="glowGradient" x1="50%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" stop-color="#00F0FF" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#00F0FF" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur"/>
+      <feComposite in="blur" operator="over" in2="SourceGraphic"/>
+    </filter>
+  </defs>
   
-  <!-- Фон для иллюстрации -->
-  <rect x="100" y="50" width="600" height="300" rx="20" ry="20" fill="#e9ecef"/>
+  <!-- Фоновый прямоугольник -->
+  <rect width="500" height="400" fill="url(#bgGradient)" rx="20"/>
   
-  <!-- Центральный элемент - мозг/нейросеть и ключ -->
-  <g transform="translate(400, 200)">
-    <!-- Основа мозга/нейросети -->
-    <ellipse cx="0" cy="0" rx="80" ry="60" fill="#4e73df" opacity="0.8"/>
+  <!-- Сетка -->
+  <g opacity="0.1" stroke="#00F0FF" stroke-width="0.5">
+    <line x1="50" y1="0" x2="50" y2="400"/>
+    <line x1="100" y1="0" x2="100" y2="400"/>
+    <line x1="150" y1="0" x2="150" y2="400"/>
+    <line x1="200" y1="0" x2="200" y2="400"/>
+    <line x1="250" y1="0" x2="250" y2="400"/>
+    <line x1="300" y1="0" x2="300" y2="400"/>
+    <line x1="350" y1="0" x2="350" y2="400"/>
+    <line x1="400" y1="0" x2="400" y2="400"/>
+    <line x1="450" y1="0" x2="450" y2="400"/>
     
-    <!-- Нейронные связи -->
-    <g stroke="#ffffff" stroke-width="2" opacity="0.7">
-      <line x1="-50" y1="-30" x2="0" y2="0" />
-      <line x1="-40" y1="-40" x2="20" y2="-20" />
-      <line x1="-30" y1="40" x2="30" y2="10" />
-      <line x1="50" y1="-30" x2="10" y2="20" />
-      <line x1="40" y1="40" x2="-10" y2="30" />
-      <line x1="0" y1="-50" x2="0" y2="0" />
-    </g>
+    <line x1="0" y1="50" x2="500" y2="50"/>
+    <line x1="0" y1="100" x2="500" y2="100"/>
+    <line x1="0" y1="150" x2="500" y2="150"/>
+    <line x1="0" y1="200" x2="500" y2="200"/>
+    <line x1="0" y1="250" x2="500" y2="250"/>
+    <line x1="0" y1="300" x2="500" y2="300"/>
+    <line x1="0" y1="350" x2="500" y2="350"/>
+  </g>
+  
+  <!-- Центральная иллюстрация - Языковая модель -->
+  <g transform="translate(150, 100)">
+    <!-- Основной контейнер модели -->
+    <rect x="0" y="0" width="200" height="200" rx="10" fill="#0A0F1E" stroke="#00F0FF" stroke-width="2"/>
     
-    <!-- Нейроны -->
-    <g fill="#ffffff">
-      <circle cx="-50" cy="-30" r="6" />
-      <circle cx="-40" cy="-40" r="6" />
-      <circle cx="-30" cy="40" r="6" />
-      <circle cx="50" cy="-30" r="6" />
-      <circle cx="40" cy="40" r="6" />
-      <circle cx="0" cy="-50" r="6" />
-      <circle cx="0" cy="0" r="10" />
-    </g>
-    
-    <!-- Ключ -->
-    <g transform="translate(120, 0) rotate(45)">
-      <!-- Кольцо ключа -->
-      <circle cx="0" cy="0" r="25" stroke="#4e73df" stroke-width="8" fill="none"/>
+    <!-- Слои нейронной сети -->
+    <g transform="translate(20, 20)">
+      <!-- Входной слой -->
+      <g>
+        <circle cx="0" cy="30" r="5" fill="#00F0FF" opacity="0.7"/>
+        <circle cx="0" cy="80" r="5" fill="#00F0FF" opacity="0.7"/>
+        <circle cx="0" cy="130" r="5" fill="#00F0FF" opacity="0.7"/>
+        <circle cx="0" cy="180" r="5" fill="#00F0FF" opacity="0.7"/>
+      </g>
       
-      <!-- Стержень ключа -->
-      <rect x="-5" y="25" width="10" height="60" fill="#4e73df"/>
+      <!-- Скрытый слой 1 -->
+      <g>
+        <circle cx="50" cy="30" r="5" fill="#00F0FF" opacity="0.7"/>
+        <circle cx="50" cy="80" r="5" fill="#00F0FF" opacity="0.7"/>
+        <circle cx="50" cy="130" r="5" fill="#00F0FF" opacity="0.7"/>
+        <circle cx="50" cy="180" r="5" fill="#00F0FF" opacity="0.7"/>
+      </g>
       
-      <!-- Зубцы ключа -->
-      <rect x="-15" y="70" width="30" height="10" fill="#4e73df"/>
-      <rect x="-10" y="80" width="5" height="10" fill="#4e73df"/>
-      <rect x="5" y="80" width="5" height="10" fill="#4e73df"/>
+      <!-- Скрытый слой 2 -->
+      <g>
+        <circle cx="100" cy="30" r="5" fill="#00F0FF" opacity="0.7"/>
+        <circle cx="100" cy="80" r="5" fill="#00F0FF" opacity="0.7"/>
+        <circle cx="100" cy="130" r="5" fill="#00F0FF" opacity="0.7"/>
+        <circle cx="100" cy="180" r="5" fill="#00F0FF" opacity="0.7"/>
+      </g>
+      
+      <!-- Выходной слой -->
+      <g>
+        <circle cx="150" cy="30" r="5" fill="#00F0FF" opacity="0.7"/>
+        <circle cx="150" cy="80" r="5" fill="#00F0FF" opacity="0.7"/>
+        <circle cx="150" cy="130" r="5" fill="#00F0FF" opacity="0.7"/>
+        <circle cx="150" cy="180" r="5" fill="#00F0FF" opacity="0.7"/>
+      </g>
+      
+      <!-- Соединения между слоями -->
+      <g stroke="#00F0FF" stroke-width="0.5" opacity="0.5">
+        <!-- Соединения от входного к первому скрытому слою -->
+        <line x1="0" y1="30" x2="50" y2="30"/>
+        <line x1="0" y1="30" x2="50" y2="80"/>
+        <line x1="0" y1="30" x2="50" y2="130"/>
+        <line x1="0" y1="30" x2="50" y2="180"/>
+        
+        <line x1="0" y1="80" x2="50" y2="30"/>
+        <line x1="0" y1="80" x2="50" y2="80"/>
+        <line x1="0" y1="80" x2="50" y2="130"/>
+        <line x1="0" y1="80" x2="50" y2="180"/>
+        
+        <line x1="0" y1="130" x2="50" y2="30"/>
+        <line x1="0" y1="130" x2="50" y2="80"/>
+        <line x1="0" y1="130" x2="50" y2="130"/>
+        <line x1="0" y1="130" x2="50" y2="180"/>
+        
+        <line x1="0" y1="180" x2="50" y2="30"/>
+        <line x1="0" y1="180" x2="50" y2="80"/>
+        <line x1="0" y1="180" x2="50" y2="130"/>
+        <line x1="0" y1="180" x2="50" y2="180"/>
+        
+        <!-- Соединения от первого скрытого ко второму скрытому слою -->
+        <line x1="50" y1="30" x2="100" y2="30"/>
+        <line x1="50" y1="30" x2="100" y2="80"/>
+        <line x1="50" y1="30" x2="100" y2="130"/>
+        <line x1="50" y1="30" x2="100" y2="180"/>
+        
+        <line x1="50" y1="80" x2="100" y2="30"/>
+        <line x1="50" y1="80" x2="100" y2="80"/>
+        <line x1="50" y1="80" x2="100" y2="130"/>
+        <line x1="50" y1="80" x2="100" y2="180"/>
+        
+        <line x1="50" y1="130" x2="100" y2="30"/>
+        <line x1="50" y1="130" x2="100" y2="80"/>
+        <line x1="50" y1="130" x2="100" y2="130"/>
+        <line x1="50" y1="130" x2="100" y2="180"/>
+        
+        <line x1="50" y1="180" x2="100" y2="30"/>
+        <line x1="50" y1="180" x2="100" y2="80"/>
+        <line x1="50" y1="180" x2="100" y2="130"/>
+        <line x1="50" y1="180" x2="100" y2="180"/>
+      </g>
     </g>
   </g>
   
-  <!-- Декоративные элементы - настройки -->
-  <g transform="translate(200, 100)">
-    <circle cx="0" cy="0" r="25" fill="#4e73df" opacity="0.3"/>
-    <circle cx="0" cy="0" r="15" fill="#ffffff" opacity="0.8"/>
-    <g stroke="#4e73df" stroke-width="3">
-      <line x1="0" y1="-15" x2="0" y2="-25" />
-      <line x1="10.6" y1="-10.6" x2="17.7" y2="-17.7" />
-      <line x1="15" y1="0" x2="25" y2="0" />
-      <line x1="10.6" y1="10.6" x2="17.7" y2="17.7" />
-      <line x1="0" y1="15" x2="0" y2="25" />
-      <line x1="-10.6" y1="10.6" x2="-17.7" y2="17.7" />
-      <line x1="-15" y1="0" x2="-25" y2="0" />
-      <line x1="-10.6" y1="-10.6" x2="-17.7" y2="-17.7" />
+  <!-- Текстовые блоки и символы -->
+  <g transform="translate(50, 50)">
+    <!-- Символы кода -->
+    <text x="0" y="0" fill="#00F0FF" opacity="0.7" font-family="monospace" font-size="12">
+      <tspan x="0" y="0">def fine_tune_model(model, data):</tspan>
+      <tspan x="0" y="20">    # Настройка параметров</tspan>
+      <tspan x="0" y="40">    params = {</tspan>
+      <tspan x="0" y="60">        "learning_rate": 1e-5,</tspan>
+      <tspan x="0" y="80">        "epochs": 3,</tspan>
+      <tspan x="0" y="100">        "batch_size": 8</tspan>
+      <tspan x="0" y="120">    }</tspan>
+      <tspan x="0" y="140">    return model.train(data, **params)</tspan>
+    </text>
+  </g>
+  
+  <!-- Шестеренки (символ настройки) -->
+  <g transform="translate(400, 100)">
+    <!-- Большая шестеренка -->
+    <g transform="rotate(0, 0, 0)" filter="url(#glow)">
+      <circle cx="0" cy="0" r="30" fill="none" stroke="#00F0FF" stroke-width="2"/>
+      <path d="M0,-40 L0,-30 M28.28,-28.28 L21.21,-21.21 M40,0 L30,0 M28.28,28.28 L21.21,21.21 M0,40 L0,30 M-28.28,28.28 L-21.21,21.21 M-40,0 L-30,0 M-28.28,-28.28 L-21.21,-21.21" stroke="#00F0FF" stroke-width="2"/>
+      <circle cx="0" cy="0" r="15" fill="none" stroke="#00F0FF" stroke-width="2"/>
+      <animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0 0 0" to="360 0 0" dur="20s" repeatCount="indefinite"/>
+    </g>
+    
+    <!-- Малая шестеренка -->
+    <g transform="translate(50, 0) rotate(0, 0, 0)" filter="url(#glow)">
+      <circle cx="0" cy="0" r="20" fill="none" stroke="#00F0FF" stroke-width="2"/>
+      <path d="M0,-25 L0,-20 M17.68,-17.68 L14.14,-14.14 M25,0 L20,0 M17.68,17.68 L14.14,14.14 M0,25 L0,20 M-17.68,17.68 L-14.14,14.14 M-25,0 L-20,0 M-17.68,-17.68 L-14.14,-14.14" stroke="#00F0FF" stroke-width="2"/>
+      <circle cx="0" cy="0" r="10" fill="none" stroke="#00F0FF" stroke-width="2"/>
+      <animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0 0 0" to="-360 0 0" dur="15s" repeatCount="indefinite"/>
     </g>
   </g>
   
-  <g transform="translate(600, 300)">
-    <circle cx="0" cy="0" r="25" fill="#4e73df" opacity="0.3"/>
-    <circle cx="0" cy="0" r="15" fill="#ffffff" opacity="0.8"/>
-    <g stroke="#4e73df" stroke-width="3">
-      <line x1="0" y1="-15" x2="0" y2="-25" />
-      <line x1="10.6" y1="-10.6" x2="17.7" y2="-17.7" />
-      <line x1="15" y1="0" x2="25" y2="0" />
-      <line x1="10.6" y1="10.6" x2="17.7" y2="17.7" />
-      <line x1="0" y1="15" x2="0" y2="25" />
-      <line x1="-10.6" y1="10.6" x2="-17.7" y2="17.7" />
-      <line x1="-15" y1="0" x2="-25" y2="0" />
-      <line x1="-10.6" y1="-10.6" x2="-17.7" y2="-17.7" />
-    </g>
-  </g>
-  
-  <!-- Соединительные линии -->
-  <g stroke="#4e73df" stroke-width="2" opacity="0.5">
-    <line x1="250" y1="120" x2="320" y2="180"/>
-    <line x1="550" y1="120" x2="480" y2="180"/>
-    <line x1="250" y1="280" x2="320" y2="220"/>
-    <line x1="550" y1="280" x2="480" y2="220"/>
-  </g>
-  
-  <!-- Декоративные элементы -->
-  <g fill="#4e73df" opacity="0.2">
-    <circle cx="150" cy="100" r="20"/>
-    <circle cx="650" cy="100" r="20"/>
-    <circle cx="150" cy="300" r="20"/>
-    <circle cx="650" cy="300" r="20"/>
+  <!-- Анимированные частицы данных -->
+  <g>
+    <circle cx="100" cy="100" r="2" fill="#00F0FF">
+      <animate attributeName="cx" values="100;400;100" dur="5s" repeatCount="indefinite"/>
+      <animate attributeName="cy" values="100;300;100" dur="5s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;1;0" dur="5s" repeatCount="indefinite"/>
+    </circle>
+    
+    <circle cx="400" cy="100" r="2" fill="#00F0FF">
+      <animate attributeName="cx" values="400;100;400" dur="7s" repeatCount="indefinite"/>
+      <animate attributeName="cy" values="100;300;100" dur="7s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;1;0" dur="7s" repeatCount="indefinite"/>
+    </circle>
+    
+    <circle cx="250" cy="200" r="2" fill="#00F0FF">
+      <animate attributeName="cx" values="250;400;100;250" dur="10s" repeatCount="indefinite"/>
+      <animate attributeName="cy" values="200;300;300;200" dur="10s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;1;1;0" dur="10s" repeatCount="indefinite"/>
+    </circle>
   </g>
 </svg> 
