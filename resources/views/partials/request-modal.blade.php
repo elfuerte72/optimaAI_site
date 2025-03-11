@@ -3,7 +3,6 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="requestModalLabel">Оставить заявку</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form id="requestForm" action="{{ route('submit-form') }}" method="POST" data-ajax="true">
@@ -30,11 +29,13 @@
                         <textarea class="form-control" id="message" name="message" rows="3"></textarea>
                     </div>
                     
-                    <div class="form-check mb-3">
-                        <input class="form-check-input" type="checkbox" id="privacyPolicy" required>
-                        <label class="form-check-label" for="privacyPolicy">
-                            Я согласен с <a href="#" target="_blank">политикой конфиденциальности</a>
-                        </label>
+                    <div class="mb-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="privacyPolicy" required>
+                            <label class="form-check-label form-label" for="privacyPolicy">
+                                Я согласен с политикой конфиденциальности
+                            </label>
+                        </div>
                     </div>
                     
                     <div class="text-end">
@@ -44,4 +45,19 @@
             </div>
         </div>
     </div>
-</div> 
+</div>
+
+<style>
+    .modal-content {
+        background-color: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: var(--border-radius);
+        opacity: 1 !important;
+        backdrop-filter: none;
+    }
+    
+    .form-check-label {
+        color: var(--text-primary);
+        font-weight: 400;
+    }
+</style> 
