@@ -20,14 +20,22 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    
+    <!-- Vite Assets -->
+    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/react-app.jsx'])
+    
     <link rel="stylesheet" href="{{ asset('css/modern-theme.css') }}">
     <link rel="stylesheet" href="{{ asset('css/modern-fonts.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/services-icons.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/stars-animation.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/modern-buttons.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/service-animations.css') }}">
     
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.12.0/dist/cdn.min.js" defer></script>
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/stars-animation.js') }}" defer></script>
+    <script src="{{ asset('js/service-animations.js') }}" defer></script>
     
     @stack('styles')
 </head>

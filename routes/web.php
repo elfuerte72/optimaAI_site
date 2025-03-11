@@ -32,7 +32,6 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 // Услуги
 Route::get('/services', [ServiceController::class, 'index'])->name('services.index');
-Route::get('/services/{service}', [ServiceController::class, 'show'])->name('services.show');
 
 // Добавляем новые маршруты для услуг с использованием строковых идентификаторов
 Route::get('/services/consulting-and-training', function () {
@@ -46,6 +45,9 @@ Route::get('/services/language-models-setup', function () {
 Route::get('/services/ai-business-integration', function () {
     return view('services.ai-business-integration');
 })->name('services.ai-business-integration');
+
+// Этот маршрут должен быть последним в группе маршрутов услуг
+Route::get('/services/{service}', [ServiceController::class, 'show'])->name('services.show');
 
 // Кейсы
 Route::get('/case-studies', [CaseStudyController::class, 'index'])->name('case-studies.index');

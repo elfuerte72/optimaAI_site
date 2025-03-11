@@ -18,7 +18,7 @@
                         повышения эффективности и создания конкурентных преимуществ
                     </p>
                     <div class="d-flex flex-wrap animate-on-scroll" data-animation="fade-up" data-delay="0.4">
-                        <button class="btn btn-accent btn-lg neon-glow" data-bs-toggle="modal" data-bs-target="#requestModal">
+                        <button class="btn btn-accent btn-lg neon-glow me-3 mb-3" data-bs-toggle="modal" data-bs-target="#requestModal">
                             Оставить заявку
                         </button>
                     </div>
@@ -85,55 +85,6 @@
                         </div>
                         <h3 class="advantage-title h5 fw-bold mb-3">Экспертная команда</h3>
                         <p class="advantage-text mb-0">Специалисты с опытом внедрения ИИ в различных отраслях бизнеса</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Services Section -->
-    <section class="services-section py-5 bg-dark position-relative overflow-hidden">
-        <div class="neural-bg"></div>
-        <div id="services-stars-container" class="stars-container"></div>
-        <div class="container py-5">
-            <div class="row mb-5 text-center">
-                <div class="col-lg-8 mx-auto">
-                    <h2 class="section-title fw-bold mb-4 animate-on-scroll" data-animation="fade-up">Наши услуги</h2>
-                    <p class="section-subtitle animate-on-scroll" data-animation="fade-up" data-delay="0.2">Комплексные решения для оптимизации бизнеса с помощью искусственного интеллекта</p>
-                </div>
-            </div>
-            
-            <div class="row g-4">
-                <div class="col-md-4">
-                    <div class="service-card h-100 animate-on-scroll" data-animation="fade-up" data-delay="0.1">
-                        <div class="service-icon mb-4 pulse-animation">
-                            <i class="bi bi-people"></i>
-                        </div>
-                        <h3 class="service-title h4 fw-bold mb-3">Консультации и обучение</h3>
-                        <p class="service-description mb-4">Стратегический консалтинг по внедрению ИИ, обучение команды и разработка дорожной карты цифровой трансформации</p>
-                        <a href="{{ route('services.consulting-and-training') }}" class="btn btn-accent neon-glow">Подробнее</a>
-                    </div>
-                </div>
-                
-                <div class="col-md-4">
-                    <div class="service-card h-100 animate-on-scroll" data-animation="fade-up" data-delay="0.2">
-                        <div class="service-icon mb-4 pulse-animation">
-                            <i class="bi bi-cpu"></i>
-                        </div>
-                        <h3 class="service-title h4 fw-bold mb-3">Настройка языковых моделей</h3>
-                        <p class="service-description mb-4">Адаптация и тонкая настройка языковых моделей под специфику вашего бизнеса, обучение на корпоративных данных</p>
-                        <a href="{{ route('services.language-models-setup') }}" class="btn btn-accent neon-glow">Подробнее</a>
-                    </div>
-                </div>
-                
-                <div class="col-md-4">
-                    <div class="service-card h-100 animate-on-scroll" data-animation="fade-up" data-delay="0.3">
-                        <div class="service-icon mb-4 pulse-animation">
-                            <i class="bi bi-gear"></i>
-                        </div>
-                        <h3 class="service-title h4 fw-bold mb-3">Интеграция ИИ в бизнес</h3>
-                        <p class="service-description mb-4">Полный цикл внедрения искусственного интеллекта в бизнес-процессы компании, от аудита до поддержки</p>
-                        <a href="{{ route('services.ai-business-integration') }}" class="btn btn-accent neon-glow">Подробнее</a>
                     </div>
                 </div>
             </div>
@@ -481,66 +432,6 @@
         color: var(--text-color);
     }
     
-    /* Services Section */
-    .services-section {
-        background-color: var(--bs-dark);
-        position: relative;
-    }
-    
-    .service-card {
-        padding: 2rem;
-        background: var(--card-bg);
-        border-radius: var(--border-radius);
-        border: 1px solid var(--border-color);
-        transition: var(--transition-smooth);
-        text-align: center;
-    }
-    
-    .service-card:hover {
-        transform: translateY(-5px);
-        box-shadow: var(--card-shadow-hover);
-        border-color: var(--primary-color);
-    }
-    
-    .service-icon {
-        font-size: 2.5rem;
-        color: var(--primary-color);
-        background: rgba(var(--primary-rgb), 0.1);
-        width: 80px;
-        height: 80px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin: 0 auto 1.5rem;
-        position: relative;
-        overflow: hidden;
-    }
-    
-    .service-icon::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
-        opacity: 0.2;
-        z-index: -1;
-    }
-    
-    .service-icon i {
-        filter: drop-shadow(0 0 5px rgba(var(--primary-rgb), 0.5));
-    }
-    
-    .service-title {
-        color: var(--heading-color);
-    }
-    
-    .service-description {
-        color: var(--text-color);
-    }
-    
     /* Process Section */
     .process-section {
         background-color: var(--bs-dark);
@@ -777,9 +668,6 @@
         
         // Create stars for the advantages section
         createStars('stars-container');
-        
-        // Create stars for the services section
-        createStars('services-stars-container');
         
         // Create stars for the process section
         createStars('process-stars-container');

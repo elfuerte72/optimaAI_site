@@ -1,0 +1,166 @@
+/**
+ * OptimaAI - Анимированные иконки услуг 2025
+ * Современные анимации с использованием SVG и CSS
+ */
+
+/* Общие стили для контейнера иконок */
+.service-icon-wrapper {
+  position: relative;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: rgba(99, 102, 241, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  transition: all 0.4s ease;
+  overflow: hidden;
+}
+
+.service-icon-wrapper::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0%,
+    rgba(123, 150, 255, 0.7) 25%,
+    rgba(179, 0, 255, 0.7) 50%,
+    rgba(0, 195, 255, 0.7) 75%,
+    transparent 100%
+  );
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 0.5s ease, transform 5s linear;
+}
+
+.service-icon-wrapper:hover::before {
+  opacity: 1;
+  transform: rotate(360deg);
+}
+
+/* Стили для анимированных иконок */
+.ai-icon {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  transition: transform 0.5s ease;
+}
+
+.service-icon-wrapper:hover .ai-icon {
+  transform: scale(1.15);
+}
+
+/* Иконка Консультаций - мозг с пульсирующими нейронами */
+.consulting-icon {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236366f1' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44l2.54-11.44a1 1 0 0 0-.8-1.2.9.9 0 0 0-.7.26L7 8.5l-1.7-3a2.5 2.5 0 0 1 4.2-2.7L9.5 2.1V2Z'/%3E%3Cpath d='M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44l-2.54-11.44a1 1 0 0 1 .8-1.2.9.9 0 0 1 .7.26L17 8.5l1.7-3a2.5 2.5 0 0 0-4.2-2.7V2Z'/%3E%3Cpath class='brain-pulse' d='M4.5 17.5L2 19m17.5-1.5L22 19M6 12l-2 1m14-1l2 1'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+}
+
+@keyframes brainPulse {
+  0%, 100% { opacity: 0.1; }
+  50% { opacity: 1; }
+}
+
+.service-icon-wrapper:hover .consulting-icon::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 40px;
+  height: 40px;
+  background-image: radial-gradient(circle, rgba(99, 102, 241, 0.6) 0%, rgba(99, 102, 241, 0) 70%);
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  opacity: 0;
+  animation: brainPulse 2s infinite;
+}
+
+/* Иконка Настройки языковых моделей - код с анимацией ввода */
+.models-icon {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236366f1' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9h8'/%3E%3Cpath class='code-line-1' d='M6 12h10'/%3E%3Cpath class='code-line-2' d='M6 15h6'/%3E%3Crect x='2' y='3' width='20' height='18' rx='2' ry='2'/%3E%3Cpath class='code-cursor' d='M13 15h1'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+}
+
+@keyframes typing {
+  0% { opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+@keyframes cursorBlink {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 1; }
+}
+
+.service-icon-wrapper:hover .models-icon::after {
+  content: '';
+  position: absolute;
+  width: 1px;
+  height: 8px;
+  background-color: #6366f1;
+  right: 8px;
+  top: 15px;
+  animation: cursorBlink 1s infinite;
+}
+
+/* Иконка Интеграции ИИ в бизнес - соединяющиеся узлы */
+.integration-icon {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236366f1' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle class='node-1' cx='6' cy='6' r='3'/%3E%3Ccircle class='node-2' cx='18' cy='6' r='3'/%3E%3Ccircle class='node-3' cx='6' cy='18' r='3'/%3E%3Ccircle class='node-4' cx='18' cy='18' r='3'/%3E%3Cline class='connection-line-1' x1='6' y1='9' x2='6' y2='15'/%3E%3Cline class='connection-line-2' x1='9' y1='6' x2='15' y2='6'/%3E%3Cline class='connection-line-3' x1='9' y1='18' x2='15' y2='18'/%3E%3Cline class='connection-line-4' x1='18' y1='9' x2='18' y2='15'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+}
+
+@keyframes connectionFlow {
+  0% { stroke-dashoffset: 20; }
+  100% { stroke-dashoffset: 0; }
+}
+
+@keyframes nodeActivate {
+  0%, 100% { 
+    filter: drop-shadow(0 0 0 rgba(99, 102, 241, 0)); 
+    transform: scale(1);
+  }
+  50% { 
+    filter: drop-shadow(0 0 5px rgba(99, 102, 241, 0.8)); 
+    transform: scale(1.1);
+  }
+}
+
+.service-icon-wrapper:hover .integration-icon::before,
+.service-icon-wrapper:hover .integration-icon::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-repeat: no-repeat;
+  background-size: contain;
+  opacity: 0;
+  animation: nodeActivate 3s infinite;
+}
+
+.service-icon-wrapper:hover .integration-icon::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23b300ff' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='6' cy='6' r='3' fill='rgba(179, 0, 255, 0.2)'/%3E%3Ccircle cx='18' cy='18' r='3' fill='rgba(179, 0, 255, 0.2)'/%3E%3C/svg%3E");
+  animation-delay: 0s;
+}
+
+.service-icon-wrapper:hover .integration-icon::after {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2300c3ff' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='18' cy='6' r='3' fill='rgba(0, 195, 255, 0.2)'/%3E%3Ccircle cx='6' cy='18' r='3' fill='rgba(0, 195, 255, 0.2)'/%3E%3C/svg%3E");
+  animation-delay: 1.5s;
+} 

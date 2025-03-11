@@ -15,15 +15,8 @@
                     <li class="nav-item">
                         <a class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}" href="{{ route('home') }}">Главная</a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle {{ request()->routeIs('services.*') ? 'active' : '' }}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Услуги
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-dark">
-                            <li><a class="dropdown-item" href="{{ route('services.consulting-and-training') }}">Консультации и обучение</a></li>
-                            <li><a class="dropdown-item" href="{{ route('services.language-models-setup') }}">Настройка языковых моделей</a></li>
-                            <li><a class="dropdown-item" href="{{ route('services.ai-business-integration') }}">Интеграция ИИ в бизнес</a></li>
-                        </ul>
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->routeIs('services.*') ? 'active' : '' }}" href="{{ route('services.index') }}">Услуги</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {{ request()->routeIs('contact.*') ? 'active' : '' }}" href="{{ route('contact.index') }}">Контакты</a>
