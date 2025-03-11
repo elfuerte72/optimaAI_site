@@ -1,123 +1,65 @@
-<div class="chatbot-container" x-data="{ isOpen: false, step: 1, answers: {}, isSubmitting: false }">
+<div class="chatbot-container" x-data="chatbotData">
     <!-- Кнопка чат-бота -->
     <button 
-        class="chatbot-button" 
-        x-on:click="isOpen = !isOpen"
+        class="chatbot-button animate__animated animate__pulse animate__infinite" 
+        x-on:click="toggleChat"
         x-bind:class="{ 'active': isOpen }"
     >
         <i class="bi" x-bind:class="isOpen ? 'bi-x-lg' : 'bi-chat-dots-fill'"></i>
     </button>
     
     <!-- Окно чат-бота -->
-    <div class="chatbot-window" x-show="isOpen" x-transition>
+    <div 
+        class="chatbot-window animate__animated" 
+        x-show="isOpen" 
+        x-transition:enter="animate__fadeIn animate__faster"
+        x-transition:leave="animate__fadeOut animate__faster"
+        x-bind:class="{ 'chatbot-window-expanded': isOpen }"
+    >
         <div class="chatbot-header">
             <h5 class="mb-0">ИИ-помощник OptimaAI</h5>
+            <button class="btn-reset btn-primary-outline" x-on:click="resetChat" title="Начать новый диалог">
+                <i class="bi bi-arrow-counterclockwise"></i>
+            </button>
         </div>
         
-        <div class="chatbot-body">
-            <!-- Шаг 1: Приветствие -->
-            <div x-show="step === 1">
-                <div class="bot-message">
-                    <p>Здравствуйте! Я ИИ-помощник OptimaAI. Я помогу вам подобрать оптимальное решение для вашего бизнеса.</p>
-                    <p>Для начала, выберите отрасль вашего бизнеса:</p>
+        <div class="chatbot-body" x-ref="chatBody">
+            <!-- Сообщения чата -->
+            <template x-for="(message, index) in messages" :key="index">
+                <div x-bind:class="message.role === 'user' ? 'user-message' : 'bot-message'">
+                    <p x-text="message.content"></p>
                 </div>
-                
-                <div class="options-container">
-                    <button class="option-button" x-on:click="answers.industry = 'Розничная торговля'; step = 2;">Розничная торговля</button>
-                    <button class="option-button" x-on:click="answers.industry = 'Производство'; step = 2;">Производство</button>
-                    <button class="option-button" x-on:click="answers.industry = 'Услуги'; step = 2;">Услуги</button>
-                    <button class="option-button" x-on:click="answers.industry = 'Образование'; step = 2;">Образование</button>
-                    <button class="option-button" x-on:click="answers.industry = 'Другое'; step = 2;">Другое</button>
-                </div>
-            </div>
+            </template>
             
-            <!-- Шаг 2: Задачи -->
-            <div x-show="step === 2">
-                <div class="bot-message">
-                    <p>Отлично! Какие задачи вы хотели бы автоматизировать с помощью ИИ?</p>
-                </div>
-                
-                <div class="options-container">
-                    <button class="option-button" x-on:click="answers.task = 'Анализ данных'; step = 3;">Анализ данных</button>
-                    <button class="option-button" x-on:click="answers.task = 'Автоматизация ответов клиентам'; step = 3;">Автоматизация ответов клиентам</button>
-                    <button class="option-button" x-on:click="answers.task = 'Генерация контента'; step = 3;">Генерация контента</button>
-                    <button class="option-button" x-on:click="answers.task = 'Оптимизация процессов'; step = 3;">Оптимизация процессов</button>
-                    <button class="option-button" x-on:click="answers.task = 'Другое'; step = 3;">Другое</button>
-                </div>
+            <!-- Индикатор загрузки -->
+            <div class="bot-message typing-indicator" x-show="isLoading">
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
-            
-            <!-- Шаг 3: Опыт работы с ИИ -->
-            <div x-show="step === 3">
-                <div class="bot-message">
-                    <p>Есть ли у вас опыт работы с нейросетями?</p>
-                </div>
-                
-                <div class="options-container">
-                    <button class="option-button" x-on:click="answers.experience = 'Да, есть опыт'; step = 4;">Да, есть опыт</button>
-                    <button class="option-button" x-on:click="answers.experience = 'Нет, но интересно узнать'; step = 4;">Нет, но интересно узнать</button>
-                    <button class="option-button" x-on:click="answers.experience = 'Нет, нужно готовое решение'; step = 4;">Нет, нужно готовое решение</button>
-                </div>
-            </div>
-            
-            <!-- Шаг 4: Результат и форма -->
-            <div x-show="step === 4">
-                <div class="bot-message">
-                    <p>Спасибо за ответы! На основе вашей информации я могу предложить следующее решение:</p>
-                    
-                    <div class="recommendation-box">
-                        <template x-if="answers.experience === 'Да, есть опыт'">
-                            <p>Вам подойдет наша услуга <strong>"Интеграция нейросетей в бизнес-процессы"</strong>. Мы поможем интегрировать ИИ в ваши существующие системы и обучим команду эффективно использовать новые инструменты.</p>
-                        </template>
-                        
-                        <template x-if="answers.experience === 'Нет, но интересно узнать'">
-                            <p>Рекомендуем начать с нашей услуги <strong>"Консультации и обучение"</strong>. Вы получите базовые знания о нейросетях и научитесь применять их для решения бизнес-задач.</p>
-                        </template>
-                        
-                        <template x-if="answers.experience === 'Нет, нужно готовое решение'">
-                            <p>Оптимальный вариант для вас — <strong>"Настройка языковых моделей под ключ"</strong>. Мы создадим готовое решение, которое будет работать автоматически и не потребует от вас специальных знаний.</p>
-                        </template>
-                    </div>
-                    
-                    <p>Оставьте свои контактные данные, и наш специалист свяжется с вами для более детального обсуждения:</p>
-                </div>
-                
-                <form id="chatbotForm" x-on:submit.prevent="submitChatbotForm">
-                    <div class="mb-3">
-                        <input type="text" class="form-control" placeholder="Ваше имя *" x-model="answers.name" required>
-                    </div>
-                    
-                    <div class="mb-3">
-                        <input type="email" class="form-control" placeholder="Email *" x-model="answers.email" required>
-                    </div>
-                    
-                    <div class="mb-3">
-                        <input type="tel" class="form-control" placeholder="Телефон *" x-model="answers.phone" required>
-                    </div>
-                    
-                    <div class="form-check mb-3">
-                        <input class="form-check-input" type="checkbox" id="chatbotPrivacyPolicy" x-model="answers.privacy" required>
-                        <label class="form-check-label" for="chatbotPrivacyPolicy">
-                            Я согласен с <a href="#" target="_blank">политикой конфиденциальности</a>
-                        </label>
-                    </div>
-                    
-                    <button type="submit" class="btn btn-primary w-100" x-bind:disabled="isSubmitting">
-                        <span x-show="!isSubmitting">Отправить</span>
-                        <span x-show="isSubmitting">Отправка...</span>
+        </div>
+        
+        <!-- Форма отправки сообщения -->
+        <div class="chatbot-footer">
+            <form x-on:submit.prevent="sendMessage">
+                <div class="input-group">
+                    <input 
+                        type="text" 
+                        class="form-control" 
+                        placeholder="Введите ваш вопрос..." 
+                        x-model="userInput"
+                        x-bind:disabled="isLoading"
+                        x-on:keydown.enter="sendMessage"
+                    >
+                    <button 
+                        class="btn btn-primary" 
+                        type="submit"
+                        x-bind:disabled="isLoading || !userInput.trim()"
+                    >
+                        <i class="bi bi-send"></i>
                     </button>
-                </form>
-            </div>
-            
-            <!-- Шаг 5: Успешная отправка -->
-            <div x-show="step === 5">
-                <div class="bot-message">
-                    <p>Спасибо за обращение! Ваша заявка успешно отправлена.</p>
-                    <p>Наш специалист свяжется с вами в ближайшее время для обсуждения деталей.</p>
-                    <p>Если у вас возникнут дополнительные вопросы, вы можете связаться с нами по телефону <a href="tel:+79123456789">+7 (912) 345-67-89</a> или по email <a href="mailto:info@optimaai.ru">info@optimaai.ru</a>.</p>
                 </div>
-                
-                <button class="btn btn-outline-primary w-100 mt-3" x-on:click="isOpen = false">Закрыть</button>
-            </div>
+            </form>
         </div>
     </div>
 </div>
@@ -160,14 +102,25 @@
         position: absolute;
         bottom: 80px;
         right: 0;
-        width: 350px;
-        max-height: 500px;
+        width: 437px; /* Увеличено на 25% от 350px */
+        height: 625px; /* Увеличено на 25% от 500px */
         background-color: white;
         border-radius: 12px;
         box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
         overflow: hidden;
         display: flex;
         flex-direction: column;
+        transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        transform-origin: bottom right;
+    }
+    
+    .chatbot-window-expanded {
+        animation: expand-chat 0.5s forwards;
+    }
+    
+    @keyframes expand-chat {
+        0% { transform: scale(0.8); opacity: 0; }
+        100% { transform: scale(1); opacity: 1; }
     }
     
     .chatbot-header {
@@ -175,54 +128,130 @@
         color: white;
         padding: 15px;
         font-weight: 600;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .btn-reset {
+        background: none;
+        border: none;
+        color: white;
+        font-size: 18px;
+        cursor: pointer;
+        padding: 8px;
+        margin: 0;
+        border-radius: 50%;
+        width: 36px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+    }
+    
+    .btn-reset:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+        transform: rotate(-30deg);
+    }
+    
+    .btn-primary-outline {
+        border: 1px solid rgba(255, 255, 255, 0.3);
     }
     
     .chatbot-body {
         padding: 20px;
         overflow-y: auto;
-        max-height: 450px;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .bot-message, .user-message {
+        padding: 12px 15px;
+        border-radius: 10px;
+        max-width: 80%;
+        word-wrap: break-word;
+        animation: message-appear 0.3s ease-out forwards;
+    }
+    
+    @keyframes message-appear {
+        0% { opacity: 0; transform: translateY(10px); }
+        100% { opacity: 1; transform: translateY(0); }
     }
     
     .bot-message {
         background-color: #f5f5f5;
-        padding: 15px;
-        border-radius: 10px;
-        margin-bottom: 15px;
+        align-self: flex-start;
+        border-bottom-left-radius: 0;
     }
     
-    .bot-message p:last-child {
+    .user-message {
+        background-color: #0a2463;
+        color: white;
+        align-self: flex-end;
+        border-bottom-right-radius: 0;
+    }
+    
+    .bot-message p, .user-message p {
         margin-bottom: 0;
     }
     
-    .options-container {
+    .chatbot-footer {
+        padding: 10px;
+        border-top: 1px solid #eee;
+    }
+    
+    .typing-indicator {
         display: flex;
-        flex-direction: column;
-        gap: 10px;
-        margin-top: 15px;
+        align-items: center;
+        justify-content: flex-start;
+        min-height: 20px;
+        min-width: 60px;
     }
     
-    .option-button {
-        background-color: white;
-        border: 1px solid #0a2463;
-        color: #0a2463;
-        padding: 10px 15px;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: all 0.2s ease;
-        text-align: left;
+    .typing-indicator span {
+        height: 8px;
+        width: 8px;
+        background-color: #777;
+        border-radius: 50%;
+        display: inline-block;
+        margin-right: 5px;
+        animation: typing 1.5s infinite ease-in-out;
     }
     
-    .option-button:hover {
-        background-color: #0a2463;
-        color: white;
+    .typing-indicator span:nth-child(1) {
+        animation-delay: 0s;
     }
     
-    .recommendation-box {
-        background-color: #e6f7ff;
-        border-left: 4px solid #0a2463;
-        padding: 15px;
-        margin: 15px 0;
-        border-radius: 0 5px 5px 0;
+    .typing-indicator span:nth-child(2) {
+        animation-delay: 0.3s;
+    }
+    
+    .typing-indicator span:nth-child(3) {
+        animation-delay: 0.6s;
+        margin-right: 0;
+    }
+    
+    @keyframes typing {
+        0% { transform: translateY(0); }
+        50% { transform: translateY(-5px); }
+        100% { transform: translateY(0); }
+    }
+    
+    @media (max-width: 576px) {
+        .chatbot-window {
+            width: 90vw;
+            height: 70vh;
+            bottom: 80px;
+            right: 5vw;
+        }
+        
+        .chatbot-container {
+            bottom: 20px;
+            right: 20px;
+        }
     }
 </style>
 @endpush
@@ -232,44 +261,161 @@
     document.addEventListener('alpine:init', () => {
         Alpine.data('chatbotData', () => ({
             isOpen: false,
-            step: 1,
-            answers: {},
-            isSubmitting: false,
+            isLoading: false,
+            userInput: '',
+            messages: [],
             
-            submitChatbotForm() {
-                this.isSubmitting = true;
+            init() {
+                // Проверяем, есть ли сохраненные сообщения в localStorage
+                const savedMessages = localStorage.getItem('chatMessages');
+                if (savedMessages) {
+                    try {
+                        this.messages = JSON.parse(savedMessages);
+                    } catch (e) {
+                        console.error('Error parsing saved messages:', e);
+                        this.messages = [];
+                    }
+                }
                 
-                // Добавляем данные из анкеты
-                const formData = new FormData();
-                formData.append('name', this.answers.name);
-                formData.append('email', this.answers.email);
-                formData.append('phone', this.answers.phone);
-                formData.append('message', `Отрасль: ${this.answers.industry}, Задача: ${this.answers.task}, Опыт: ${this.answers.experience}`);
-                formData.append('source', 'chatbot');
-                formData.append('_token', document.querySelector('meta[name="csrf-token"]').getAttribute('content'));
+                // Если сообщений нет, инициализируем чат с приветственным сообщением
+                if (this.messages.length === 0) {
+                    this.initializeChat();
+                }
                 
-                // Отправляем данные
-                fetch('{{ route("submit-form") }}', {
+                // Добавляем Animate.css для анимаций
+                if (!document.getElementById('animate-css')) {
+                    const link = document.createElement('link');
+                    link.id = 'animate-css';
+                    link.rel = 'stylesheet';
+                    link.href = 'https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css';
+                    document.head.appendChild(link);
+                }
+            },
+            
+            initializeChat() {
+                this.isLoading = true;
+                
+                // Имитация загрузки для первого сообщения
+                setTimeout(() => {
+                    this.messages.push({
+                        role: 'assistant',
+                        content: 'Здравствуйте! Я виртуальный ассистент OptimaAI. Чем могу помочь? Вы можете задать вопросы о наших услугах, продуктах, условиях работы или контактах.'
+                    });
+                    this.isLoading = false;
+                    this.scrollToBottom();
+                    this.saveMessages();
+                }, 1000);
+            },
+            
+            toggleChat() {
+                this.isOpen = !this.isOpen;
+                if (this.isOpen && this.messages.length === 0) {
+                    this.initializeChat();
+                }
+                if (this.isOpen) {
+                    this.$nextTick(() => {
+                        this.scrollToBottom();
+                    });
+                }
+            },
+            
+            scrollToBottom() {
+                this.$nextTick(() => {
+                    const chatBody = this.$refs.chatBody;
+                    chatBody.scrollTop = chatBody.scrollHeight;
+                });
+            },
+            
+            saveMessages() {
+                // Сохраняем сообщения в localStorage для сохранения между сессиями
+                localStorage.setItem('chatMessages', JSON.stringify(this.messages));
+            },
+            
+            sendMessage() {
+                if (!this.userInput.trim() || this.isLoading) return;
+                
+                // Добавляем сообщение пользователя
+                this.messages.push({
+                    role: 'user',
+                    content: this.userInput.trim()
+                });
+                
+                const message = this.userInput.trim();
+                this.userInput = '';
+                this.isLoading = true;
+                this.scrollToBottom();
+                this.saveMessages();
+                
+                // Отправляем запрос к API
+                fetch('/chatbot/chat', {
                     method: 'POST',
-                    body: formData,
                     headers: {
-                        'X-Requested-With': 'XMLHttpRequest'
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                    },
+                    body: JSON.stringify({ message })
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.success) {
+                        // Добавляем ответ от бота
+                        this.messages.push({
+                            role: 'assistant',
+                            content: data.message
+                        });
+                        this.saveMessages();
+                    } else {
+                        // Обработка ошибки
+                        this.messages.push({
+                            role: 'assistant',
+                            content: 'Извините, произошла ошибка при обработке вашего запроса. Пожалуйста, попробуйте позже или свяжитесь с нами по телефону.'
+                        });
+                        this.saveMessages();
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    this.messages.push({
+                        role: 'assistant',
+                        content: 'Извините, произошла ошибка при обработке вашего запроса. Пожалуйста, попробуйте позже или свяжитесь с нами по телефону.'
+                    });
+                    this.saveMessages();
+                })
+                .finally(() => {
+                    this.isLoading = false;
+                    this.scrollToBottom();
+                });
+            },
+            
+            resetChat() {
+                this.isLoading = true;
+                
+                // Отправляем запрос на сброс истории чата
+                fetch('/chatbot/reset', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
                     }
                 })
                 .then(response => response.json())
                 .then(data => {
-                    this.isSubmitting = false;
-                    
                     if (data.success) {
-                        this.step = 5;
-                    } else {
-                        alert('Произошла ошибка при отправке формы. Пожалуйста, проверьте введенные данные.');
+                        // Очищаем историю сообщений
+                        this.messages = [];
+                        localStorage.removeItem('chatMessages');
+                        // Инициализируем чат заново
+                        this.initializeChat();
                     }
                 })
                 .catch(error => {
-                    this.isSubmitting = false;
                     console.error('Error:', error);
-                    alert('Произошла ошибка при отправке формы. Пожалуйста, попробуйте позже.');
+                    this.isLoading = false;
                 });
             }
         }));

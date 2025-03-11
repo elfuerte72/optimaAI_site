@@ -14,19 +14,18 @@
             </div>
             
             <div class="col-lg-2 col-md-4 mb-4 mb-md-0">
-                <h5 class="mb-4">Компания</h5>
+                <h5 class="mb-4">Навигация</h5>
                 <ul class="list-unstyled">
                     <li class="mb-2"><a href="{{ route('home') }}" class="text-white text-decoration-none">Главная</a></li>
-                    <li class="mb-2"><a href="{{ route('about') }}" class="text-white text-decoration-none">О компании</a></li>
                     <li class="mb-2"><a href="{{ route('services.index') }}" class="text-white text-decoration-none">Услуги</a></li>
                     <li class="mb-2"><a href="{{ route('case-studies.index') }}" class="text-white text-decoration-none">Кейсы</a></li>
+                    <li class="mb-2"><a href="{{ route('contact.index') }}" class="text-white text-decoration-none">Контакты</a></li>
                 </ul>
             </div>
             
             <div class="col-lg-2 col-md-4 mb-4 mb-md-0">
                 <h5 class="mb-4">Информация</h5>
                 <ul class="list-unstyled">
-                    <li class="mb-2"><a href="{{ route('blog.index') }}" class="text-white text-decoration-none">Блог</a></li>
                     <li class="mb-2"><a href="#" class="text-white text-decoration-none">Политика конфиденциальности</a></li>
                     <li class="mb-2"><a href="#" class="text-white text-decoration-none">Условия использования</a></li>
                 </ul>

@@ -12,16 +12,10 @@
             <div class="collapse navbar-collapse" id="navbarMain">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('about') ? 'active' : '' }}" href="{{ route('about') }}">О компании</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link {{ request()->routeIs('services.*') ? 'active' : '' }}" href="{{ route('services.index') }}">Услуги</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {{ request()->routeIs('case-studies.*') ? 'active' : '' }}" href="{{ route('case-studies.index') }}">Кейсы</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('blog.*') ? 'active' : '' }}" href="{{ route('blog.index') }}">Блог</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {{ request()->routeIs('contact.*') ? 'active' : '' }}" href="{{ route('contact.index') }}">Контакты</a>

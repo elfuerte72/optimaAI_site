@@ -70,9 +70,6 @@
                 <div class="col-md-6 col-lg-3">
                     <div class="card h-100 border-0 shadow-sm">
                         <div class="card-body text-center">
-                            <div class="process-step mb-3">
-                                <span class="fs-2 fw-bold text-primary">01</span>
-                            </div>
                             <h3 class="card-title h5">Анализ потребностей</h3>
                             <p class="card-text">Мы изучаем ваш бизнес, процессы и задачи, чтобы определить оптимальное решение.</p>
                         </div>
@@ -82,9 +79,6 @@
                 <div class="col-md-6 col-lg-3">
                     <div class="card h-100 border-0 shadow-sm">
                         <div class="card-body text-center">
-                            <div class="process-step mb-3">
-                                <span class="fs-2 fw-bold text-primary">02</span>
-                            </div>
                             <h3 class="card-title h5">Разработка решения</h3>
                             <p class="card-text">Создаем индивидуальное решение, адаптированное под ваши конкретные задачи.</p>
                         </div>
@@ -94,9 +88,6 @@
                 <div class="col-md-6 col-lg-3">
                     <div class="card h-100 border-0 shadow-sm">
                         <div class="card-body text-center">
-                            <div class="process-step mb-3">
-                                <span class="fs-2 fw-bold text-primary">03</span>
-                            </div>
                             <h3 class="card-title h5">Внедрение</h3>
                             <p class="card-text">Интегрируем решение в ваши существующие системы и обучаем сотрудников.</p>
                         </div>
@@ -106,81 +97,8 @@
                 <div class="col-md-6 col-lg-3">
                     <div class="card h-100 border-0 shadow-sm">
                         <div class="card-body text-center">
-                            <div class="process-step mb-3">
-                                <span class="fs-2 fw-bold text-primary">04</span>
-                            </div>
                             <h3 class="card-title h5">Сопровождение</h3>
                             <p class="card-text">Обеспечиваем постоянную поддержку и развитие внедренного решения.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- FAQ Section -->
-    <section class="faq py-5">
-        <div class="container">
-            <div class="row mb-5">
-                <div class="col-lg-8 mx-auto text-center">
-                    <h2 class="mb-4">Часто задаваемые вопросы</h2>
-                    <p class="lead">Ответы на наиболее распространенные вопросы о наших услугах и процессе работы.</p>
-                </div>
-            </div>
-            
-            <div class="row">
-                <div class="col-lg-8 mx-auto">
-                    <div class="accordion" id="faqAccordion">
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingOne">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                    Сколько времени занимает внедрение ИИ-решения?
-                                </button>
-                            </h2>
-                            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
-                                <div class="accordion-body">
-                                    Сроки внедрения зависят от сложности проекта и готовности инфраструктуры. Обычно процесс занимает от 2 недель до 3 месяцев. На первом этапе мы проводим анализ и составляем детальный план работ с указанием сроков.
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingTwo">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                    Какие технологии вы используете?
-                                </button>
-                            </h2>
-                            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
-                                <div class="accordion-body">
-                                    Мы работаем с широким спектром технологий, включая GPT, BERT, различные языковые модели, компьютерное зрение и другие. Выбор технологии зависит от конкретных задач и потребностей клиента.
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingThree">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                    Как оценить эффективность внедрения ИИ?
-                                </button>
-                            </h2>
-                            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
-                                <div class="accordion-body">
-                                    Мы разрабатываем индивидуальные KPI для каждого проекта. Это может быть экономия времени сотрудников, повышение точности прогнозов, сокращение ошибок или другие метрики, важные для вашего бизнеса.
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingFour">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                                    Нужны ли специальные знания для работы с вашими решениями?
-                                </button>
-                            </h2>
-                            <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#faqAccordion">
-                                <div class="accordion-body">
-                                    Нет, наши решения разрабатываются с учетом удобства использования. Мы проводим обучение сотрудников и предоставляем подробную документацию. Кроме того, мы обеспечиваем техническую поддержку на всех этапах работы.
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
