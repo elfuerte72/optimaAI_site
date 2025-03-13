@@ -5,8 +5,9 @@
       ref="card"
       @mouseenter="onMouseEnter"
       @mouseleave="onMouseLeave"
+      @mousemove="onMouseMove"
     >
-      <div class="service-card-inner">
+      <div class="service-card-inner" ref="cardInner">
         <div class="service-icon-wrapper animated-icon" ref="icon">
           <slot name="icon"></slot>
         </div>
@@ -42,6 +43,7 @@ export default {
   },
   setup(props) {
     const card = ref(null);
+    const cardInner = ref(null);
     const icon = ref(null);
     const title = ref(null);
     const text = ref(null);
@@ -74,6 +76,18 @@ export default {
         ease: 'power2.out'
       });
       
+      gsap.to(cardInner.value, {
+        rotateX: 0,
+        rotateY: 0,
+        duration: 0.5,
+        ease: 'power2.out'
+      });
+      
+      // Возвращаем исходный фон
+      if (card.value) {
+        card.value.style.background = 'rgba(20, 20, 40, 0.7)';
+      }
+      
       if (icon.value) {
         gsap.to(icon.value, {
           scale: 1,
@@ -81,6 +95,37 @@ export default {
           duration: 0.3
         });
       }
+    };
+    
+    const onMouseMove = (e) => {
+      if (!card.value || !cardInner.value) return;
+      
+      const cardRect = card.value.getBoundingClientRect();
+      const cardCenterX = cardRect.left + cardRect.width / 2;
+      const cardCenterY = cardRect.top + cardRect.height / 2;
+      
+      // Вычисляем положение курсора относительно центра карточки
+      const mouseX = e.clientX - cardCenterX;
+      const mouseY = e.clientY - cardCenterY;
+      
+      // Нормализуем значения от -1 до 1
+      const rotateX = mouseY / (cardRect.height / 2) * -10; // Инвертируем ось Y
+      const rotateY = mouseX / (cardRect.width / 2) * 10;
+      
+      // Применяем 3D-трансформацию
+      gsap.to(cardInner.value, {
+        rotateX: rotateX,
+        rotateY: rotateY,
+        transformPerspective: 1000,
+        duration: 0.3,
+        ease: 'power2.out'
+      });
+      
+      // Добавляем эффект свечения в направлении курсора
+      const gradientX = (e.clientX - cardRect.left) / cardRect.width * 100;
+      const gradientY = (e.clientY - cardRect.top) / cardRect.height * 100;
+      
+      card.value.style.background = `radial-gradient(circle at ${gradientX}% ${gradientY}%, rgba(99, 102, 241, 0.3), rgba(20, 20, 40, 0.7) 70%)`;
     };
     
     onMounted(() => {
@@ -165,12 +210,14 @@ export default {
     
     return {
       card,
+      cardInner,
       icon,
       title,
       text,
       link,
       onMouseEnter,
-      onMouseLeave
+      onMouseLeave,
+      onMouseMove
     };
   }
 };
@@ -191,6 +238,15 @@ export default {
   overflow: hidden;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   will-change: transform, box-shadow;
+  transform-style: preserve-3d;
+}
+
+.service-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.3s ease;
 }
 
 .service-card::before {
@@ -215,6 +271,13 @@ export default {
   height: 80px;
   margin-bottom: 1.5rem;
   transition: transform 0.3s ease;
+  transform-style: preserve-3d;
+  transform: translateZ(20px);
+}
+
+.card-title, .card-text {
+  transform-style: preserve-3d;
+  transform: translateZ(10px);
 }
 
 .interactive-element {
@@ -224,6 +287,8 @@ export default {
   color: var(--color-text, #fff);
   text-decoration: none;
   transition: color 0.3s ease;
+  transform-style: preserve-3d;
+  transform: translateZ(15px);
 }
 
 .interactive-element:hover {

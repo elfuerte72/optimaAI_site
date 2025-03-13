@@ -11,7 +11,7 @@
       </header>
 
       <section class="services-section">
-        <div class="row g-4">
+        <div class="row g-4 justify-content-center">
           <!-- Карточки услуг -->
           <div class="col-md-4" v-for="(service, index) in services" :key="service.id">
             <service-card :link="service.link" :delay="index * 0.2">
@@ -23,48 +23,6 @@
               <template #link-text>Подробнее</template>
             </service-card>
           </div>
-        </div>
-      </section>
-
-      <!-- 3D-логотип -->
-      <section class="logo-section my-5 py-5">
-        <div class="row align-items-center">
-          <div class="col-md-6">
-            <h2 class="slide-left mb-4" ref="logoTitle">Инновационные <span class="text-gradient">ИИ-решения</span></h2>
-            <p class="slide-left" ref="logoText">Мы используем передовые технологии искусственного интеллекта для создания инновационных решений, которые помогают бизнесу развиваться и достигать новых высот.</p>
-            <div class="mt-4 slide-left" ref="logoButtons">
-              <a href="/about" class="cyber-btn me-3">О нас</a>
-              <a href="/case-studies" class="btn btn-outline">Кейсы</a>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div id="logo-container" class="logo-container scale-in" style="height: 400px;"></div>
-          </div>
-        </div>
-      </section>
-
-      <section class="features-section my-5 py-5">
-        <h2 class="text-center mb-5" ref="featuresTitle">Преимущества наших услуг</h2>
-        <div class="row g-4">
-          <div class="col-md-4" v-for="(feature, index) in features" :key="feature.id">
-            <div class="card neon-glow" ref="featureCards">
-              <div class="card-body">
-                <div class="feature-icon mb-3">
-                  <i :class="feature.icon + ' fs-1 text-gradient'"></i>
-                </div>
-                <h3 class="h5 mb-3">{{ feature.title }}</h3>
-                <p>{{ feature.description }}</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="services-cta text-center mt-5 pt-4 animated-border" ref="ctaSection">
-        <div class="p-5">
-          <h2 class="mb-4 glitch-text" data-text="Готовы начать работу с нейросетями?">Готовы начать работу с нейросетями?</h2>
-          <p class="mb-4">Свяжитесь с нами для консультации и обсуждения вашего проекта</p>
-          <a href="/contact" class="cyber-btn btn-lg">Связаться с нами</a>
         </div>
       </section>
     </div>
@@ -193,12 +151,6 @@ export default {
     const pageTitle = ref(null);
     const pageSubtitle = ref(null);
     const headerSeparator = ref(null);
-    const logoTitle = ref(null);
-    const logoText = ref(null);
-    const logoButtons = ref(null);
-    const featuresTitle = ref(null);
-    const featureCards = ref([]);
-    const ctaSection = ref(null);
     
     // Данные для карточек услуг
     const services = ref([
@@ -225,38 +177,7 @@ export default {
       }
     ]);
     
-    // Данные для преимуществ
-    const features = ref([
-      {
-        id: 1,
-        title: 'Высокая производительность',
-        description: 'Оптимизированные решения, которые работают быстро и эффективно даже при высоких нагрузках.',
-        icon: 'bi bi-lightning-charge-fill'
-      },
-      {
-        id: 2,
-        title: 'Безопасность данных',
-        description: 'Все решения разрабатываются с учетом современных требований к безопасности и защите данных.',
-        icon: 'bi bi-shield-check'
-      },
-      {
-        id: 3,
-        title: 'Масштабируемость',
-        description: 'Наши решения легко масштабируются под растущие потребности вашего бизнеса.',
-        icon: 'bi bi-graph-up-arrow'
-      }
-    ]);
-    
     onMounted(() => {
-      // Инициализируем 3D-логотип
-      const logoContainer = document.getElementById('logo-container');
-      if (logoContainer) {
-        const aiLogoEffect = new AILogoEffect({
-          container: '#logo-container',
-          modelPath: '/models/ai-crystal.glb'
-        });
-      }
-      
       // Анимация заголовка страницы
       if (pageTitle.value) {
         const originalText = pageTitle.value.textContent;
@@ -293,92 +214,13 @@ export default {
           { width: '80px', opacity: 1, duration: 1, delay: 0.5, ease: 'power2.inOut' }
         );
       }
-      
-      // Анимация секции с логотипом
-      if (logoTitle.value && logoText.value && logoButtons.value) {
-        ScrollTrigger.create({
-          trigger: logoTitle.value,
-          start: 'top 80%',
-          onEnter: () => {
-            gsap.fromTo(logoTitle.value,
-              { x: -50, opacity: 0 },
-              { x: 0, opacity: 1, duration: 0.8, ease: 'power2.out' }
-            );
-            
-            gsap.fromTo(logoText.value,
-              { x: -50, opacity: 0 },
-              { x: 0, opacity: 1, duration: 0.8, delay: 0.2, ease: 'power2.out' }
-            );
-            
-            gsap.fromTo(logoButtons.value,
-              { x: -50, opacity: 0 },
-              { x: 0, opacity: 1, duration: 0.8, delay: 0.4, ease: 'power2.out' }
-            );
-          },
-          once: true
-        });
-      }
-      
-      // Анимация заголовка преимуществ
-      if (featuresTitle.value) {
-        ScrollTrigger.create({
-          trigger: featuresTitle.value,
-          start: 'top 80%',
-          onEnter: () => {
-            gsap.fromTo(featuresTitle.value,
-              { y: 30, opacity: 0 },
-              { y: 0, opacity: 1, duration: 0.8, ease: 'power2.out' }
-            );
-          },
-          once: true
-        });
-      }
-      
-      // Анимация карточек преимуществ
-      if (featureCards.value.length > 0) {
-        featureCards.value.forEach((card, index) => {
-          ScrollTrigger.create({
-            trigger: card,
-            start: 'top 80%',
-            onEnter: () => {
-              gsap.fromTo(card,
-                { y: 50, opacity: 0 },
-                { y: 0, opacity: 1, duration: 0.8, delay: index * 0.2, ease: 'power2.out' }
-              );
-            },
-            once: true
-          });
-        });
-      }
-      
-      // Анимация CTA секции
-      if (ctaSection.value) {
-        ScrollTrigger.create({
-          trigger: ctaSection.value,
-          start: 'top 80%',
-          onEnter: () => {
-            gsap.fromTo(ctaSection.value,
-              { y: 50, opacity: 0 },
-              { y: 0, opacity: 1, duration: 0.8, ease: 'power2.out' }
-            );
-          },
-          once: true
-        });
-      }
     });
     
     return {
       services,
-      features,
       pageTitle,
       pageSubtitle,
-      headerSeparator,
-      logoTitle,
-      logoText,
-      logoButtons,
-      featuresTitle,
-      featureCards,
-      ctaSection
+      headerSeparator
     };
   }
 };
@@ -410,19 +252,9 @@ export default {
   text-fill-color: transparent;
 }
 
-.logo-container {
-  position: relative;
-  width: 100%;
-  height: 400px;
-}
-
 @media (max-width: 768px) {
   .services-page-title {
     font-size: 2rem;
-  }
-  
-  .logo-container {
-    height: 300px;
   }
 }
 </style> 

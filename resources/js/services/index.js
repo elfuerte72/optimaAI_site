@@ -9,11 +9,16 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { TextPlugin } from 'gsap/TextPlugin';
 import ServicesPage from '../components/ServicesPage.vue';
 import StarBackground from '../components/StarBackground.vue';
-import StarField from '../starfield';
+import '../starfield';
 import { AILogoEffect } from '../three-effects';
 
 // Регистрируем плагины GSAP
 gsap.registerPlugin(ScrollTrigger, TextPlugin);
+
+// Экспортируем GSAP и плагины для использования в других файлах
+window.gsap = gsap;
+window.ScrollTrigger = ScrollTrigger;
+window.TextPlugin = TextPlugin;
 
 // Инициализация Vue приложения на странице услуг
 document.addEventListener('DOMContentLoaded', () => {
@@ -39,12 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
     animateServiceSubpages();
   }
   
-  // Инициализируем звездное небо
-  const starField = new StarField({
-    container: '.stars-container',
-    starCount: 300,
-    parallaxIntensity: 0.03
-  });
+  // Звездный фон инициализируется автоматически через DOMContentLoaded в starfield.js
   
   // Инициализируем 3D-логотип
   const logoContainer = document.getElementById('logo-container');
@@ -121,16 +121,6 @@ function animateServiceCards() {
   
   if (serviceCards.length === 0) return;
   
-  // Удаляем класс tilt-card для отключения 3D-эффекта
-  serviceCards.forEach(card => {
-    card.classList.remove('tilt-card');
-    if (card.querySelector('.tilt-card-inner')) {
-      const inner = card.querySelector('.tilt-card-inner');
-      const content = inner.innerHTML;
-      inner.outerHTML = `<div class="service-card-inner">${content}</div>`;
-    }
-  });
-  
   // Создаем временную шкалу для анимации карточек
   const tl = gsap.timeline({
     scrollTrigger: {
@@ -199,6 +189,51 @@ function animateServiceCards() {
         `-=0.2`
       );
     }
+    
+    // Добавляем 3D-эффект при наведении
+    const cardInner = card.querySelector('.tilt-card-inner') || card;
+    
+    card.addEventListener('mousemove', (e) => {
+      const cardRect = card.getBoundingClientRect();
+      const cardCenterX = cardRect.left + cardRect.width / 2;
+      const cardCenterY = cardRect.top + cardRect.height / 2;
+      
+      // Вычисляем положение курсора относительно центра карточки
+      const mouseX = e.clientX - cardCenterX;
+      const mouseY = e.clientY - cardCenterY;
+      
+      // Нормализуем значения от -1 до 1
+      const rotateX = mouseY / (cardRect.height / 2) * -10; // Инвертируем ось Y
+      const rotateY = mouseX / (cardRect.width / 2) * 10;
+      
+      // Применяем 3D-трансформацию
+      gsap.to(cardInner, {
+        rotateX: rotateX,
+        rotateY: rotateY,
+        transformPerspective: 1000,
+        duration: 0.3,
+        ease: 'power2.out'
+      });
+      
+      // Добавляем эффект свечения в направлении курсора
+      const gradientX = (e.clientX - cardRect.left) / cardRect.width * 100;
+      const gradientY = (e.clientY - cardRect.top) / cardRect.height * 100;
+      
+      card.style.background = `radial-gradient(circle at ${gradientX}% ${gradientY}%, rgba(99, 102, 241, 0.3), rgba(20, 25, 45, 0.7) 70%)`;
+    });
+    
+    card.addEventListener('mouseleave', () => {
+      // Возвращаем карточку в исходное положение
+      gsap.to(cardInner, {
+        rotateX: 0,
+        rotateY: 0,
+        duration: 0.5,
+        ease: 'power2.out'
+      });
+      
+      // Возвращаем исходный фон
+      card.style.background = 'rgba(20, 25, 45, 0.7)';
+    });
     
     // Добавляем интерактивность при наведении
     card.addEventListener('mouseenter', () => {
