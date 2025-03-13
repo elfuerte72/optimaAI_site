@@ -3,61 +3,111 @@
 @section('title', 'Консультации и обучение по ИИ | OptimaAI')
 @section('meta_description', 'Профессиональные консультации и обучение по искусственному интеллекту для вашего бизнеса от экспертов OptimaAI.')
 
+@section('styles')
+    <link rel="stylesheet" href="{{ asset('css/gsap-animations.css') }}">
+@endsection
+
 @section('content')
+<div class="stars-container" id="stars-container"></div>
+
 <!-- Hero Section -->
-<section class="service-hero position-relative overflow-hidden py-5">
-    <div class="neural-bg"></div>
+<section class="service-hero position-relative overflow-hidden py-5 service-detail-page">
     <div class="container py-5">
         <div class="row align-items-center">
             <div class="col-lg-10 mx-auto text-center">
-                <h1 class="display-4 fw-bold mb-4 text-gradient animate-on-scroll" data-animation="fade-up">Консультации и обучение</h1>
-                <p class="lead mb-5 animate-on-scroll" data-animation="fade-up" data-delay="0.2">Помогаем разобраться в возможностях ИИ для вашего бизнеса и обучаем команду работе с нейросетями, чтобы вы могли максимально эффективно использовать современные технологии.</p>
-                <button class="btn btn-primary btn-lg animate-on-scroll" data-animation="fade-up" data-delay="0.4" data-bs-toggle="modal" data-bs-target="#requestModal">
-                    Оставить заявку
-                </button>
+                <h1 class="display-4 fw-bold mb-4 text-gradient service-detail-title">Консультации и обучение</h1>
+                <p class="lead mb-5 service-detail-subtitle">Помогаем разобраться в возможностях ИИ для вашего бизнеса и обучаем команду работе с нейросетями, чтобы вы могли максимально эффективно использовать современные технологии.</p>
             </div>
         </div>
     </div>
 </section>
 
 <!-- Features Section -->
-<section class="py-5 bg-dark">
+<section class="py-5 bg-transparent service-section">
     <div class="container py-5">
         <div class="row mb-5 text-center">
             <div class="col-lg-8 mx-auto">
-                <h2 class="section-title fw-bold mb-4 animate-on-scroll" data-animation="fade-up">Что включает услуга</h2>
-                <p class="section-subtitle animate-on-scroll" data-animation="fade-up" data-delay="0.2">Комплексный подход к обучению и консультированию, адаптированный под ваши бизнес-задачи</p>
+                <h2 class="section-title fw-bold mb-4 text-gradient service-section-title">Что включает услуга</h2>
+                <p class="section-subtitle">Комплексный подход к обучению и консультированию, адаптированный под ваши бизнес-задачи</p>
             </div>
         </div>
         
         <div class="row g-4">
+            <!-- Фича 1 -->
             <div class="col-md-4">
-                <div class="service-card h-100 animate-on-scroll" data-animation="fade-up" data-delay="0.1">
-                    <div class="service-icon mb-4">
-                        <i class="bi bi-lightbulb"></i>
+                <div class="service-feature-card h-100">
+                    <div class="service-icon-container">
+                        <div class="service-icon-wrapper icon-circle">
+                            <i class="bi bi-lightbulb-fill"></i>
+                        </div>
                     </div>
-                    <h3 class="service-title h4 fw-bold mb-3">Стратегические консультации</h3>
-                    <p class="service-description">Анализ бизнес-процессов и определение областей, где ИИ может принести максимальную пользу. Разработка стратегии внедрения искусственного интеллекта с учетом особенностей вашего бизнеса.</p>
+                    <h3 class="h5 mb-3">Стратегический анализ</h3>
+                    <p class="service-list-item">Оценка потребностей вашего бизнеса и определение оптимальных направлений внедрения ИИ-технологий</p>
                 </div>
             </div>
             
+            <!-- Фича 2 -->
             <div class="col-md-4">
-                <div class="service-card h-100 animate-on-scroll" data-animation="fade-up" data-delay="0.2">
-                    <div class="service-icon mb-4">
-                        <i class="bi bi-people"></i>
+                <div class="service-feature-card h-100">
+                    <div class="service-icon-container">
+                        <div class="service-icon-wrapper icon-circle">
+                            <i class="bi bi-people-fill"></i>
+                        </div>
                     </div>
-                    <h3 class="service-title h4 fw-bold mb-3">Обучение команды</h3>
-                    <p class="service-description">Практические воркшопы и тренинги по работе с нейросетями для сотрудников разных уровней. Индивидуальные и групповые занятия с фокусом на практическое применение.</p>
+                    <h3 class="h5 mb-3">Обучение команды</h3>
+                    <p class="service-list-item">Практические воркшопы и тренинги по работе с нейросетями для сотрудников разных уровней</p>
                 </div>
             </div>
             
+            <!-- Фича 3 -->
             <div class="col-md-4">
-                <div class="service-card h-100 animate-on-scroll" data-animation="fade-up" data-delay="0.3">
-                    <div class="service-icon mb-4">
-                        <i class="bi bi-graph-up"></i>
+                <div class="service-feature-card h-100">
+                    <div class="service-icon-container">
+                        <div class="service-icon-wrapper icon-circle">
+                            <i class="bi bi-gear-fill"></i>
+                        </div>
                     </div>
-                    <h3 class="service-title h4 fw-bold mb-3">Оценка эффективности</h3>
-                    <p class="service-description">Разработка метрик и KPI для измерения результатов внедрения ИИ в бизнес-процессы. Регулярный мониторинг и корректировка стратегии для достижения максимальных результатов.</p>
+                    <h3 class="h5 mb-3">Техническая поддержка</h3>
+                    <p class="service-list-item">Постоянное сопровождение и помощь в решении возникающих вопросов при работе с ИИ-инструментами</p>
+                </div>
+            </div>
+            
+            <!-- Фича 4 -->
+            <div class="col-md-4">
+                <div class="service-feature-card h-100">
+                    <div class="service-icon-container">
+                        <div class="service-icon-wrapper icon-circle">
+                            <i class="bi bi-file-earmark-text-fill"></i>
+                        </div>
+                    </div>
+                    <h3 class="h5 mb-3">Документация и гайды</h3>
+                    <p class="service-list-item">Разработка подробных руководств и инструкций по использованию ИИ в вашей компании</p>
+                </div>
+            </div>
+            
+            <!-- Фича 5 -->
+            <div class="col-md-4">
+                <div class="service-feature-card h-100">
+                    <div class="service-icon-container">
+                        <div class="service-icon-wrapper icon-circle">
+                            <i class="bi bi-graph-up-arrow"></i>
+                        </div>
+                    </div>
+                    <h3 class="h5 mb-3">Оценка эффективности</h3>
+                    <p class="service-list-item">Разработка метрик и регулярный анализ результатов внедрения ИИ в рабочие процессы</p>
+                </div>
+            </div>
+            
+            <!-- Фича 6 -->
+            <div class="col-md-4">
+                <div class="service-feature-card h-100">
+                    <div class="service-icon-container">
+                        <div class="service-icon-wrapper icon-circle">
+                            <i class="bi bi-chat-dots-fill"></i>
+                        </div>
+                    </div>
+                    <h3 class="h5 mb-3">Консультации экспертов</h3>
+                    <p class="service-list-item">Доступ к команде специалистов по ИИ для решения сложных вопросов и задач</p>
                 </div>
             </div>
         </div>
@@ -65,47 +115,60 @@
 </section>
 
 <!-- Process Section -->
-<section class="process-section py-5">
+<section class="py-5 bg-transparent service-section">
     <div class="container py-5">
         <div class="row mb-5 text-center">
             <div class="col-lg-8 mx-auto">
-                <h2 class="section-title fw-bold mb-4 animate-on-scroll" data-animation="fade-up">Как мы работаем</h2>
-                <p class="section-subtitle animate-on-scroll" data-animation="fade-up" data-delay="0.2">Процесс консультирования и обучения, который обеспечивает максимальную эффективность</p>
+                <h2 class="section-title fw-bold mb-4 text-gradient service-section-title">Как мы работаем</h2>
+                <p class="section-subtitle">Прозрачный процесс консультирования и обучения для достижения максимальных результатов</p>
             </div>
         </div>
         
         <div class="row">
-            <div class="col-12">
+            <div class="col-lg-10 mx-auto">
                 <div class="process-timeline">
-                    <div class="process-item animate-on-scroll" data-animation="fade-up" data-delay="0.1">
-                        <div class="process-number">01</div>
+                    <!-- Шаг 1 -->
+                    <div class="process-step">
+                        <div class="step-number icon-circle">1</div>
                         <div class="process-content">
-                            <h3 class="process-title h5 fw-bold mb-3">Аудит</h3>
-                            <p class="process-description mb-0">Анализируем текущие процессы и определяем потребности в обучении. Выявляем ключевые области для внедрения ИИ.</p>
+                            <h3 class="h5 fw-bold mb-3">Первичная консультация</h3>
+                            <p class="service-list-item">Проводим встречу для понимания ваших бизнес-процессов, целей и задач, которые вы хотите решить с помощью ИИ</p>
                         </div>
                     </div>
                     
-                    <div class="process-item animate-on-scroll" data-animation="fade-up" data-delay="0.2">
-                        <div class="process-number">02</div>
+                    <!-- Шаг 2 -->
+                    <div class="process-step">
+                        <div class="step-number icon-circle">2</div>
                         <div class="process-content">
-                            <h3 class="process-title h5 fw-bold mb-3">Программа</h3>
-                            <p class="process-description mb-0">Разрабатываем индивидуальную программу обучения и консультаций с учетом специфики вашего бизнеса и уровня подготовки сотрудников.</p>
+                            <h3 class="h5 fw-bold mb-3">Анализ потребностей</h3>
+                            <p class="service-list-item">Изучаем текущие процессы и определяем, где внедрение ИИ принесет максимальную пользу</p>
                         </div>
                     </div>
                     
-                    <div class="process-item animate-on-scroll" data-animation="fade-up" data-delay="0.3">
-                        <div class="process-number">03</div>
+                    <!-- Шаг 3 -->
+                    <div class="process-step">
+                        <div class="step-number icon-circle">3</div>
                         <div class="process-content">
-                            <h3 class="process-title h5 fw-bold mb-3">Реализация</h3>
-                            <p class="process-description mb-0">Проводим обучение и консультации согласно разработанной программе. Обеспечиваем практическое применение полученных знаний.</p>
+                            <h3 class="h5 fw-bold mb-3">Разработка программы</h3>
+                            <p class="service-list-item">Создаем индивидуальную программу обучения и консультирования, адаптированную под ваши потребности</p>
                         </div>
                     </div>
                     
-                    <div class="process-item animate-on-scroll" data-animation="fade-up" data-delay="0.4">
-                        <div class="process-number">04</div>
+                    <!-- Шаг 4 -->
+                    <div class="process-step">
+                        <div class="step-number icon-circle">4</div>
                         <div class="process-content">
-                            <h3 class="process-title h5 fw-bold mb-3">Поддержка</h3>
-                            <p class="process-description mb-0">Обеспечиваем постоянную поддержку и консультации после завершения основного этапа обучения. Помогаем решать возникающие вопросы.</p>
+                            <h3 class="h5 fw-bold mb-3">Проведение обучения</h3>
+                            <p class="service-list-item">Организуем серию тренингов и воркшопов для вашей команды с практическими заданиями</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Шаг 5 -->
+                    <div class="process-step">
+                        <div class="step-number icon-circle">5</div>
+                        <div class="process-content">
+                            <h3 class="h5 fw-bold mb-3">Поддержка и сопровождение</h3>
+                            <p class="service-list-item">Обеспечиваем постоянную поддержку и консультации в процессе внедрения ИИ в рабочие процессы</p>
                         </div>
                     </div>
                 </div>
@@ -115,60 +178,64 @@
 </section>
 
 <!-- Benefits Section -->
-<section class="py-5 bg-dark">
+<section class="py-5 bg-transparent service-section">
     <div class="container py-5">
         <div class="row mb-5 text-center">
             <div class="col-lg-8 mx-auto">
-                <h2 class="section-title fw-bold mb-4 animate-on-scroll" data-animation="fade-up">Преимущества</h2>
-                <p class="section-subtitle animate-on-scroll" data-animation="fade-up" data-delay="0.2">Почему стоит выбрать наши консультации и обучение</p>
+                <h2 class="section-title fw-bold mb-4 text-gradient service-section-title">Преимущества работы с нами</h2>
+                <p class="section-subtitle">Почему клиенты выбирают наши консультационные услуги и обучение</p>
             </div>
         </div>
         
         <div class="row g-4">
+            <!-- Преимущество 1 -->
             <div class="col-md-6">
-                <div class="benefit-card animate-on-scroll" data-animation="fade-up" data-delay="0.1">
-                    <div class="benefit-check">
-                        <i class="bi bi-check-circle-fill"></i>
+                <div class="benefit-card">
+                    <div class="benefit-icon icon-circle">
+                        <i class="bi bi-mortarboard-fill"></i>
                     </div>
                     <div class="benefit-content">
-                        <h3 class="benefit-title h5 fw-bold mb-2">Экспертный опыт</h3>
-                        <p class="benefit-text mb-0">Наши специалисты имеют многолетний опыт работы с ИИ и нейросетями в различных отраслях бизнеса.</p>
+                        <h3 class="h5 fw-bold mb-2">Экспертиза в области ИИ</h3>
+                        <p class="service-list-item">Наша команда состоит из специалистов с многолетним опытом работы в сфере искусственного интеллекта</p>
                     </div>
                 </div>
             </div>
             
+            <!-- Преимущество 2 -->
             <div class="col-md-6">
-                <div class="benefit-card animate-on-scroll" data-animation="fade-up" data-delay="0.2">
-                    <div class="benefit-check">
-                        <i class="bi bi-check-circle-fill"></i>
+                <div class="benefit-card">
+                    <div class="benefit-icon icon-circle">
+                        <i class="bi bi-puzzle-fill"></i>
                     </div>
                     <div class="benefit-content">
-                        <h3 class="benefit-title h5 fw-bold mb-2">Практический подход</h3>
-                        <p class="benefit-text mb-0">Фокус на практическом применении знаний и навыков, а не только на теоретических аспектах.</p>
+                        <h3 class="h5 fw-bold mb-2">Индивидуальный подход</h3>
+                        <p class="service-list-item">Разрабатываем программы обучения с учетом специфики вашего бизнеса и уровня подготовки сотрудников</p>
                     </div>
                 </div>
             </div>
             
+            <!-- Преимущество 3 -->
             <div class="col-md-6">
-                <div class="benefit-card animate-on-scroll" data-animation="fade-up" data-delay="0.3">
-                    <div class="benefit-check">
-                        <i class="bi bi-check-circle-fill"></i>
+                <div class="benefit-card">
+                    <div class="benefit-icon icon-circle">
+                        <i class="bi bi-clock-history"></i>
                     </div>
                     <div class="benefit-content">
-                        <h3 class="benefit-title h5 fw-bold mb-2">Индивидуальный подход</h3>
-                        <p class="benefit-text mb-0">Адаптация программы обучения и консультаций под конкретные потребности и задачи вашего бизнеса.</p>
+                        <h3 class="h5 fw-bold mb-2">Экономия времени</h3>
+                        <p class="service-list-item">Помогаем быстро освоить технологии ИИ без длительного самостоятельного изучения</p>
                     </div>
                 </div>
             </div>
             
+            <!-- Преимущество 4 -->
             <div class="col-md-6">
-                <div class="benefit-card animate-on-scroll" data-animation="fade-up" data-delay="0.4">
-                    <div class="benefit-check">
-                        <i class="bi bi-check-circle-fill"></i>
+                <div class="benefit-card">
+                    <div class="benefit-icon icon-circle">
+                        <i class="bi bi-currency-dollar"></i>
                     </div>
                     <div class="benefit-content">
-                        <h3 class="benefit-title h5 fw-bold mb-2">Долгосрочное сотрудничество</h3>
-                        <p class="benefit-text mb-0">Мы не просто проводим обучение, но и обеспечиваем поддержку на всех этапах внедрения ИИ в ваш бизнес.</p>
+                        <h3 class="h5 fw-bold mb-2">Повышение ROI</h3>
+                        <p class="service-list-item">Обеспечиваем максимальную отдачу от инвестиций в ИИ благодаря правильному внедрению</p>
                     </div>
                 </div>
             </div>
@@ -177,17 +244,14 @@
 </section>
 
 <!-- CTA Section -->
-<section class="cta-section py-5">
+<section class="py-5 bg-transparent service-section">
     <div class="container py-5">
-        <div class="row justify-content-center">
-            <div class="col-lg-10">
-                <div class="cta-card text-center p-5 animate-on-scroll" data-animation="scale-up">
-                    <h2 class="cta-title fw-bold mb-4">Готовы начать обучение?</h2>
-                    <p class="cta-text mb-4">Свяжитесь с нами, чтобы обсудить, как наши консультации и обучение могут помочь вашему бизнесу эффективно использовать искусственный интеллект</p>
-                    <div class="d-flex justify-content-center gap-3">
-                        <a href="{{ route('contact.index') }}" class="btn btn-primary btn-lg">Связаться с нами</a>
-                        <button class="btn btn-outline-light btn-lg" data-bs-toggle="modal" data-bs-target="#requestModal">Оставить заявку</button>
-                    </div>
+        <div class="row">
+            <div class="col-lg-10 mx-auto">
+                <div class="cta-card text-center p-5 animated-border">
+                    <h2 class="fw-bold mb-4 service-section-title">Готовы начать обучение?</h2>
+                    <p class="mb-4">Свяжитесь с нами для консультации и обсуждения вашего проекта</p>
+                    <a href="{{ route('contact') }}" class="cyber-btn btn-lg">Связаться с нами</a>
                 </div>
             </div>
         </div>
@@ -195,74 +259,6 @@
 </section>
 @endsection
 
-@push('styles')
-<style>
-    /* Service Hero */
-    .service-hero {
-        padding: 6rem 0;
-        background-color: var(--bs-dark);
-    }
-    
-    /* Benefit Cards */
-    .benefit-card {
-        display: flex;
-        align-items: flex-start;
-        padding: 1.5rem;
-        background: var(--card-bg);
-        border-radius: var(--border-radius);
-        border: 1px solid var(--border-color);
-        margin-bottom: 1.5rem;
-        transition: var(--transition-smooth);
-    }
-    
-    .benefit-card:hover {
-        transform: translateY(-5px);
-        box-shadow: var(--card-shadow-hover);
-        border-color: var(--primary-color);
-    }
-    
-    .benefit-check {
-        font-size: 1.5rem;
-        color: var(--primary-color);
-        margin-right: 1rem;
-        background: rgba(var(--primary-rgb), 0.1);
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-shrink: 0;
-        position: relative;
-        overflow: hidden;
-    }
-    
-    .benefit-check::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
-        opacity: 0.2;
-        z-index: -1;
-    }
-    
-    .benefit-check i {
-        filter: drop-shadow(0 0 5px rgba(var(--primary-rgb), 0.5));
-    }
-    
-    .benefit-content {
-        flex: 1;
-    }
-    
-    .benefit-title {
-        color: var(--heading-color);
-    }
-    
-    .benefit-text {
-        color: var(--text-color);
-    }
-</style>
-@endpush 
+@section('scripts')
+    @vite(['resources/js/services/index.js'])
+@endsection 

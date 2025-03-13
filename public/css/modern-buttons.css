@@ -1,119 +1,249 @@
 /**
- * OptimaAI - Modern Button Styles 2025
- * Неоморфный дизайн с актуальными анимациями
+ * Modern Buttons - OptimAI 2030 Edition
+ * Футуристические стили для кнопок
  */
 
-/* Основные стили современной кнопки */
-.btn-modern {
+/* Основная кибер-кнопка */
+.cyber-btn {
   position: relative;
+  background: rgba(20, 20, 40, 0.7);
+  color: var(--color-text);
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  padding: 0.85rem 2rem;
+  border: 1px solid var(--neon-purple);
+  border-radius: 2px;
   overflow: hidden;
-  background: rgba(99, 102, 241, 0.1);
-  color: #7B96FF;
-  border: 1px solid rgba(123, 150, 255, 0.4);
-  border-radius: 12px;
-  padding: 0.7rem 1.8rem;
-  font-weight: 500;
-  letter-spacing: 0.5px;
-  backdrop-filter: blur(10px);
-  transition: all 0.35s cubic-bezier(0.35, 0, 0.25, 1);
-  box-shadow: 
-    0 4px 10px rgba(0, 0, 0, 0.1),
-    inset 0 1px 1px rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+  cursor: pointer;
   z-index: 1;
-  transform: translateY(0);
 }
 
-/* Эффект световой линии при наведении */
-.btn-modern::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -150%;
-  width: 150%;
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.2),
-    transparent
-  );
-  transform: skewX(-25deg);
-  transition: all 0.6s ease;
-  z-index: -1;
-}
-
-/* Свечение при наведении */
-.btn-modern::after {
+.cyber-btn::before {
   content: '';
   position: absolute;
   top: 0;
   left: 0;
-  right: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(185, 53, 255, 0.2) 25%, 
+    rgba(185, 53, 255, 0.5) 50%, 
+    rgba(185, 53, 255, 0.2) 75%, 
+    transparent 100%);
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+  z-index: -1;
+}
+
+.cyber-btn:hover {
+  box-shadow: 0 0 15px rgba(185, 53, 255, 0.7);
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+}
+
+.cyber-btn:hover::before {
+  transform: translateX(100%);
+}
+
+.cyber-btn::after {
+  content: '';
+  position: absolute;
   bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, 
+    var(--neon-purple) 0%, 
+    var(--neon-blue) 50%, 
+    var(--neon-purple) 100%);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.cyber-btn:hover::after {
+  transform: scaleX(1);
+}
+
+/* Большая кибер-кнопка */
+.cyber-btn.btn-lg {
+  font-size: 1rem;
+  padding: 1rem 2.5rem;
+}
+
+/* Маленькая кибер-кнопка */
+.cyber-btn.btn-sm {
+  font-size: 0.75rem;
+  padding: 0.5rem 1.5rem;
+}
+
+/* Кнопка с иконкой */
+.cyber-btn-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.cyber-btn-icon i {
+  transition: transform 0.3s ease;
+}
+
+.cyber-btn-icon:hover i {
+  transform: translateX(3px);
+}
+
+/* Неоновая кнопка */
+.neon-btn {
+  position: relative;
+  background: transparent;
+  color: var(--neon-blue);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  padding: 0.85rem 2rem;
+  border: 2px solid var(--neon-blue);
+  border-radius: 4px;
+  box-shadow: 0 0 10px rgba(58, 142, 255, 0.5), inset 0 0 10px rgba(58, 142, 255, 0.5);
+  text-shadow: 0 0 5px rgba(58, 142, 255, 0.5);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.neon-btn:hover {
+  background: rgba(58, 142, 255, 0.1);
+  box-shadow: 0 0 20px rgba(58, 142, 255, 0.8), inset 0 0 15px rgba(58, 142, 255, 0.5);
+  text-shadow: 0 0 8px rgba(58, 142, 255, 0.8);
+}
+
+.neon-btn:active {
+  transform: scale(0.95);
+}
+
+/* Кнопка с градиентной границей */
+.gradient-border-btn {
+  position: relative;
+  background: rgba(20, 20, 40, 0.7);
+  color: var(--color-text);
+  font-weight: 500;
+  padding: 0.85rem 2rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.gradient-border-btn::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(90deg, 
+    var(--neon-purple), 
+    var(--neon-blue), 
+    var(--neon-magenta), 
+    var(--neon-cyan), 
+    var(--neon-purple));
+  background-size: 400% 400%;
+  border-radius: 6px;
+  z-index: -1;
+  animation: border-animation 8s linear infinite;
+}
+
+.gradient-border-btn::after {
+  content: '';
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  right: 1px;
+  bottom: 1px;
+  background: rgba(20, 20, 40, 0.9);
+  border-radius: 3px;
+  z-index: -1;
+}
+
+.gradient-border-btn:hover::after {
+  background: rgba(30, 30, 60, 0.9);
+}
+
+@keyframes border-animation {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Кнопка с эффектом глитча */
+.glitch-btn {
+  position: relative;
+  background: rgba(20, 20, 40, 0.7);
+  color: var(--color-text);
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  padding: 0.85rem 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 2px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.glitch-btn:hover {
+  color: var(--neon-purple);
+  border-color: var(--neon-purple);
+  text-shadow: 0 0 5px rgba(185, 53, 255, 0.5);
+}
+
+.glitch-btn::before,
+.glitch-btn::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   opacity: 0;
-  border-radius: 12px;
-  box-shadow: 0 0 20px 5px rgba(123, 150, 255, 0.5);
-  transition: opacity 0.4s ease;
+  transition: all 0.3s ease;
+}
+
+.glitch-btn::before {
+  color: var(--neon-magenta);
+  z-index: -1;
+}
+
+.glitch-btn::after {
+  color: var(--neon-cyan);
   z-index: -2;
 }
 
-/* Эффекты при наведении */
-.btn-modern:hover {
-  transform: translateY(-3px);
-  box-shadow: 
-    0 7px 15px rgba(0, 0, 0, 0.2),
-    inset 0 1px 1px rgba(255, 255, 255, 0.2);
-  color: #ffffff;
-  border-color: rgba(123, 150, 255, 0.7);
-  background: rgba(99, 102, 241, 0.25);
+.glitch-btn:hover::before {
+  opacity: 0.8;
+  transform: translate(-5px, -5px);
+  animation: glitch-anim-1 0.3s infinite;
 }
 
-.btn-modern:hover::before {
-  left: 100%;
-  transition: all 0.6s ease;
+.glitch-btn:hover::after {
+  opacity: 0.8;
+  transform: translate(5px, 5px);
+  animation: glitch-anim-2 0.3s infinite;
 }
 
-.btn-modern:hover::after {
-  opacity: 1;
+@keyframes glitch-anim-1 {
+  0%, 100% { transform: translate(-5px, -5px); }
+  50% { transform: translate(-7px, -7px); }
 }
 
-/* Эффект нажатия */
-.btn-modern:active {
-  transform: translateY(-1px);
-  transition: all 0.1s ease;
-  background: rgba(99, 102, 241, 0.35);
-}
-
-/* Анимация при загрузке страницы */
-@keyframes buttonPulse {
-  0% {
-    box-shadow: 0 0 0 0 rgba(123, 150, 255, 0.4);
-  }
-  70% {
-    box-shadow: 0 0 0 8px rgba(123, 150, 255, 0);
-  }
-  100% {
-    box-shadow: 0 0 0 0 rgba(123, 150, 255, 0);
-  }
-}
-
-/* Применение пульсирующей анимации при загрузке */
-.btn-modern.animate-pulse {
-  animation: buttonPulse 2s infinite;
-}
-
-/* Стили для разных состояний */
-.btn-modern:focus {
-  outline: none;
-  box-shadow: 
-    0 0 0 3px rgba(123, 150, 255, 0.3),
-    0 7px 15px rgba(0, 0, 0, 0.1);
-}
-
-/* Адаптивность для мобильных устройств */
-@media (max-width: 768px) {
-  .btn-modern {
-    padding: 0.6rem 1.4rem;
-    font-size: 0.9rem;
-  }
+@keyframes glitch-anim-2 {
+  0%, 100% { transform: translate(5px, 5px); }
+  50% { transform: translate(7px, 7px); }
 } 

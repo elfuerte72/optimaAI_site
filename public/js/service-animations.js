@@ -4,6 +4,56 @@
  */
 
 document.addEventListener('DOMContentLoaded', function() {
+    // Логируем успешную загрузку скрипта
+    console.log('✅ Скрипт анимаций для услуг загружен');
+    
+    // Проверяем, есть ли React-контейнеры на странице
+    const reactContainers = [
+        document.getElementById('react-service-features'),
+        document.getElementById('react-process-steps')
+    ];
+    
+    // Логируем наличие контейнеров
+    reactContainers.forEach((container, index) => {
+        if (container) {
+            console.log(`✅ React контейнер #${index + 1} найден`);
+        }
+    });
+    
+    // Добавляем анимацию для обычных элементов (не React)
+    const animateElements = document.querySelectorAll('.animate-on-scroll');
+    
+    if (animateElements.length > 0) {
+        console.log(`✅ Найдено ${animateElements.length} элементов для анимации при скролле`);
+    }
+    
+    // Функция для проверки видимости элемента
+    function isElementInViewport(el) {
+        const rect = el.getBoundingClientRect();
+        return (
+            rect.top <= (window.innerHeight || document.documentElement.clientHeight) &&
+            rect.bottom >= 0
+        );
+    }
+    
+    // Функция для анимации элементов при скролле
+    function animateOnScroll() {
+        animateElements.forEach(element => {
+            if (isElementInViewport(element) && !element.classList.contains('animated')) {
+                const animation = element.dataset.animation || 'fade-up';
+                const delay = element.dataset.delay || 0;
+                
+                setTimeout(() => {
+                    element.classList.add('animated', animation);
+                }, delay * 1000);
+            }
+        });
+    }
+    
+    // Запускаем анимацию при загрузке и скролле
+    window.addEventListener('scroll', animateOnScroll);
+    animateOnScroll();
+    
     // Применяем анимацию пульсации к кнопкам "Подробнее"
     const detailButtons = document.querySelectorAll('.btn-modern');
     detailButtons.forEach(button => {
@@ -56,31 +106,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 500);
         });
     });
-    
-    // Анимация появления карточек при скролле
-    const animateOnScroll = function() {
-        const elements = document.querySelectorAll('.animate-on-scroll');
-        
-        elements.forEach(element => {
-            const elementTop = element.getBoundingClientRect().top;
-            const elementVisible = 150;
-            
-            if (elementTop < window.innerHeight - elementVisible) {
-                // Получаем задержку анимации из атрибута
-                const delay = element.dataset.delay || 0;
-                const animation = element.dataset.animation || 'fade-up';
-                
-                // Применяем анимацию с задержкой
-                setTimeout(() => {
-                    element.classList.add('animated', animation);
-                }, delay * 1000);
-            }
-        });
-    };
-    
-    // Запускаем функцию при загрузке страницы и при скролле
-    window.addEventListener('scroll', animateOnScroll);
-    animateOnScroll();
     
     // Добавляем эффект мерцания для иконок услуг
     const iconWrappers = document.querySelectorAll('.service-icon-wrapper');

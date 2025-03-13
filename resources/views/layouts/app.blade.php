@@ -15,15 +15,18 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
     
     <!-- Styles -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     
     <!-- Vite Assets -->
-    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/react-app.jsx'])
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     
+    <!-- Custom Styles -->
     <link rel="stylesheet" href="{{ asset('css/modern-theme.css') }}">
     <link rel="stylesheet" href="{{ asset('css/modern-fonts.css') }}">
     <link rel="stylesheet" href="{{ asset('css/services-icons.css') }}">
@@ -31,15 +34,18 @@
     <link rel="stylesheet" href="{{ asset('css/modern-buttons.css') }}">
     <link rel="stylesheet" href="{{ asset('css/service-animations.css') }}">
     
-    <!-- Scripts -->
+    @yield('styles')
+    
+    <!-- Scripts в head -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.12.0/dist/cdn.min.js" defer></script>
-    <script src="{{ asset('js/stars-animation.js') }}" defer></script>
-    <script src="{{ asset('js/service-animations.js') }}" defer></script>
     
-    @stack('styles')
+    <!-- Скрипт для звезд загружаем в head, чтобы он был доступен раньше -->
+    <script src="{{ asset('js/stars-animation.js') }}"></script>
+    
+    @stack('head-scripts')
 </head>
-<body>
+<body class="cyber-theme">
     <div id="app">
         @include('partials.header')
         
@@ -49,8 +55,18 @@
         
         @include('partials.footer')
         @include('partials.request-modal')
-        
-        @stack('scripts')
     </div>
+    
+    <!-- Scripts в конце body -->
+    <script src="{{ asset('js/service-animations.js') }}"></script>
+    <script src="{{ asset('js/stars-init.js') }}"></script>
+    
+    @yield('scripts')
+    @stack('footer-scripts')
+    
+    <!-- Скрипт для страницы услуг -->
+    @if(request()->is('services'))
+        <script type="module" src="{{ Vite::asset('resources/js/services/index.js') }}"></script>
+    @endif
 </body>
 </html> 

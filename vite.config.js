@@ -1,26 +1,38 @@
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
-import tailwindcss from '@tailwindcss/vite';
-import react from '@vitejs/plugin-react';
+import vue from '@vitejs/plugin-vue';
 
 export default defineConfig({
     plugins: [
         laravel({
-            input: ['resources/css/app.css', 'resources/js/app.js', 'resources/js/react-app.jsx'],
+            input: [
+                'resources/css/app.css', 
+                'resources/js/app.js', 
+                'resources/js/services/index.js'
+            ],
             refresh: true,
         }),
-        tailwindcss(),
-        react({
-            jsxRuntime: 'automatic',
-            include: '**/*.{jsx,js}',
+        vue({
+            template: {
+                transformAssetUrls: {
+                    base: null,
+                    includeAbsolute: false,
+                },
+            },
         }),
     ],
+    // ВАЖНО: Не меняйте эти порты! Они зафиксированы для проекта.
+    // Laravel сервер работает на порту 8000 (APP_URL в .env)
     server: {
-        port: 8000,
+        port: 8011,
         host: '127.0.0.1',
         hmr: {
             host: '127.0.0.1',
-            port: 8000
+            protocol: 'ws',
+            port: 8011,
+            clientPort: 8011,
+            timeout: 120000,
+            overlay: false  // Отключаем overlay с ошибками
         },
     },
     build: {
@@ -28,9 +40,10 @@ export default defineConfig({
         rollupOptions: {
             output: {
                 manualChunks: {
-                    'react-vendor': ['react', 'react-dom', 'framer-motion'],
+                    'gsap-vendor': ['gsap'],
                     'app-core': ['resources/js/app.js'],
-                    'react-app': ['resources/js/react-app.jsx'],
+                    'services': ['resources/js/services/index.js'],
+                    'vue': ['vue'],
                 },
             },
         },
@@ -38,6 +51,7 @@ export default defineConfig({
     resolve: {
         alias: {
             '@': '/resources/js',
+            'vue': 'vue/dist/vue.esm-bundler.js',
         },
     },
 });

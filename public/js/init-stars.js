@@ -1,14 +1,19 @@
 /**
- * Stars Animation - OptimAI 2030 Edition
- * Скрипт для анимации звездного фона
+ * Инициализация звезд - OptimAI 2030 Edition
+ * Этот файл должен загружаться перед stars-animation.js
  */
 
-// Определяем функцию initStars
-function initStars() {
+// Определяем функцию initStars глобально
+window.initStars = function() {
+  console.log('Инициализация звезд запущена');
+  
   // Находим контейнер для звезд
   const starsContainer = document.querySelector('.stars-container');
   
-  if (!starsContainer) return;
+  if (!starsContainer) {
+    console.warn('Контейнер для звезд не найден');
+    return;
+  }
   
   // Очищаем контейнер перед созданием новых звезд
   starsContainer.innerHTML = '';
@@ -33,45 +38,8 @@ function initStars() {
     createNebula(starsContainer);
   }
   
-  console.log("Stars initialized successfully");
-}
-
-// Привязываем функцию к window, чтобы она была доступна глобально
-// ВАЖНО: Делаем это до DOMContentLoaded, чтобы функция была доступна раньше
-window.initStars = initStars;
-
-document.addEventListener('DOMContentLoaded', function() {
-  // Инициализируем звезды при загрузке страницы
-  if (typeof window.initStars === 'function') {
-    window.initStars();
-  } else {
-    console.error("Error: initStars function is not available");
-  }
-  
-  // Добавляем эффект параллакса при движении мыши
-  document.addEventListener('mousemove', function(e) {
-    const mouseX = e.clientX / window.innerWidth;
-    const mouseY = e.clientY / window.innerHeight;
-    
-    const stars = document.querySelectorAll('.star');
-    const nebulae = document.querySelectorAll('.nebula');
-    
-    stars.forEach(star => {
-      const depth = parseFloat(star.getAttribute('data-depth') || 1);
-      const moveX = (mouseX - 0.5) * 20 * depth;
-      const moveY = (mouseY - 0.5) * 20 * depth;
-      
-      star.style.transform = `translate(${moveX}px, ${moveY}px)`;
-    });
-    
-    nebulae.forEach(nebula => {
-      const moveX = (mouseX - 0.5) * 10;
-      const moveY = (mouseY - 0.5) * 10;
-      
-      nebula.style.transform = `translate(${moveX}px, ${moveY}px)`;
-    });
-  });
-});
+  console.log('Звезды успешно инициализированы');
+};
 
 /**
  * Создает звезду с случайными параметрами
@@ -160,18 +128,16 @@ function createNebula(container) {
   container.appendChild(nebula);
 }
 
-/**
- * Пересоздание звезд при изменении размера окна
- */
-window.addEventListener('resize', function() {
+// Инициализируем звезды при загрузке страницы
+document.addEventListener('DOMContentLoaded', function() {
+  window.initStars();
+  
+  // Пересоздание звезд при изменении размера окна
+  window.addEventListener('resize', function() {
     // Используем debounce для оптимизации
     clearTimeout(window.resizeTimer);
     window.resizeTimer = setTimeout(function() {
-        // Проверяем доступность функции перед вызовом
-        if (typeof window.initStars === 'function') {
-            window.initStars();
-        } else {
-            console.error("Error: initStars function is not available on resize");
-        }
+      window.initStars();
     }, 250);
+  });
 }); 

@@ -163,4 +163,123 @@
 .service-icon-wrapper:hover .integration-icon::after {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2300c3ff' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='18' cy='6' r='3' fill='rgba(0, 195, 255, 0.2)'/%3E%3Ccircle cx='6' cy='18' r='3' fill='rgba(0, 195, 255, 0.2)'/%3E%3C/svg%3E");
   animation-delay: 1.5s;
+}
+
+/* Анимации для сервисных компонентов */
+.animated {
+    animation-duration: 0.8s;
+    animation-fill-mode: both;
+}
+
+.fade-up {
+    animation-name: fadeUp;
+}
+
+.scale-up {
+    animation-name: scaleUp;
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes scaleUp {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Стили для звезд */
+.star {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    opacity: 0.8;
+    animation: twinkle var(--duration, 3s) infinite ease-in-out;
+}
+
+.star.small {
+    width: 1px;
+    height: 1px;
+}
+
+.star.medium {
+    width: 2px;
+    height: 2px;
+}
+
+.star.large {
+    width: 3px;
+    height: 3px;
+    box-shadow: 0 0 4px 1px rgba(255, 255, 255, 0.6);
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 0.8; }
+    50% { opacity: 0.2; }
+}
+
+/* Стили для React компонентов */
+.service-feature-card {
+    background: rgba(30, 41, 59, 0.5);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    border: 1px solid rgba(167, 139, 250, 0.2);
+    position: relative;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    height: 100%;
+    transition: all 0.3s ease;
+}
+
+.service-feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+    border-color: rgba(167, 139, 250, 0.5);
+}
+
+.process-timeline {
+    position: relative;
+    padding-left: 60px;
+}
+
+.process-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 2.5rem;
+    position: relative;
+}
+
+.process-item:last-child {
+    margin-bottom: 0;
+}
+
+.process-content {
+    flex: 1;
+}
+
+@media (max-width: 768px) {
+    .process-timeline {
+        padding-left: 40px;
+    }
+    
+    .process-item {
+        margin-bottom: 2rem;
+    }
 } 

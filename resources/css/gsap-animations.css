@@ -1,0 +1,489 @@
+/**
+ * GSAP Animations - OptimAI 2030 Edition
+ * Футуристические стили для анимаций и эффектов
+ */
+
+/* Стили для частиц */
+.particle-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.particle {
+  position: absolute;
+  background: linear-gradient(135deg, var(--neon-purple), var(--neon-blue));
+  border-radius: 50%;
+  filter: blur(1px);
+  pointer-events: none;
+}
+
+/* Стили для звездного фона */
+.stars-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -10;
+  overflow: hidden;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center, rgba(20, 20, 40, 0.4) 0%, rgba(10, 10, 25, 0.8) 100%);
+}
+
+.star {
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+  opacity: 0;
+  transform: translateZ(0);
+  box-shadow: 0 0 4px rgba(255, 255, 255, 0.8);
+  will-change: transform, opacity;
+}
+
+/* Стили для неоновых эффектов */
+.neon-glow {
+  position: relative;
+}
+
+.neon-glow::before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  background: linear-gradient(135deg, var(--neon-purple), var(--neon-blue));
+  border-radius: inherit;
+  z-index: -1;
+  opacity: 0;
+  filter: blur(15px);
+  transition: opacity 0.3s ease;
+}
+
+.neon-glow:hover::before {
+  opacity: 0.7;
+}
+
+/* Стили для текстовых эффектов */
+.glitch-text {
+  position: relative;
+  display: inline-block;
+  color: var(--color-text);
+}
+
+.glitch-text::before,
+.glitch-text::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.8;
+}
+
+.glitch-text::before {
+  color: var(--neon-magenta);
+  z-index: -1;
+  animation: glitch-anim-1 2s infinite linear alternate-reverse;
+}
+
+.glitch-text::after {
+  color: var(--neon-cyan);
+  z-index: -2;
+  animation: glitch-anim-2 3s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim-1 {
+  0%, 100% { transform: translate(0); }
+  20% { transform: translate(-2px, 2px); }
+  40% { transform: translate(-2px, -2px); }
+  60% { transform: translate(2px, 2px); }
+  80% { transform: translate(2px, -2px); }
+}
+
+@keyframes glitch-anim-2 {
+  0%, 100% { transform: translate(0); }
+  25% { transform: translate(2px, 0); }
+  50% { transform: translate(-2px, 1px); }
+  75% { transform: translate(1px, -1px); }
+}
+
+/* Стили для кибер-кнопок */
+.cyber-btn {
+  position: relative;
+  background: rgba(20, 20, 40, 0.7);
+  color: var(--color-text);
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  padding: 0.85rem 2rem;
+  border: 1px solid var(--neon-purple);
+  border-radius: 2px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.cyber-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(185, 53, 255, 0.2) 25%, 
+    rgba(185, 53, 255, 0.5) 50%, 
+    rgba(185, 53, 255, 0.2) 75%, 
+    transparent 100%);
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+  z-index: -1;
+}
+
+.cyber-btn:hover {
+  box-shadow: 0 0 15px rgba(185, 53, 255, 0.7);
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+}
+
+.cyber-btn:hover::before {
+  transform: translateX(100%);
+}
+
+.cyber-btn::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, 
+    var(--neon-purple) 0%, 
+    var(--neon-blue) 50%, 
+    var(--neon-purple) 100%);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.cyber-btn:hover::after {
+  transform: scaleX(1);
+}
+
+/* Стили для анимированных границ */
+.animated-border {
+  position: relative;
+  border-radius: var(--border-radius-md);
+  overflow: hidden;
+}
+
+.animated-border::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  background: linear-gradient(90deg, 
+    var(--neon-purple), 
+    var(--neon-blue), 
+    var(--neon-magenta), 
+    var(--neon-cyan), 
+    var(--neon-purple));
+  background-size: 400% 400%;
+  z-index: -1;
+  animation: border-animation 8s linear infinite;
+}
+
+@keyframes border-animation {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Стили для анимированных иконок */
+.animated-icon {
+  position: relative;
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.animated-icon svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 0 5px rgba(185, 53, 255, 0.5));
+  transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+.animated-icon:hover {
+  transform: scale(1.05);
+}
+
+.animated-icon:hover svg {
+  filter: drop-shadow(0 0 10px rgba(185, 53, 255, 0.8));
+}
+
+/* Стили для анимированных линий */
+.animated-line {
+  position: relative;
+  height: 2px;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    var(--neon-purple) 50%, 
+    transparent 100%);
+  width: 100%;
+  max-width: 200px;
+  margin: 0 auto;
+}
+
+.animated-line::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    var(--neon-blue) 50%, 
+    transparent 100%);
+  animation: line-pulse 2s infinite;
+}
+
+@keyframes line-pulse {
+  0%, 100% { opacity: 0.3; transform: scaleX(0.8); }
+  50% { opacity: 1; transform: scaleX(1); }
+}
+
+/* Стили для карточек услуг */
+.service-card-wrapper {
+  perspective: 1000px;
+}
+
+.service-card {
+  position: relative;
+  background: rgba(20, 20, 40, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: var(--border-radius-md);
+  padding: 2rem;
+  transition: all 0.4s ease;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  will-change: transform, box-shadow;
+}
+
+.service-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2), 0 0 15px rgba(185, 53, 255, 0.3);
+  border-color: rgba(185, 53, 255, 0.3);
+}
+
+.service-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, rgba(185, 53, 255, 0.1) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: -1;
+}
+
+.service-card:hover::before {
+  opacity: 1;
+}
+
+.service-icon-wrapper {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 1.5rem;
+  transition: transform 0.3s ease;
+}
+
+.service-card:hover .service-icon-wrapper {
+  transform: scale(1.1);
+}
+
+/* Стили для иконок на подстраницах услуг */
+.icon-circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: rgba(20, 20, 40, 0.7);
+  border: 2px solid var(--neon-purple);
+  color: var(--color-text);
+  font-size: 1.5rem;
+  margin-right: 1rem;
+  box-shadow: 0 0 15px rgba(185, 53, 255, 0.3);
+  transition: all 0.3s ease;
+}
+
+.icon-circle:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 20px rgba(185, 53, 255, 0.5);
+}
+
+.icon-circle i {
+  filter: drop-shadow(0 0 5px rgba(185, 53, 255, 0.5));
+}
+
+/* Стили для подстраниц услуг */
+.service-detail-page {
+  position: relative;
+}
+
+.service-detail-title {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  background: linear-gradient(90deg, var(--neon-purple), var(--neon-blue));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+}
+
+.service-detail-subtitle {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  opacity: 0.8;
+}
+
+.service-section {
+  margin-bottom: 3rem;
+  padding: 2rem;
+  background: rgba(20, 20, 40, 0.3);
+  border-radius: var(--border-radius-md);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.3s ease;
+}
+
+.service-section:hover {
+  background: rgba(20, 20, 40, 0.5);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  border-color: rgba(185, 53, 255, 0.3);
+}
+
+.service-section-title {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.service-list-item {
+  margin-bottom: 1rem;
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.service-list-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.5rem;
+  width: 8px;
+  height: 8px;
+  background: var(--neon-purple);
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(185, 53, 255, 0.7);
+}
+
+/* Анимации появления элементов */
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 1s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.slide-up {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: slideUp 0.8s ease forwards;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.slide-left {
+  opacity: 0;
+  transform: translateX(-30px);
+  animation: slideLeft 0.8s ease forwards;
+}
+
+@keyframes slideLeft {
+  from { opacity: 0; transform: translateX(-30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.slide-right {
+  opacity: 0;
+  transform: translateX(30px);
+  animation: slideRight 0.8s ease forwards;
+}
+
+@keyframes slideRight {
+  from { opacity: 0; transform: translateX(30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.scale-in {
+  opacity: 0;
+  transform: scale(0.9);
+  animation: scaleIn 0.8s ease forwards;
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* Медиа-запросы */
+@media (max-width: 768px) {
+  .service-card-wrapper {
+    margin-bottom: 2rem;
+  }
+  
+  .service-card {
+    padding: 1.5rem;
+  }
+  
+  .service-icon-wrapper {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .icon-circle {
+    width: 50px;
+    height: 50px;
+    font-size: 1.2rem;
+  }
+  
+  .service-detail-title {
+    font-size: 2rem;
+  }
+  
+  .service-section {
+    padding: 1.5rem;
+  }
+} 
