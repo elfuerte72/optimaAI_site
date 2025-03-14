@@ -17,9 +17,17 @@
         <p class="card-text mb-4" ref="text">
           <slot name="text"></slot>
         </p>
-        <a :href="link" class="interactive-element" ref="link">
-          <slot name="link-text">Подробнее</slot> <i class="bi bi-arrow-right ms-2"></i>
-        </a>
+        <button 
+          class="details-button" 
+          ref="detailsBtn"
+          @mouseenter="onButtonEnter"
+          @mouseleave="onButtonLeave"
+          @click="onDetailsClick"
+        >
+          <span class="btn-text"><slot name="link-text">Подробнее</slot></span>
+          <span class="btn-icon"><i class="bi bi-arrow-right ms-2"></i></span>
+          <span class="btn-shine"></span>
+        </button>
       </div>
     </div>
   </div>
@@ -32,22 +40,112 @@ import { gsap } from 'gsap';
 export default {
   name: 'ServiceCard',
   props: {
-    link: {
-      type: String,
-      required: true
-    },
     delay: {
       type: Number,
       default: 0
     }
   },
-  setup(props) {
+  emits: ['click-details'],
+  setup(props, { emit }) {
     const card = ref(null);
     const cardInner = ref(null);
     const icon = ref(null);
     const title = ref(null);
     const text = ref(null);
-    const link = ref(null);
+    const detailsBtn = ref(null);
+    
+    // Обработчик клика по кнопке "Подробнее"
+    const onDetailsClick = () => {
+      // Анимация нажатия
+      gsap.to(detailsBtn.value, {
+        scale: 0.95,
+        duration: 0.1,
+        onComplete: () => {
+          gsap.to(detailsBtn.value, {
+            scale: 1,
+            duration: 0.2,
+            ease: 'back.out(2)'
+          });
+        }
+      });
+      
+      // Анимация свечения при клике
+      const btnShine = detailsBtn.value.querySelector('.btn-shine');
+      if (btnShine) {
+        gsap.fromTo(btnShine,
+          { opacity: 0.8, scale: 0 },
+          { 
+            opacity: 0, 
+            scale: 1.5, 
+            duration: 0.5,
+            ease: 'power2.out'
+          }
+        );
+      }
+      
+      // Вызываем событие для открытия модального окна
+      emit('click-details');
+    };
+    
+    // Анимация при наведении на кнопку
+    const onButtonEnter = () => {
+      gsap.to(detailsBtn.value, {
+        backgroundColor: 'rgba(185, 53, 255, 0.8)',
+        boxShadow: '0 0 15px rgba(185, 53, 255, 0.7), 0 0 30px rgba(185, 53, 255, 0.4)',
+        scale: 1.05,
+        duration: 0.3,
+        ease: 'power2.out'
+      });
+      
+      // Анимация стрелки
+      const arrow = detailsBtn.value.querySelector('.btn-icon');
+      if (arrow) {
+        gsap.to(arrow, {
+          x: 5,
+          duration: 0.3,
+          ease: 'power2.out'
+        });
+      }
+      
+      // Анимация текста
+      const btnText = detailsBtn.value.querySelector('.btn-text');
+      if (btnText) {
+        gsap.to(btnText, {
+          fontWeight: 600,
+          duration: 0.3
+        });
+      }
+    };
+    
+    // Возврат кнопки в исходное состояние
+    const onButtonLeave = () => {
+      gsap.to(detailsBtn.value, {
+        backgroundColor: 'rgba(99, 102, 241, 0.2)',
+        boxShadow: '0 0 0 rgba(185, 53, 255, 0)',
+        scale: 1,
+        duration: 0.3,
+        ease: 'power2.out'
+      });
+      
+      // Возвращаем стрелку
+      const arrow = detailsBtn.value.querySelector('.btn-icon');
+      if (arrow) {
+        gsap.to(arrow, {
+          x: 0,
+          duration: 0.3,
+          ease: 'power2.out'
+        });
+      }
+      
+      // Возвращаем текст
+      const btnText = detailsBtn.value.querySelector('.btn-text');
+      if (btnText) {
+        gsap.to(btnText, {
+          fontWeight: 500,
+          duration: 0.3
+        });
+      }
+    };
     
     const onMouseEnter = () => {
       gsap.to(card.value, {
@@ -149,8 +247,8 @@ export default {
         gsap.set(text.value, { opacity: 0 });
       }
       
-      if (link.value) {
-        gsap.set(link.value, { opacity: 0, y: 10 });
+      if (detailsBtn.value) {
+        gsap.set(detailsBtn.value, { opacity: 0, y: 10 });
       }
       
       // Анимация появления
@@ -198,8 +296,8 @@ export default {
         }, '-=0.4');
       }
       
-      if (link.value) {
-        tl.to(link.value, {
+      if (detailsBtn.value) {
+        tl.to(detailsBtn.value, {
           opacity: 1,
           y: 0,
           duration: 0.6,
@@ -214,10 +312,13 @@ export default {
       icon,
       title,
       text,
-      link,
+      detailsBtn,
       onMouseEnter,
       onMouseLeave,
-      onMouseMove
+      onMouseMove,
+      onButtonEnter,
+      onButtonLeave,
+      onDetailsClick
     };
   }
 };
@@ -269,37 +370,95 @@ export default {
 .service-icon-wrapper {
   width: 80px;
   height: 80px;
+  margin: 0 auto 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.card-title {
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #fff;
+}
+
+.card-text {
+  color: rgba(255, 255, 255, 0.7);
   margin-bottom: 1.5rem;
-  transition: transform 0.3s ease;
-  transform-style: preserve-3d;
-  transform: translateZ(20px);
+  line-height: 1.6;
 }
 
-.card-title, .card-text {
-  transform-style: preserve-3d;
-  transform: translateZ(10px);
-}
-
-.interactive-element {
-  position: relative;
+.details-button {
   display: inline-flex;
   align-items: center;
-  color: var(--color-text, #fff);
-  text-decoration: none;
-  transition: color 0.3s ease;
-  transform-style: preserve-3d;
-  transform: translateZ(15px);
+  background-color: rgba(99, 102, 241, 0.2);
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1.25rem;
+  border-radius: 2rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  will-change: transform, box-shadow, background-color;
 }
 
-.interactive-element:hover {
-  color: var(--neon-purple, #b935ff);
+.details-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, rgba(99, 102, 241, 0.5), rgba(185, 53, 255, 0.5));
+  z-index: -1;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.5s ease;
 }
 
-.interactive-element i {
+.details-button:hover::before {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.btn-icon {
+  display: inline-block;
   transition: transform 0.3s ease;
 }
 
-.interactive-element:hover i {
-  transform: translateX(5px);
+.btn-text {
+  position: relative;
+  z-index: 2;
+}
+
+.btn-shine {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, transparent 70%);
+  border-radius: 50%;
+  opacity: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.animated-icon {
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
 }
 </style> 
