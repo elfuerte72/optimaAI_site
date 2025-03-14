@@ -61,5 +61,7 @@ Route::post('/contact', [ContactController::class, 'store'])->name('contact.stor
 Route::post('/submit-form', [FormController::class, 'submitForm'])->name('submit-form');
 
 // Маршруты для чат-бота с OpenAI
-Route::post('/chatbot/chat', [ChatbotController::class, 'chat'])->name('chatbot.chat');
-Route::post('/chatbot/reset', [ChatbotController::class, 'resetChat'])->name('chatbot.reset');
+Route::middleware(['web', \App\Http\Middleware\ChatbotRateLimiter::class])->group(function () {
+    Route::post('/chatbot/chat', [ChatbotController::class, 'chat'])->name('chatbot.chat');
+    Route::post('/chatbot/reset', [ChatbotController::class, 'resetChat'])->name('chatbot.reset');
+});

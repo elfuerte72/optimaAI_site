@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class ChatbotController extends Controller
 {
@@ -16,37 +18,11 @@ class ChatbotController extends Controller
     public function __construct()
     {
         $this->apiKey = env('OPENAI_API_KEY');
-        $this->model = 'gpt-3.5-turbo'; // Используем модель GPT-3.5 Turbo
+        $this->model = env('OPENAI_MODEL', 'gpt-3.5-turbo'); // Используем модель из .env или GPT-3.5 Turbo по умолчанию
         
         // Системный промпт для ограничения ответов бота
         $this->systemPrompt = <<<EOT
-Ты — виртуальный ассистент компании OptimaAI. Твоя задача:
-1. При открытии чата сразу приветствовать пользователя:
-   "Здравствуйте! Я виртуальный ассистент OptimaAI. Чем могу помочь? Вы можете задать вопросы о наших услугах, продуктах, условиях работы или контактах."
-
-2. Отвечать только на вопросы, связанные с компанией:
-   - Услуги и продукты компании
-   - Цены и тарифы
-   - График работы
-   - Контактная информация
-   - Процедуры оформления заказов/услуг
-   - Корпоративные политики (например, возврат, гарантии)
-
-3. Если вопрос вне зоны компетенции:
-   "Извините, я пока не могу помочь с этим вопросом. Моя специализация — информация о компании и наших услугах. Хотите, чтобы я связал вас с нашим специалистом?"
-
-4. Никогда не придумывать информацию. Если данных нет в базе:
-   "К сожалению, у меня нет актуальных данных по этому вопросу. Рекомендую уточнить информацию у нашего менеджера."
-
-5. Ответы должны быть:
-   - Краткими и структурированными
-   - На русском языке без использования markdown
-   - Без лишней информации вне темы
-
-6. Запрещено:
-   - Обсуждать политику, религию, личные темы
-   - Давать советы вне компетенции компании
-   - Использовать эмодзи или разговорный сленг
+Ты профессиональный помощник пользователей интернет-магазина. Отвечай кратко, используй эмодзи и оформляй списки в виде bullet points. Не используй markdown.
 
 Информация о компании OptimaAI:
 
@@ -89,17 +65,30 @@ class ChatbotController extends Controller
 EOT;
     }
 
+    /**
+     * Обработка запроса чата
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function chat(Request $request)
     {
         try {
-            $userMessage = $request->input('message');
+            // Валидация входящих данных
+            $validator = Validator::make($request->all(), [
+                'message' => 'required|string|max:1000',
+            ]);
             
-            if (empty($userMessage)) {
+            if ($validator->fails()) {
                 return response()->json([
                     'success' => false,
-                    'message' => 'Сообщение не может быть пустым'
-                ], 400);
+                    'message' => 'Ошибка валидации',
+                    'errors' => $validator->errors()
+                ], 422);
             }
+            
+            // Фильтрация XSS в пользовательском вводе
+            $userMessage = $this->sanitizeInput($request->input('message'));
             
             // Получаем историю сообщений из сессии или создаем новую
             $messages = $request->session()->get('chat_history', []);
@@ -131,15 +120,20 @@ EOT;
                 'last_user_message' => $userMessage
             ]);
             
+            // Генерируем уникальный идентификатор запроса для отслеживания
+            $requestId = Str::uuid()->toString();
+            
             // Отправляем запрос к OpenAI API
             $response = Http::withHeaders([
                 'Authorization' => 'Bearer ' . $this->apiKey,
                 'Content-Type' => 'application/json',
+                'X-Request-ID' => $requestId
             ])->post('https://api.openai.com/v1/chat/completions', [
                 'model' => $this->model,
                 'messages' => $messages,
                 'max_tokens' => 800, // Увеличиваем лимит токенов для более полных ответов
                 'temperature' => 0.7,
+                'user' => $this->getUserIdentifier($request), // Добавляем идентификатор пользователя для отслеживания
             ]);
             
             // Проверяем ответ
@@ -149,6 +143,7 @@ EOT;
                 
                 // Логируем ответ для отладки
                 Log::debug('OpenAI response:', [
+                    'request_id' => $requestId,
                     'message' => $aiMessage
                 ]);
                 
@@ -167,7 +162,9 @@ EOT;
                 ]);
             } else {
                 $errorBody = $response->body();
-                Log::error('OpenAI API error: ' . $errorBody);
+                Log::error('OpenAI API error: ' . $errorBody, [
+                    'request_id' => $requestId
+                ]);
                 
                 // Пытаемся извлечь более подробную информацию об ошибке
                 $errorData = json_decode($errorBody, true);
@@ -176,6 +173,7 @@ EOT;
                     : 'Произошла ошибка при обработке запроса';
                 
                 Log::error('OpenAI API error details:', [
+                    'request_id' => $requestId,
                     'status' => $response->status(),
                     'error_message' => $errorMessage
                 ]);
@@ -199,6 +197,12 @@ EOT;
         }
     }
     
+    /**
+     * Сброс истории чата
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function resetChat(Request $request)
     {
         $request->session()->forget('chat_history');
@@ -207,5 +211,34 @@ EOT;
             'success' => true,
             'message' => 'История чата очищена'
         ]);
+    }
+    
+    /**
+     * Фильтрация XSS в пользовательском вводе
+     *
+     * @param  string  $input
+     * @return string
+     */
+    protected function sanitizeInput($input)
+    {
+        // Удаляем HTML-теги
+        $sanitized = strip_tags($input);
+        
+        // Экранируем специальные символы
+        $sanitized = htmlspecialchars($sanitized, ENT_QUOTES, 'UTF-8');
+        
+        return $sanitized;
+    }
+    
+    /**
+     * Получение уникального идентификатора пользователя
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return string
+     */
+    protected function getUserIdentifier(Request $request)
+    {
+        // Используем сессионный идентификатор или IP-адрес
+        return $request->session()->getId() ?: $request->ip();
     }
 } 
