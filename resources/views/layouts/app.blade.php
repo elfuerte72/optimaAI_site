@@ -143,8 +143,8 @@
         @include('partials.footer')
         @include('partials.request-modal')
         
-        <!-- Компонент чат-бота -->
-        <chat-bot></chat-bot>
+        <!-- Компонент чат-бота с анимацией при наведении -->
+        <chat-bot-icon></chat-bot-icon>
     </div>
     
     <!-- Scripts в конце body с defer -->
@@ -186,5 +186,8 @@
     <!-- Стили и скрипты для чат-бота -->
     <link rel="stylesheet" href="{{ asset('css/chatbot-animations.css') }}" media="print" onload="this.media='all'">
     <script src="{{ asset('js/chatbot-animations.js') }}" defer></script>
+    
+    <!-- Подключаем стек scripts для компонентов -->
+    @stack('scripts')
 </body>
 </html> 

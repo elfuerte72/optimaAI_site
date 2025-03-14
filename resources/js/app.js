@@ -6,17 +6,34 @@
 // Импортируем необходимые скрипты
 import './bootstrap';
 import './starfield'; // Импортируем оптимизированный звездный фон
-import './gsap-animations'; // Импортируем оптимизированные GSAP анимации
+
+// Импортируем GSAP и необходимые плагины
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { TextPlugin } from 'gsap/TextPlugin';
+
+// Регистрируем плагины GSAP
+gsap.registerPlugin(ScrollTrigger, TextPlugin);
+
+// Делаем GSAP доступным глобально
+window.gsap = gsap;
+window.ScrollTrigger = ScrollTrigger;
+window.TextPlugin = TextPlugin;
+
+// Импортируем GSAP анимации после регистрации плагинов
+import './gsap-animations';
 
 // Импортируем Vue и компоненты
 import { createApp } from 'vue';
 import ChatBot from './components/ChatBot.vue';
+import ChatBotIcon from './components/ChatBotIcon.vue';
 
 // Создаем экземпляр Vue приложения
 const app = createApp({});
 
 // Регистрируем компоненты
 app.component('chat-bot', ChatBot);
+app.component('chat-bot-icon', ChatBotIcon);
 
 // Монтируем приложение
 app.mount('#app');
