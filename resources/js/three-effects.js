@@ -1,6 +1,7 @@
 /**
  * Three.js Effects - OptimAI 2030 Edition
  * Футуристические 3D-эффекты с использованием Three.js
+ * Оптимизированная версия с адаптацией качества для разных устройств
  */
 
 import * as THREE from 'three';
@@ -11,6 +12,88 @@ import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
 import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
 import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass.js';
 import { gsap } from 'gsap';
+
+/**
+ * Определение возможностей устройства 
+ * для адаптации качества визуальных эффектов
+ */
+const DeviceCapabilities = {
+  // Определяем силу устройства, учитывая различные факторы
+  getDeviceTier: function() {
+    // Низкопроизводительное устройство: 0, среднее: 1, высокопроизводительное: 2
+    let tier = 1; // По умолчанию среднее
+    
+    // Проверяем, мобильное ли устройство
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    if (isMobile) {
+      tier = 0; // Мобильные устройства начинают с низкого качества
+    }
+    
+    // Проверяем количество логических процессоров
+    if (navigator.hardwareConcurrency) {
+      if (navigator.hardwareConcurrency >= 8) {
+        tier += 1;
+      } else if (navigator.hardwareConcurrency <= 2) {
+        tier -= 1;
+      }
+    }
+    
+    // Проверяем, поддерживает ли устройство WebGL2
+    const canvas = document.createElement('canvas');
+    const gl = canvas.getContext('webgl2');
+    if (!gl) {
+      tier -= 1;
+    }
+    
+    // Ограничиваем диапазон от 0 до 2
+    return Math.max(0, Math.min(2, tier));
+  },
+  
+  // Получаем настройки качества на основе уровня устройства
+  getQualitySettings: function() {
+    const tier = this.getDeviceTier();
+    
+    // Базовые настройки для разных уровней производительности
+    const settings = {
+      pixelRatio: Math.min(window.devicePixelRatio, 1),
+      particleCount: 500,
+      bloomStrength: 0.5,
+      bloomRadius: 0.5,
+      shadowMapEnabled: false,
+      antialias: false,
+      maxLights: 2,
+      postprocessing: false
+    };
+    
+    if (tier === 1) {
+      // Средний уровень
+      settings.pixelRatio = Math.min(window.devicePixelRatio, 1.5);
+      settings.particleCount = 1000;
+      settings.bloomStrength = 1;
+      settings.bloomRadius = 0.75;
+      settings.shadowMapEnabled = true;
+      settings.antialias = true;
+      settings.maxLights = 3;
+      settings.postprocessing = true;
+    } else if (tier === 2) {
+      // Высокий уровень
+      settings.pixelRatio = Math.min(window.devicePixelRatio, 2);
+      settings.particleCount = 2000;
+      settings.bloomStrength = 1.5;
+      settings.bloomRadius = 1;
+      settings.shadowMapEnabled = true;
+      settings.antialias = true;
+      settings.maxLights = 4;
+      settings.postprocessing = true;
+    }
+    
+    return settings;
+  }
+};
+
+// Получаем настройки качества для текущего устройства
+const qualitySettings = DeviceCapabilities.getQualitySettings();
+console.log('Настройки качества Three.js:', qualitySettings);
 
 /**
  * Класс для создания 3D-логотипа с эффектами
@@ -39,6 +122,9 @@ class AILogoEffect {
     this.mouseX = 0;
     this.mouseY = 0;
     
+    // Применяем настройки качества
+    this.qualitySettings = qualitySettings;
+    
     this.init();
   }
   
@@ -51,13 +137,31 @@ class AILogoEffect {
     this.camera = new THREE.PerspectiveCamera(75, this.width / this.height, 0.1, 1000);
     this.camera.position.z = 5;
     
-    // Создаем рендерер
-    this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    // Создаем рендерер с учетом возможностей устройства
+    this.renderer = new THREE.WebGLRenderer({ 
+      antialias: this.qualitySettings.antialias, 
+      alpha: true,
+      powerPreference: 'high-performance' // Подсказка для выбора GPU на устройствах с несколькими GPU
+    });
     this.renderer.setSize(this.width, this.height);
-    this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    this.renderer.setPixelRatio(this.qualitySettings.pixelRatio);
     this.renderer.outputEncoding = THREE.sRGBEncoding;
-    this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    this.renderer.toneMappingExposure = 1.5;
+    
+    // Настраиваем тонмаппинг в зависимости от производительности
+    if (this.qualitySettings.postprocessing) {
+      this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
+      this.renderer.toneMappingExposure = 1.5;
+    } else {
+      this.renderer.toneMapping = THREE.ReinhardToneMapping; // Более легкий тонмаппинг
+      this.renderer.toneMappingExposure = 1.2;
+    }
+    
+    // Настраиваем тени, если устройство позволяет
+    if (this.qualitySettings.shadowMapEnabled) {
+      this.renderer.shadowMap.enabled = true;
+      this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    }
+    
     this.container.appendChild(this.renderer.domElement);
     
     // Добавляем освещение
@@ -66,24 +170,58 @@ class AILogoEffect {
     // Загружаем модель
     this.loadModel();
     
-    // Настраиваем постобработку
-    this.setupPostprocessing();
+    // Настраиваем постобработку только если устройство позволяет
+    if (this.qualitySettings.postprocessing) {
+      this.setupPostprocessing();
+    }
     
-    // Добавляем управление
+    // Добавляем управление с адаптированными параметрами для производительности
     this.controls = new OrbitControls(this.camera, this.renderer.domElement);
     this.controls.enableDamping = true;
     this.controls.dampingFactor = 0.05;
     this.controls.enableZoom = false;
     
-    // Добавляем обработчики событий
-    window.addEventListener('resize', this.handleResize.bind(this));
-    window.addEventListener('mousemove', this.handleMouseMove.bind(this));
+    // Ограничиваем частоту обработки событий на мобильных устройствах
+    const isLowPerfDevice = this.qualitySettings.particleCount <= 500;
+    const resizeThrottle = isLowPerfDevice ? 200 : 100;
+    const mouseMoveThrottle = isLowPerfDevice ? 50 : 16;
     
-    // Запускаем анимацию
+    // Добавляем обработчики событий с throttle
+    window.addEventListener('resize', this.throttle(this.handleResize.bind(this), resizeThrottle));
+    
+    // На мобильных устройствах лучше слушать orientationchange для рендеринга
+    if (/Mobi|Android/i.test(navigator.userAgent)) {
+      window.addEventListener('orientationchange', this.handleResize.bind(this));
+    }
+    
+    window.addEventListener('mousemove', this.throttle(this.handleMouseMove.bind(this), mouseMoveThrottle));
+    
+    // Запускаем анимацию с адаптивной частотой кадров
+    this.lastTime = 0;
+    this.frameLimit = isLowPerfDevice ? 30 : 60; // Ограничиваем FPS на слабых устройствах
+    this.frameInterval = 1000 / this.frameLimit;
+    
     this.animate();
   }
   
+  // Функция для ограничения частоты вызовов (throttle)
+  throttle(callback, limit) {
+    let waiting = false;
+    return function() {
+      if (!waiting) {
+        callback.apply(this, arguments);
+        waiting = true;
+        setTimeout(() => {
+          waiting = false;
+        }, limit);
+      }
+    };
+  }
+  
   setupLights() {
+    // Адаптируем количество источников света в зависимости от производительности
+    const maxLights = this.qualitySettings.maxLights;
+    
     // Добавляем окружающий свет
     this.ambientLight = new THREE.AmbientLight(this.options.ambientLightColor, 0.5);
     this.scene.add(this.ambientLight);
@@ -91,12 +229,37 @@ class AILogoEffect {
     // Добавляем точечный свет
     this.pointLight = new THREE.PointLight(this.options.pointLightColor, 1, 100);
     this.pointLight.position.set(5, 5, 5);
+    
+    // Настройка теней для основного света
+    if (this.qualitySettings.shadowMapEnabled) {
+      this.pointLight.castShadow = true;
+      this.pointLight.shadow.mapSize.width = 512; // Для слабых устройств используем меньшее разрешение теней
+      this.pointLight.shadow.mapSize.height = 512;
+      this.pointLight.shadow.camera.near = 0.5;
+      this.pointLight.shadow.camera.far = 50;
+    }
+    
     this.scene.add(this.pointLight);
     
-    // Добавляем второй точечный свет
-    this.secondPointLight = new THREE.PointLight(this.options.secondPointLightColor, 1, 100);
-    this.secondPointLight.position.set(-5, -5, 5);
-    this.scene.add(this.secondPointLight);
+    // Добавляем второй точечный свет, только если устройство позволяет
+    if (maxLights >= 2) {
+      this.secondPointLight = new THREE.PointLight(this.options.secondPointLightColor, 1, 100);
+      this.secondPointLight.position.set(-5, -5, 5);
+      this.scene.add(this.secondPointLight);
+    }
+    
+    // Добавляем дополнительные источники света только для мощных устройств
+    if (maxLights >= 3) {
+      this.thirdPointLight = new THREE.PointLight(0x00ffff, 0.5, 50);
+      this.thirdPointLight.position.set(0, 5, -5);
+      this.scene.add(this.thirdPointLight);
+    }
+    
+    if (maxLights >= 4) {
+      this.fourthPointLight = new THREE.PointLight(0xff00ff, 0.3, 30);
+      this.fourthPointLight.position.set(5, -5, -5);
+      this.scene.add(this.fourthPointLight);
+    }
   }
   
   loadModel() {

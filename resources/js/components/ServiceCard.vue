@@ -387,63 +387,56 @@ export default {
 }
 
 .details-button {
+  position: relative;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
+  padding: 0.6em 1.2em;
   background-color: rgba(99, 102, 241, 0.2);
   color: #fff;
   border: none;
-  padding: 0.5rem 1.25rem;
-  border-radius: 2rem;
+  border-radius: var(--border-radius-sm, 0.3em);
+  font-size: 1rem;
   font-weight: 500;
   cursor: pointer;
-  transition: all 0.3s ease;
-  position: relative;
   overflow: hidden;
-  z-index: 1;
-  will-change: transform, box-shadow, background-color;
+  transition: background-color var(--transition-normal, 0.3s), 
+              transform var(--transition-normal, 0.3s), 
+              box-shadow var(--transition-normal, 0.3s);
 }
 
-.details-button::before {
-  content: '';
+.details-button:hover {
+  background-color: var(--accent-color, rgba(185, 53, 255, 0.8));
+  transform: translateY(-2px);
+  box-shadow: var(--button-shadow, 0 4px 12px rgba(185, 53, 255, 0.4));
+}
+
+.details-button:focus {
+  outline: 2px dashed var(--accent-color, rgba(185, 53, 255, 0.7));
+  outline-offset: 2px;
+}
+
+.btn-shine {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, rgba(99, 102, 241, 0.5), rgba(185, 53, 255, 0.5));
-  z-index: -1;
-  transform: scaleX(0);
-  transform-origin: right;
-  transition: transform 0.5s ease;
-}
-
-.details-button:hover::before {
-  transform: scaleX(1);
-  transform-origin: left;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.8), transparent 70%);
+  opacity: 0;
+  pointer-events: none;
 }
 
 .btn-icon {
-  display: inline-block;
-  transition: transform 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform var(--transition-normal, 0.3s) ease;
 }
 
 .btn-text {
   position: relative;
   z-index: 2;
-}
-
-.btn-shine {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(0);
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, transparent 70%);
-  border-radius: 50%;
-  opacity: 0;
-  z-index: 0;
-  pointer-events: none;
 }
 
 .animated-icon {

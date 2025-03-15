@@ -61,7 +61,17 @@ Route::post('/contact', [ContactController::class, 'store'])->name('contact.stor
 Route::post('/submit-form', [FormController::class, 'submitForm'])->name('submit-form');
 
 // Маршруты для чат-бота с OpenAI
-Route::middleware(['web', \App\Http\Middleware\ChatbotRateLimiter::class])->group(function () {
-    Route::post('/chatbot/chat', [ChatbotController::class, 'chat'])->name('chatbot.chat');
-    Route::post('/chatbot/reset', [ChatbotController::class, 'resetChat'])->name('chatbot.reset');
+Route::post('/chatbot/chat', [ChatbotController::class, 'chat'])
+    ->middleware(\App\Http\Middleware\ChatbotRateLimiter::class)
+    ->withoutMiddleware(\App\Http\Middleware\VerifyCsrfToken::class)
+    ->name('chatbot.chat');
+
+Route::post('/chatbot/reset', [ChatbotController::class, 'resetChat'])
+    ->middleware(\App\Http\Middleware\ChatbotRateLimiter::class)
+    ->withoutMiddleware(\App\Http\Middleware\VerifyCsrfToken::class)
+    ->name('chatbot.reset');
+
+// Маршрут для обновления CSRF-токена
+Route::get('/csrf-token', function () {
+    return response()->json(['token' => csrf_token()]);
 });

@@ -12,13 +12,15 @@ import StarBackground from '../components/StarBackground.vue';
 import '../starfield';
 import { AILogoEffect } from '../three-effects';
 
-// Регистрируем плагины GSAP
-gsap.registerPlugin(ScrollTrigger, TextPlugin);
-
-// Экспортируем GSAP и плагины для использования в других файлах
-window.gsap = gsap;
-window.ScrollTrigger = ScrollTrigger;
-window.TextPlugin = TextPlugin;
+// Регистрируем плагины GSAP только если они еще не зарегистрированы
+if (!window.gsap) {
+  gsap.registerPlugin(ScrollTrigger, TextPlugin);
+  
+  // Экспортируем GSAP и плагины для использования в других файлах
+  window.gsap = gsap;
+  window.ScrollTrigger = ScrollTrigger;
+  window.TextPlugin = TextPlugin;
+}
 
 // Инициализация Vue приложения на странице услуг
 document.addEventListener('DOMContentLoaded', () => {

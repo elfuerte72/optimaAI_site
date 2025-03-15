@@ -3,6 +3,116 @@
  * Современный чат-бот с анимациями 2025
  */
 
+// Функция для загрузки GSAP, если он не загружен
+const loadGSAP = () => {
+  return new Promise((resolve, reject) => {
+    if (typeof gsap !== 'undefined') {
+      console.log('GSAP уже загружен, используем существующий');
+      resolve(gsap);
+      return;
+    }
+    
+    // Массив CDN для резервной загрузки
+    const cdnSources = [
+      'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.7/gsap.min.js',
+      'https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js',
+      'https://unpkg.com/gsap@3.12.7/dist/gsap.min.js'
+    ];
+    
+    // Функция для попытки загрузки из следующего источника
+    const tryLoadFromNextSource = (sourceIndex) => {
+      if (sourceIndex >= cdnSources.length) {
+        console.error('Не удалось загрузить GSAP из всех источников');
+        reject(new Error('Не удалось загрузить GSAP из всех доступных источников'));
+        return;
+      }
+      
+      const script = document.createElement('script');
+      script.src = cdnSources[sourceIndex];
+      
+      script.onload = () => {
+        console.log(`GSAP успешно загружен из ${cdnSources[sourceIndex]}`);
+        resolve(window.gsap);
+      };
+      
+      script.onerror = () => {
+        console.warn(`Не удалось загрузить GSAP из ${cdnSources[sourceIndex]}, пробуем следующий источник`);
+        // Пробуем следующий источник
+        tryLoadFromNextSource(sourceIndex + 1);
+      };
+      
+      document.head.appendChild(script);
+    };
+    
+    // Начинаем с первого источника
+    tryLoadFromNextSource(0);
+  });
+};
+
+// Функция для отображения ошибки загрузки GSAP
+const showGSAPLoadError = () => {
+  // Создаем элемент уведомления
+  const notification = document.createElement('div');
+  notification.className = 'gsap-load-error';
+  notification.innerHTML = `
+    <div class="gsap-load-error-content">
+      <p>Не удалось загрузить библиотеку анимаций. Некоторые элементы могут отображаться некорректно.</p>
+      <button class="gsap-load-error-close">Закрыть</button>
+    </div>
+  `;
+  
+  // Добавляем стили
+  const style = document.createElement('style');
+  style.textContent = `
+    .gsap-load-error {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: rgba(255, 0, 0, 0.1);
+      border: 1px solid rgba(255, 0, 0, 0.3);
+      border-radius: 8px;
+      padding: 15px;
+      color: #fff;
+      font-size: 14px;
+      z-index: 9999;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+    .gsap-load-error-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+    }
+    .gsap-load-error-close {
+      background: rgba(255, 255, 255, 0.2);
+      border: none;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .gsap-load-error-close:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+  `;
+  
+  document.head.appendChild(style);
+  document.body.appendChild(notification);
+  
+  // Добавляем обработчик для кнопки закрытия
+  const closeButton = notification.querySelector('.gsap-load-error-close');
+  closeButton.addEventListener('click', () => {
+    notification.remove();
+  });
+  
+  // Автоматически скрываем через 10 секунд
+  setTimeout(() => {
+    notification.remove();
+  }, 10000);
+};
+
 document.addEventListener('alpine:init', () => {
   Alpine.data('modernChatbot', () => ({
     isOpen: false,
@@ -11,8 +121,25 @@ document.addEventListener('alpine:init', () => {
     messages: [],
     typingTimeout: null,
     animationInProgress: false,
+    gsapLoaded: false,
     
     init() {
+      // Проверяем, загружен ли GSAP
+      if (typeof gsap === 'undefined') {
+        console.warn('GSAP не загружен. Пытаемся загрузить динамически...');
+        loadGSAP().then(() => {
+          console.log('GSAP загружен динамически');
+          this.gsapLoaded = true;
+          this.initializeFramerMotion();
+        }).catch(error => {
+          console.error('Не удалось загрузить GSAP:', error);
+          showGSAPLoadError();
+        });
+      } else {
+        this.gsapLoaded = true;
+        this.initializeFramerMotion();
+      }
+      
       // Очищаем localStorage при первой загрузке для сброса предыдущих настроек
       localStorage.removeItem('chatMessages');
       
@@ -100,18 +227,70 @@ document.addEventListener('alpine:init', () => {
             ease: "power2.out"
           }
         );
+      } else {
+        // Если GSAP не загружен, пытаемся загрузить его динамически
+        loadGSAP().then(gsapInstance => {
+          const chatWindow = this.$refs.chatWindow;
+          
+          gsapInstance.fromTo(chatWindow, 
+            { opacity: 0, y: 50, scale: 0.9 },
+            { 
+              opacity: 1, 
+              y: 0, 
+              scale: 1,
+              duration: 0.5,
+              ease: "back.out(1.7)"
+            }
+          );
+          
+          // Анимация элементов внутри чата
+          const chatElements = chatWindow.querySelectorAll('.chatbot-header, .chatbot-body, .chatbot-footer');
+          
+          gsapInstance.fromTo(chatElements, 
+            { opacity: 0, y: 20 },
+            { 
+              opacity: 1, 
+              y: 0, 
+              duration: 0.5,
+              stagger: 0.1,
+              delay: 0.2,
+              ease: "power2.out"
+            }
+          );
+          
+          this.gsapLoaded = true;
+        }).catch(error => {
+          console.error('Не удалось загрузить GSAP для анимации:', error);
+          // Если не удалось загрузить GSAP, просто показываем окно без анимации
+          const chatWindow = this.$refs.chatWindow;
+          chatWindow.style.opacity = 1;
+        });
       }
     },
     
     animateChatClose() {
-      // Анимация закрытия чата
-      if (typeof gsap !== 'undefined' && this.$refs.chatWindow) {
+      if (typeof gsap !== 'undefined') {
         gsap.to(this.$refs.chatWindow, {
           opacity: 0,
           y: 50,
-          scale: 0.9,
+          scale: 0.8,
           duration: 0.3,
           ease: "power2.in"
+        });
+      } else {
+        // Если GSAP не загружен, пытаемся загрузить его динамически
+        loadGSAP().then(gsapInstance => {
+          gsapInstance.to(this.$refs.chatWindow, {
+            opacity: 0,
+            y: 50,
+            scale: 0.8,
+            duration: 0.3,
+            ease: "power2.in"
+          });
+        }).catch(error => {
+          console.error('Не удалось загрузить GSAP для анимации закрытия:', error);
+          // Если не удалось загрузить GSAP, просто скрываем окно без анимации
+          this.$refs.chatWindow.style.opacity = 0;
         });
       }
     },
@@ -176,12 +355,12 @@ document.addEventListener('alpine:init', () => {
     },
     
     animateLastMessage() {
-      // Анимация появления последнего сообщения с использованием GSAP
-      if (typeof gsap !== 'undefined') {
-        const messageElements = this.$refs.chatBody.querySelectorAll('.user-message, .bot-message');
-        const lastMessage = messageElements[messageElements.length - 1];
-        
-        if (lastMessage) {
+      // Анимация последнего сообщения
+      const messageElements = this.$refs.chatBody.querySelectorAll('.user-message, .bot-message');
+      const lastMessage = messageElements[messageElements.length - 1];
+      
+      if (lastMessage) {
+        if (typeof gsap !== 'undefined') {
           gsap.fromTo(lastMessage, 
             { opacity: 0, scale: 0.8, y: 20 },
             { 
@@ -189,16 +368,27 @@ document.addEventListener('alpine:init', () => {
               scale: 1, 
               y: 0,
               duration: 0.4,
-              ease: "back.out(1.7)",
-              onComplete: () => {
-                // Отмечаем, что анимация завершена
-                const index = this.messages.length - 1;
-                if (this.messages[index]) {
-                  this.messages[index].animationComplete = true;
-                }
-              }
+              ease: "back.out(1.7)"
             }
           );
+        } else {
+          // Если GSAP не загружен, пытаемся загрузить его динамически
+          loadGSAP().then(gsapInstance => {
+            gsapInstance.fromTo(lastMessage, 
+              { opacity: 0, scale: 0.8, y: 20 },
+              { 
+                opacity: 1, 
+                scale: 1, 
+                y: 0,
+                duration: 0.4,
+                ease: "back.out(1.7)"
+              }
+            );
+          }).catch(error => {
+            console.error('Не удалось загрузить GSAP для анимации сообщения:', error);
+            // Если не удалось загрузить GSAP, просто показываем сообщение без анимации
+            lastMessage.style.opacity = 1;
+          });
         }
       }
     },
@@ -279,8 +469,31 @@ document.addEventListener('alpine:init', () => {
           scale: 1.1,
           duration: 0.3,
           ease: "elastic.out(1, 0.3)",
-          yoyo: true,
-          repeat: 1
+          onComplete: () => {
+            gsap.to(this.$refs.chatButton, {
+              scale: 1,
+              duration: 0.2,
+              ease: "power2.out"
+            });
+          }
+        });
+      } else if (this.$refs.chatButton) {
+        // Если GSAP не загружен, пытаемся загрузить его динамически
+        loadGSAP().then(gsapInstance => {
+          gsapInstance.to(this.$refs.chatButton, {
+            scale: 1.1,
+            duration: 0.3,
+            ease: "elastic.out(1, 0.3)",
+            onComplete: () => {
+              gsapInstance.to(this.$refs.chatButton, {
+                scale: 1,
+                duration: 0.2,
+                ease: "power2.out"
+              });
+            }
+          });
+        }).catch(error => {
+          console.error('Не удалось загрузить GSAP для анимации кнопки:', error);
         });
       }
     },
@@ -292,15 +505,34 @@ document.addEventListener('alpine:init', () => {
           gsap.to(this.$refs.sendButton, {
             scale: 1.1,
             duration: 0.3,
-            ease: "back.out(1.7)"
+            ease: "power2.out"
           });
         } else {
           gsap.to(this.$refs.sendButton, {
             scale: 1,
-            duration: 0.2,
+            duration: 0.3,
             ease: "power2.out"
           });
         }
+      } else if (this.$refs.sendButton) {
+        // Если GSAP не загружен, пытаемся загрузить его динамически
+        loadGSAP().then(gsapInstance => {
+          if (enter) {
+            gsapInstance.to(this.$refs.sendButton, {
+              scale: 1.1,
+              duration: 0.3,
+              ease: "power2.out"
+            });
+          } else {
+            gsapInstance.to(this.$refs.sendButton, {
+              scale: 1,
+              duration: 0.3,
+              ease: "power2.out"
+            });
+          }
+        }).catch(error => {
+          console.error('Не удалось загрузить GSAP для анимации кнопки отправки:', error);
+        });
       }
     }
   }));
